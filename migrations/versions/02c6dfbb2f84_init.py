@@ -1,8 +1,8 @@
-"""Criação da tabela pessoa
+"""init
 
-Revision ID: b1c245d2b4ab
+Revision ID: 02c6dfbb2f84
 Revises: 
-Create Date: 2024-08-24 16:28:40.987460
+Create Date: 2024-08-25 01:07:19.173573
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b1c245d2b4ab'
+revision = '02c6dfbb2f84'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,14 @@ def upgrade():
     sa.Column('nome', sa.Text(), nullable=False),
     sa.Column('data_nascimento', sa.Date(), nullable=False),
     sa.Column('cpf', sa.String(length=11), nullable=False),
+    sa.Column('genero', sa.String(length=25), nullable=True),
+    sa.Column('telefone', sa.String(length=11), nullable=True),
+    sa.Column('email', sa.String(length=100), nullable=True),
+    sa.Column('endereco', sa.Text(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('cpf'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('telefone'),
     schema='farmzul'
     )
     # ### end Alembic commands ###
