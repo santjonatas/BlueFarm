@@ -6,6 +6,8 @@ from flask_migrate import Migrate
 import pyodbc
 
 from app.application.settings.extensions import db
+# from app.application.settings.extensions import Session
+
 from app.models.entities.pessoa_entity import PessoaEntity
 from app.models.entities.funcionario_entity import FuncionarioEntity
 from app.models.entities.usuario_entity import UsuarioEntity

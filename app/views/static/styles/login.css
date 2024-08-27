@@ -105,7 +105,7 @@ h2{
     align-items: center;
 }
 
-.form-email{
+.form-username{
     display: flex;
     flex-direction: column;
 }

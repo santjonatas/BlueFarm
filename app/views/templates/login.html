@@ -15,18 +15,21 @@
         </div>
     </div>
     <section class="sessao-login">
-            <h2>Login</h2>
+            <h2>BlueFarm | Login</h2>
             <article class="logo-farmzul">
 
             </article>
             <form action="/login" method="POST" class="form-login">
-                <div class="form-email">
-                    <label for="inputEmail">User</label>
-                    <input type="text" name="user" class="form-control" id="inputUser" placeholder="User">
+                {{ form.csrf_token }}
+                <div class="form-username">
+                    <label for="inputEmail">Username</label>
+                    <!-- <input type="text" name="user" class="form-control" id="inputUser" placeholder="User"> -->
+                     {{ form.username(class="form-control", placeholder="Username") }}
                 </div>
                 <div class="form-password">
                     <label for="inputPassword">Senha</label>
-                    <input type="password" name="senha" class="form-control" id="inputPassword" placeholder="Senha">
+                    <!-- <input type="password" name="senha" class="form-control" id="inputPassword" placeholder="Senha"> -->
+                     {{ form.senha(class="form-control", placeholder="Senha") }}
                 </div>
                 <button type="submit" class="bt-login">Login</button>
             </form>
