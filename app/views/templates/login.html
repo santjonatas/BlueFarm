@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueFarm | Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css' ) }}">
+    <link rel="stylesheet" href="../static/styles/login.css">
+</head>
+<body>
+    <div class="imagem-fazenda-urbana">
+        <div class="color-blue-imagem-fazenda-urbana">
+            <h1>Seja Bem-Vindo a BlueFarm!</h1>
+            <h3>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h3>
+        </div>
+    </div>
+    <section class="sessao-login">
+            <h2>Login</h2>
+            <article class="logo-farmzul">
+
+            </article>
+            <form action="/login" method="POST" class="form-login">
+                <div class="form-email">
+                    <label for="inputEmail">User</label>
+                    <input type="text" name="user" class="form-control" id="inputUser" placeholder="User">
+                </div>
+                <div class="form-password">
+                    <label for="inputPassword">Senha</label>
+                    <input type="password" name="senha" class="form-control" id="inputPassword" placeholder="Senha">
+                </div>
+                <button type="submit" class="bt-login">Login</button>
+            </form>
+    </section>
+</body>
+</html>
