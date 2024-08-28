@@ -1,4 +1,5 @@
 from app.application.settings.extensions import db
+from app.models.entities.common.base_entity import BaseEntity
 import os
 from dotenv import load_dotenv
 
@@ -7,7 +8,7 @@ load_dotenv()
 schema = os.getenv('SQLALCHEMY_DATABASE_SCHEMA')
 
 
-class PessoaEntity(db.Model):
+class PessoaEntity(BaseEntity):
     __tablename__ = 'pessoa'
     __table_args__ = {'schema': schema}
 

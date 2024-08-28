@@ -19,9 +19,8 @@ def login():
             print(form.username.data)
             print(form.senha.data)
             #
-            usuario = UsuarioEntity(username=form.username.data, senha=form.senha.data)
 
-            usuario_response = session.query(UsuarioEntity).filter(UsuarioEntity.username == usuario.username and UsuarioEntity.senha == usuario.senha).first()
+            usuario_response = session.query(UsuarioEntity).filter(UsuarioEntity.username == form.username.data and UsuarioEntity.senha == form.senha.data).first()
             session.commit()
             
         except Exception as e:
