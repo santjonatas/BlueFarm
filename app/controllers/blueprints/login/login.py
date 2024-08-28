@@ -3,7 +3,7 @@ from app.models.forms.auth_forms.login_form import LoginForm
 #
 from app.application.settings.extensions import session
 #
-from app.models.entities.usuario_entity import UsuarioEntity
+from app.models.entities.usuario_management.usuario_entity import UsuarioEntity
 
 
 login_blueprint = Blueprint('login', __name__, template_folder='views/templates')
