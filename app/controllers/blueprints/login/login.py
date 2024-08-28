@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.models.forms.auth_forms.login_form import LoginForm
-
 #
 from app.application.settings.extensions import session
 #
@@ -21,7 +20,8 @@ def login():
             print(form.senha.data)
             #
             usuario = UsuarioEntity(username=form.username.data, senha=form.senha.data)
-            session.add(usuario)
+
+            usuario_response = session.query(UsuarioEntity).filter(UsuarioEntity.username == usuario.username and UsuarioEntity.senha == usuario.senha).first()
             session.commit()
             
         except Exception as e:

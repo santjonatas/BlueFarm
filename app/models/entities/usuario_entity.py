@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
+
 schema = os.getenv('SQLALCHEMY_DATABASE_SCHEMA')
 
 
