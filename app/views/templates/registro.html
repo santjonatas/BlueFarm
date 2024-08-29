@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueFarm | Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/registro.css' ) }}">
+    <link rel="stylesheet" href="../static/styles/registro.css">
+</head>
+<body>
+    <div class="imagem-fazenda-urbana">
+        <div class="color-blue-imagem-fazenda-urbana">
+            <h1>Registre-se na BlueFarm!</h1>
+            <h3>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h3>
+        </div>
+    </div>
+    <section class="sessao-registro">
+            <h2>BlueFarm | Registro</h2>
+            <article class="logo-farmzul">
+
+            </article>
+            <form action="/registro" method="POST" class="form-registro">
+                {{ form.csrf_token }}
+                <div class="form-username">
+                    <label for="inputEmail">Username</label>
+                     {{ form.username(class="form-control", placeholder="Username") }}
+                </div>
+                <div class="form-password">
+                    <label for="inputPassword">Senha</label>
+                     {{ form.senha(class="form-control", placeholder="Senha") }}
+                </div>
+                <button type="submit" class="bt-registro">Registrar-se</button>
+            </form>
+    </section>
+</body>
+</html>
