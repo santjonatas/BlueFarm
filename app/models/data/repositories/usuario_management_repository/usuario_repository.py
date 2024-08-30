@@ -10,4 +10,4 @@ class UsuarioRepository(IUsuarioRepository):
         return self.session.query(self.entity).filter(self.entity.username==username).first()
 
     def username_existe(self, username: str) -> bool:
-        return self.get_by_username(username=username) is not None
+        return self.obter_username(username=username) is not None

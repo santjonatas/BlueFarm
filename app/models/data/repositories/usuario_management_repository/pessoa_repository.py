@@ -13,4 +13,4 @@ class PessoaRepository(IPessoaRepository):
         return self.session.query(self.entity).filter(self.entity.email==email).first()
 
     def email_existe(self, email: str) -> bool:
-        return self.get_by_email(email=email) is not None
+        return self.obter_email(email=email) is not None

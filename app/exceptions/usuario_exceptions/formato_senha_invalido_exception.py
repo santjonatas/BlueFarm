@@ -1,0 +1,2 @@
+class FormatoSenhaInvalidoException(Exception):
+    pass
