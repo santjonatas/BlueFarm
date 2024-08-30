@@ -18,13 +18,11 @@ def login():
     form = RegistroOperadorForm()
     if form.validate_on_submit():
         try:
-            #
-            print(form.username.data)
-            print(form.senha.data)
-            #
+            
 
             # usuario_response = session.query(UsuarioEntity).filter(UsuarioEntity.username == form.username.data and UsuarioEntity.senha == form.senha.data).first()
             # session.commit()
+            pass
             
         except Exception as e:
             flash(message=str(e), category='danger')
