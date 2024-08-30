@@ -23,12 +23,14 @@ class FuncionarioEntity(BaseEntity):
                  data_admissao,
                  cargo,
                  salario,
-                 data_demissao
+                 data_demissao,
+                 id_pessoa = None
                  ) -> None:
-        self.data_admissao = data_admissao,
-        self.cargo = cargo,
-        self.salario = salario,
-        self.data_demissao = data_demissao,
+        self.data_admissao = data_admissao
+        self.cargo = cargo
+        self.salario = salario
+        self.data_demissao = data_demissao
+        self.id_pessoa = id_pessoa
         super().__init__()
         pass
 

@@ -21,10 +21,14 @@ class UsuarioEntity(BaseEntity):
 
     def __init__(self, 
                  username,
-                 senha
+                 senha,
+                 permissao = None,
+                 id_funcionario = None
                  ) -> None:
         self.username = username
         self.senha = senha
+        self.permissao = permissao
+        self.id_funcionario = id_funcionario
         super().__init__()
         pass
 

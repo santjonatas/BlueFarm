@@ -19,10 +19,12 @@ class OperadorEntity(BaseEntity):
 
     def __init__(self,
                  area_operacao,
-                 supervisor_direto
+                 supervisor_direto,
+                 id_usuario = None
                  ) -> None:
-        self.area_operacao = area_operacao,
+        self.area_operacao = area_operacao
         self.supervisor_direto = supervisor_direto
+        self.id_usuario = id_usuario
         super().__init__()
         pass
 
