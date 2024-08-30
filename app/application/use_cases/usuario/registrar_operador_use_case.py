@@ -77,6 +77,11 @@ class RegistrarOperadorUseCase:
         
         if pessoa_repository.telefone_existe(telefone=self.telefone):
             raise UsuarioExistenteException('Número de telefone em uso')
+        
+        if pessoa_repository.cpf_existe(cpf=self.cpf):
+            raise UsuarioExistenteException('CPF em uso')
+        
+
 
         pessoa_entity = PessoaEntity(
             nome=self.nome,
@@ -87,7 +92,6 @@ class RegistrarOperadorUseCase:
             email= self.email,
             endereco= self.endereco
         )
-        # pessoa_repository = PessoaRepository(session=session)
         pessoa = pessoa_repository.add(pessoa_entity)
 
         funcionario_entity = FuncionarioEntity(
@@ -97,7 +101,6 @@ class RegistrarOperadorUseCase:
             data_demissao= self.data_demissao,
             id_pessoa=pessoa.id
         )
-        # funcionario_repository = FuncionarioRepository(session=session)
         funcionario = funcionario_repository.add(funcionario_entity)
 
         usuario_entity = UsuarioEntity(
@@ -106,7 +109,6 @@ class RegistrarOperadorUseCase:
             permissao= self.permissao,
             id_funcionario=funcionario.id
         )
-        # usuario_repository = UsuarioRepository(session=session)
         usuario = usuario_repository.add(usuario_entity)
 
         operador_entity = OperadorEntity(
@@ -114,6 +116,5 @@ class RegistrarOperadorUseCase:
             supervisor_direto= self.supervisor_direto,
             id_usuario=usuario.id
         )
-        # operador_repository = OperadorRepository(session=session)
         operador_repository.add(operador_entity)
         pass

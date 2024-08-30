@@ -11,3 +11,6 @@ class IPessoaRepository(BaseRepository[PessoaEntity]):
 
     def email_existe(self, email: str) -> bool:
         ...
+
+    def cpf_existe(self, telefone: str) -> bool:
+        ...

@@ -14,3 +14,6 @@ class PessoaRepository(IPessoaRepository):
 
     def email_existe(self, email: str) -> bool:
         return self.obter_email(email=email) is not None
+    
+    def cpf_existe(self, cpf: str) -> bool:
+        return self.session.query(self.entity).filter(self.entity.cpf==cpf).first() is not None
