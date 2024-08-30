@@ -119,8 +119,10 @@ h2{
 .form{
     display: flex;
     flex-direction: column;
+    justify-content: end;
 
     margin-top: 3px;
+    height: 70px;
 }
 
 .form-control{
