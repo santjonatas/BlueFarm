@@ -14,6 +14,7 @@ from app.infra.utils.auth.regex_validator import RegexValidatorUtil
 from app.exceptions.usuario_exceptions.formato_email_invalido_exception import FormatoEmailInvalidoException
 from app.exceptions.usuario_exceptions.formato_senha_invalido_exception import FormatoSenhaInvalidoException
 from app.exceptions.usuario_exceptions.usuario_existente_exception import UsuarioExistenteException
+from app.exceptions.usuario_exceptions.cpf_invalido_exception import CpfInvalidoException
 
 
 regex = RegexValidatorUtil()
@@ -78,10 +79,12 @@ class RegistrarOperadorUseCase:
         if pessoa_repository.telefone_existe(telefone=self.telefone):
             raise UsuarioExistenteException('Número de telefone em uso')
         
+        # if regex.validar_cpf(cpf=self.cpf) == False:
+        #     raise CpfInvalidoException('CPF Inválido')
+            
         if pessoa_repository.cpf_existe(cpf=self.cpf):
             raise UsuarioExistenteException('CPF em uso')
         
-
 
         pessoa_entity = PessoaEntity(
             nome=self.nome,

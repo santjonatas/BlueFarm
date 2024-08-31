@@ -1,7 +1,12 @@
 import os, re
 from dotenv import load_dotenv
 
+from app.infra.services.ForDevs.for_devs import ForDevsService
+
+
 load_dotenv()
+
+for_devs = ForDevsService()
 
 
 class RegexValidatorUtil:
@@ -18,3 +23,14 @@ class RegexValidatorUtil:
         if self.password_regex:
             return bool(re.match(self.password_regex, senha))
         raise ValueError("PASSWORD_REGEX não foi definido nas variáveis de ambiente.")
+    
+    def validar_cpf(self, cpf):
+
+        res = for_devs.validar_cpf(cpf)
+
+        texto_lower = res.lower()
+
+        if 'verdadeiro' in texto_lower:
+            return True
+        if 'falso' in texto_lower:
+            return False

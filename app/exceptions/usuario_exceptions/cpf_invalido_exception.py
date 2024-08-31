@@ -1,0 +1,2 @@
+class CpfInvalidoException(Exception):
+    pass
