@@ -6,6 +6,9 @@
     <title>BlueFarm | Registro - Operador</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/registro_operador.css' ) }}">
     <link rel="stylesheet" href="../static/styles/registro_operador.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+    <link rel="stylesheet" href="../static/styles/common/messages.css">
 </head>
 <body>
     <!-- <div class="imagem-fazenda-urbana">
@@ -15,10 +18,27 @@
         </div>
     </div> -->
     <section class="sessao-registro">
-            <h2>BlueFarm | Registro - Operador</h2>
+            <div class="titulo-pagina">
+                <h2>BlueFarm | Registro - Operador</h2>
+                <article class="logo-farmzul">
+
+                </article>
+            </div>
+            <div id="sessao-messages">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class=flashes>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <!-- <h2>BlueFarm | Registro - Operador</h2>
             <article class="logo-farmzul">
 
-            </article>
+            </article> -->
             <form action="/registro-operador" method="POST" class="form-registro">
                 {{ form.csrf_token }}
                 <div id="formularios">

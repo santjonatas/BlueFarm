@@ -70,6 +70,16 @@ h3{
     );
 }
 
+.titulo-pagina{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+
+    width: 100%;
+    height: 100px;
+}
+
 h2{
     font-size: 27px;
 
@@ -90,6 +100,11 @@ h2{
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+#sessao-messages{
+    width: 30%;
+    height: 70px;
 }
 
 .form-registro{
