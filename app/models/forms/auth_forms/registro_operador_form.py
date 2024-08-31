@@ -22,3 +22,25 @@ class RegistroOperadorForm(FlaskForm):
 
     area_operacao = StringField('Área de operação', validators=[DataRequired()])
     supervisor_direto = StringField('Supervisor direto', validators=[Optional()])
+
+
+    @property
+    def to_dict(self) -> dict:
+        return {
+            "nome": self.nome.data,
+            "data_nascimento": self.data_nascimento.data,
+            "cpf": self.cpf.data,
+            "genero": self.genero.data,
+            "telefone": self.telefone.data,
+            "email": self.email.data,
+            "endereco": self.endereco.data,
+            "data_admissao": self.data_admissao.data,
+            "cargo": self.cargo.data,
+            "salario": str(self.salario.data),
+            "data_demissao": self.data_demissao.data,
+            "username": self.username.data,
+            "senha": self.senha.data,
+            "permissao": self.permissao.data,
+            "area_operacao": self.area_operacao.data,
+            "supervisor_direto": self.supervisor_direto.data
+        }
