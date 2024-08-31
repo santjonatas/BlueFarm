@@ -20,9 +20,9 @@
     <section class="sessao-registro">
             <div class="titulo-pagina">
                 <h2>BlueFarm | Registro - Operador</h2>
-                <article class="logo-farmzul">
+                <!-- <article class="logo-farmzul">
 
-                </article>
+                </article> -->
             </div>
             <div id="sessao-messages">
                 {% with messages = get_flashed_messages() %}
@@ -84,11 +84,11 @@
                         <!-- <input type="text" class="form-control" placeholder="Salário"> -->
                          {{ form.salario(class="form-control", placeholder="Salário") }}
                     </div>
-                    <div class="form">
+                    <!-- <div class="form">
                         <label>Data de demissão</label>
-                        <!-- <input type="date" class="form-control" placeholder="Data de demissão"> -->
+                        <input type="date" class="form-control" placeholder="Data de demissão">
                          {{ form.data_demissao(class="form-control", placeholder="Data de demissão") }}
-                    </div>
+                    </div> --> 
                     <div class="form">
                         <!-- <input type="text" class="form-control" placeholder="Username"> -->
                          {{ form.username(class="form-control", placeholder="Username") }}
@@ -109,6 +109,9 @@
                         <!-- <input type="text" class="form-control" placeholder="Supervisor direto"> -->
                          {{ form.supervisor_direto(class="form-control", placeholder="Supervisor direto") }}
                     </div>
+                    <article class="logo-farmzul">
+
+                    </article>
                 </div>
                 <button type="submit" class="bt-registro">Registrar-se</button>
             </form>
