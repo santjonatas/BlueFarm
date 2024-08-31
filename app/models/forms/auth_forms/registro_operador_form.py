@@ -17,7 +17,7 @@ class RegistroOperadorForm(FlaskForm):
     data_demissao = DateField('Data de demissão', validators=[Optional()])
 
     username = StringField('Username', validators=[DataRequired(), Length(min=4, max=50, message="O username deve ter entre 4 e 20 caracteres."), Regexp(r'^\w+$', message="O username deve conter apenas letras, números e underscores.")])
-    senha = PasswordField('Senha', validators=[DataRequired(), Length(min=8, message="A senha deve ter no mínimo 8 caracteres."), Regexp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$', message="A senha deve ter pelo menos uma letra, um número e um caractere especial.")])
+    senha = PasswordField('Senha', validators=[DataRequired(), Length(min=8, message="A senha deve ter no mínimo 8 caracteres."), Regexp('^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$', message="A senha deve ter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.")])
     permissao = StringField('Permissão', validators=[DataRequired(), Length(max=15, message="A permissão deve ter no máximo 15 caracteres.")])
 
     area_operacao = StringField('Área de operação', validators=[DataRequired(), Length(max=50, message="A área de operação deve ter no máximo 50 caracteres.")])
