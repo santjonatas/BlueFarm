@@ -1,3 +1,4 @@
+import traceback
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.models.forms.auth_forms.registro_operador_form import RegistroOperadorForm 
 
@@ -23,6 +24,7 @@ def login():
             pass
             
         except Exception as e:
+            stacktrace = traceback.format_exc()
             flash(message=str(e), category='danger')
     
     return render_template('registro_operador.html', form=form)

@@ -94,8 +94,8 @@ class RegistrarOperadorUseCase:
         if pessoa_repository.telefone_existe(telefone=input.telefone):
             raise UsuarioExistenteException('Número de telefone em uso')
         
-        # if regex.validar_cpf(cpf=input.cpf) == False:
-        #     raise CpfInvalidoException('CPF Inválido')
+        if regex.validar_cpf(cpf=input.cpf) == False:
+            raise CpfInvalidoException('CPF Inválido')
             
         if pessoa_repository.cpf_existe(cpf=input.cpf):
             raise UsuarioExistenteException('CPF em uso')
