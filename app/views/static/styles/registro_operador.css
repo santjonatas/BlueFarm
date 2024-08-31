@@ -119,6 +119,10 @@ h2{
 }
 
 #sessao-messages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 30%;
     height: 70px;
 }
