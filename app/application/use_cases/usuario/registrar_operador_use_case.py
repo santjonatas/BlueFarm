@@ -10,6 +10,7 @@ from app.models.entities.usuario_management.usuario_entity import UsuarioEntity
 from app.models.entities.usuario_management.operador_entity import OperadorEntity
 
 from app.infra.utils.auth.regex_validator import RegexValidatorUtil
+from app.infra.utils.auth.pwd_hasher import PwdHasherUtil
 
 from app.exceptions.usuario_exceptions.formato_email_invalido_exception import FormatoEmailInvalidoException
 from app.exceptions.usuario_exceptions.formato_senha_invalido_exception import FormatoSenhaInvalidoException
@@ -18,6 +19,7 @@ from app.exceptions.usuario_exceptions.cpf_invalido_exception import CpfInvalido
 
 
 regex = RegexValidatorUtil()
+pwd_hasher = PwdHasherUtil()
 
 class RegistrarOperadorInputDto:
     def __init__(self, 
@@ -107,7 +109,7 @@ class RegistrarOperadorUseCase:
             cpf= input.cpf, 
             genero= input.genero,
             telefone= input.telefone,
-            email= input.email,
+            email= input.email.lower(),
             endereco= input.endereco
         )
         pessoa = pessoa_repository.add(pessoa_entity)
@@ -123,7 +125,7 @@ class RegistrarOperadorUseCase:
 
         usuario_entity = UsuarioEntity(
             username= input.username,
-            senha= input.senha,
+            senha= pwd_hasher.hash_password(password=input.senha),
             permissao= input.permissao,
             id_funcionario=funcionario.id
         )
