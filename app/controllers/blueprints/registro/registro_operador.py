@@ -26,7 +26,7 @@ def login():
         except Exception as e:
             stacktrace = traceback.format_exc()
             flash(message=str(e), category='danger')
-            
+     
     else:
         for field, errors in form.errors.items():
             for error in errors:

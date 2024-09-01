@@ -11,20 +11,11 @@
     <link rel="stylesheet" href="../static/styles/common/messages.css">
 </head>
 <body>
-    <!-- <div class="imagem-fazenda-urbana">
-        <div class="color-blue-imagem-fazenda-urbana">
-            <h1>Registre-se na BlueFarm!</h1>
-            <h3>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h3>
-        </div>
-    </div> -->
     <section class="sessao-registro">
             <div class="titulo-pagina">
                 <div class="color-blue-imagem-fazenda-urbana">
                     <h2>BlueFarm | Registro - Operador</h2>
                 </div>
-                <!-- <article class="logo-farmzul">
-
-                </article> -->
             </div>
             <div id="sessao-messages">
                 {% with messages = get_flashed_messages() %}
@@ -37,10 +28,6 @@
                     {% endif %}
                 {% endwith %}
             </div>
-            <!-- <h2>BlueFarm | Registro - Operador</h2>
-            <article class="logo-farmzul">
-
-            </article> -->
             <form action="/registro-operador" method="POST" class="form-registro">
                 {{ form.csrf_token }}
                 <div id="formularios">

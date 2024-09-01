@@ -25,11 +25,15 @@ def login():
 
             
 
-            # usuario_response = session.query(UsuarioEntity).filter(UsuarioEntity.username == form.username.data and UsuarioEntity.senha == form.senha.data).first()
-            # session.commit()
             pass
             
         except Exception as e:
+            stacktrace = traceback.format_exc()
             flash(message=str(e), category='danger')
+            
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(message=f"Erro no campo {field}: {error}", category='danger')
     
     return render_template('login.html', form=form)
