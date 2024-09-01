@@ -34,15 +34,15 @@ class LoginInputDto:
 
 class LoginOutputDto:
     def __init__(self, 
-                 pessoa: PessoaEntity, 
-                 funcionario: FuncionarioEntity, 
                  usuario: UsuarioEntity,
+                 pessoa: PessoaEntity = None, 
+                 funcionario: FuncionarioEntity = None, 
                  operador: OperadorEntity = None,
                  administrador: AdministradorEntity = None
                  ) -> None:
+        self.usuario = usuario
         self.pessoa = pessoa
         self.funcionario = funcionario
-        self.usuario = usuario
         self.operador = operador
         self.administrador = administrador
         pass
@@ -67,10 +67,4 @@ class LoginUseCase:
         if not pwd_hasher.verify_password(hashed_password=usuario_entrada.senha, password=input.senha):
             raise AuthException('Senha inválida')
         
-        # return LoginOutputDto(
-        #     pessoa=pessoa_entity, 
-        #     funcionario=funcionario_entity,
-        #     usuario=usuario_entity,
-        #     operador=operador_entity
-        #     )
-        pass
+        return LoginOutputDto(usuario=usuario_entrada)

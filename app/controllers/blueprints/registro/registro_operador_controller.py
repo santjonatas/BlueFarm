@@ -8,10 +8,10 @@ from app.application.use_cases.usuario.registrar_operador_use_case import Regist
 from app.application.use_cases.usuario.registrar_operador_use_case import RegistrarOperadorInputDto
 
 
-registro_operador_blueprint = Blueprint('registro-operador', __name__, template_folder='views/templates')
+registro_operador_controller_blueprint = Blueprint('registro-operador', __name__, template_folder='views/templates')
 
 
-@registro_operador_blueprint.route('/registro-operador', methods=['GET','POST'])
+@registro_operador_controller_blueprint.route('/registro-operador', methods=['GET','POST'])
 def login():
     form = RegistroOperadorForm()
     if form.validate_on_submit():

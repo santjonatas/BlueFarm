@@ -1,5 +1,8 @@
 from app.application.settings.extensions import db
 from app.models.entities.common.base_entity import BaseEntity
+
+from flask_login import UserMixin
+
 import os
 from dotenv import load_dotenv
 
@@ -9,7 +12,7 @@ load_dotenv()
 schema = os.getenv('SQLALCHEMY_DATABASE_SCHEMA')
 
 
-class UsuarioEntity(BaseEntity):
+class UsuarioEntity(BaseEntity, UserMixin):
     __tablename__ = 'usuario'
     __table_args__ = {'schema': schema}
 
@@ -34,3 +37,18 @@ class UsuarioEntity(BaseEntity):
 
     def __repr__(self):
         return "<Usuario %r>" % self.username
+    
+    @property
+    def is_authenticated(self):
+        return True
+    
+    @property
+    def is_active(self):
+        return True
+    
+    @property
+    def is_anonymous(self):
+        return False
+    
+    def get_id(self):
+        return str(self.id)
