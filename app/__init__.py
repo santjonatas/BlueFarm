@@ -30,8 +30,7 @@ lm.init_app(app)
 
 @lm.user_loader
 def load_user(user_id):
-    # Aqui estamos dizendo ao Flask-Login como encontrar o usuário pelo ID
-    return UsuarioEntity.query.get(int(user_id))  # Ajuste conforme sua lógica de busca do usuário
+    return UsuarioEntity.query.get(user_id) 
 
 
 app.register_blueprint(login_controller_blueprint)
