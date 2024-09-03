@@ -9,11 +9,11 @@ from app.application.use_cases.usuario.login_use_case import LoginUseCase, Login
 from app.models.entities.usuario_management.usuario_entity import UsuarioEntity
 
 
-login_controller_blueprint = Blueprint('login', __name__, template_folder='views/templates')
+login_controller = Blueprint('login', __name__, template_folder='views/templates')
 
 
-@login_controller_blueprint.route('/login', methods=['GET','POST'])
-@login_controller_blueprint.route('/login-funcionario', methods=['GET','POST'])
+@login_controller.route('/login', methods=['GET','POST'])
+@login_controller.route('/login-funcionario', methods=['GET','POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -26,7 +26,7 @@ def login():
 
             login_user(output.usuario)
             
-            return f'Usuário logado'
+            return redirect(url_for('home.home'))
 
         except Exception as e:
             stacktrace = traceback.format_exc()

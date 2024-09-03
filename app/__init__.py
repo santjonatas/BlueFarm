@@ -14,8 +14,9 @@ from app.models.entities.usuario_management.usuario_entity import UsuarioEntity
 from app.models.entities.usuario_management.administrador_entity import AdministradorEntity
 from app.models.entities.usuario_management.operador_entity import OperadorEntity
 
-from app.controllers.blueprints.login.login_controller import login_controller_blueprint
-from app.controllers.blueprints.registro.registro_operador_controller import registro_operador_controller_blueprint
+from app.controllers.blueprints.login.login_controller import login_controller
+from app.controllers.blueprints.home.home_controller import home_controller
+from app.controllers.blueprints.registro.registro_operador_controller import registro_operador_controller
 
 
 load_dotenv()
@@ -27,14 +28,16 @@ app.config.from_object('config')
 db.init_app(app)
 lm.init_app(app)
 
+lm.login_view = 'login.login'
 
 @lm.user_loader
 def load_user(user_id):
     return UsuarioEntity.query.get(user_id) 
 
 
-app.register_blueprint(login_controller_blueprint)
-app.register_blueprint(registro_operador_controller_blueprint)
+app.register_blueprint(login_controller)
+app.register_blueprint(home_controller)
+app.register_blueprint(registro_operador_controller)
 
 
 migrate = Migrate(app, db)
