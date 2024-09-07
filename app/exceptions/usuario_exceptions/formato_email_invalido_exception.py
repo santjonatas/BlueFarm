@@ -1,2 +1,0 @@
-class FormatoEmailInvalidoException(Exception):
-    pass
