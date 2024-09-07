@@ -1,0 +1,81 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} Bluefarm | Registro {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/registro.css' ) }}">
+{% endblock style %}
+
+
+{% block body %}
+
+<section class="sessao-registro">
+    <div class="titulo-pagina">
+        <div class="color-blue-imagem-fazenda-urbana">
+            <h2>BlueFarm | Registro - Administrador</h2>
+        </div>
+    </div>
+    <div id="sessao-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <form action="/registro-operador" method="POST" class="form-registro">
+        {{ form.csrf_token }}
+        <div id="formularios">
+            <div class="form">
+                {{ form.nome(class="form-control", placeholder="Nome") }}
+            </div>
+            <div class="form">
+                <label>Data de nascimento</label>
+                {{ form.data_nascimento(class="form-control", placeholder="Data de nascimento") }}
+            </div>
+            <div class="form">
+                {{ form.cpf(class="form-control", placeholder="CPF") }}
+            </div>
+            <div class="form">
+                {{ form.genero(class="form-control") }}
+            </div>
+            <div class="form">
+                {{ form.telefone(class="form-control", placeholder="Telefone") }}
+            </div>
+            <div class="form">
+                {{ form.email(class="form-control", placeholder="Email") }}
+            </div>
+            <div class="form">
+                {{ form.endereco(class="form-control", placeholder="Endereço") }}
+            </div>
+            <div class="form">
+                <label>Data de admissão</label>
+                {{ form.data_admissao(class="form-control", placeholder="Data de admissão") }}
+            </div>
+            <div class="form">
+                <label>Cargo</label>
+                {{ form.cargo(class="form-control") }}
+            </div>
+            <div class="form">
+                {{ form.username(class="form-control", placeholder="Username") }}
+            </div>
+            <div class="form">
+                {{ form.senha(class="form-control", placeholder="Senha") }}
+            </div>
+            <div class="form">
+                <label>Departamento</label>
+                {{ form.departamento(class="form-control") }}
+            </div>
+            <article class="logo-farmzul">
+
+            </article>
+        </div>
+        <button type="submit" class="bt-registro">Registrar-se</button>
+    </form>
+
+{% endblock body %}

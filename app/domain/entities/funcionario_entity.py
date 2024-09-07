@@ -2,6 +2,7 @@ from datetime import datetime
 from app.application.settings.extensions_setting import db
 from app.domain.entities.common.base_entity import BaseEntity
 
+
 class FuncionarioEntity(BaseEntity):
     __tablename__ = 'funcionario'
 

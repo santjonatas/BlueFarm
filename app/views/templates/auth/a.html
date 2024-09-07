@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueFarm | Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/registro.css' ) }}">
+    <link rel="stylesheet" href="../static/styles/registro.css">
+</head>
+<body>
+    <!-- <div class="imagem-fazenda-urbana">
+        <div class="color-blue-imagem-fazenda-urbana">
+            <h1>Registre-se na BlueFarm!</h1>
+            <h3>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h3>
+        </div>
+    </div> -->
+    <section class="sessao-registro">
+            <h2>BlueFarm | Registro</h2>
+            <article class="logo-farmzul">
+
+            </article>
+            <form action="/registro" method="POST" class="form-registro">
+                <!-- {{ form.csrf_token }} -->
+                <div id="formularios">
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Nome">
+                         <!-- {{ form.nome(class="form-control", placeholder="Nome") }} -->
+                    </div>
+                    <div class="form">
+                        <label>Data de nascimento</label>
+                        <input type="date" class="form-control" placeholder="Data de nascimento">
+                         <!-- {{ form.data_nascimento(class="form-control", placeholder="Data de nascimento") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="CPF">
+                         <!-- {{ form.cpf(class="form-control", placeholder="CPF") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Gênero">
+                         <!-- {{ form.genero(class="form-control", placeholder="Gênero") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Telefone">
+                         <!-- {{ form.telefone(class="form-control", placeholder="Telefone") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="email" class="form-control" placeholder="Email">
+                         <!-- {{ form.email(class="form-control", placeholder="Email") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Endereço">
+                         <!-- {{ form.endereco(class="form-control", placeholder="Endereço") }} -->
+                    </div>
+                    <div class="form">
+                        <label>Data de admissão</label>
+                        <input type="date" class="form-control" placeholder="Data de admissão">
+                         <!-- {{ form.data_admissao(class="form-control", placeholder="Data de admissão") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Cargo">
+                         <!-- {{ form.cargo(class="form-control", placeholder="Cargo") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Salário">
+                         <!-- {{ form.salario(class="form-control", placeholder="Salário") }} -->
+                    </div>
+                    <div class="form">
+                        <label>Data de demissão</label>
+                        <input type="date" class="form-control" placeholder="Data de demissão">
+                         <!-- {{ form.data_demissao(class="form-control", placeholder="Data de demissão") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Username">
+                         <!-- {{ form.username(class="form-control", placeholder="Username") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="password" class="form-control" placeholder="Senha">
+                         <!-- {{ form.senha(class="form-control", placeholder="Senha") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Permissão">
+                         <!-- {{ form.permissao(class="form-control", placeholder="Permissão") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Permissão adicinal">
+                         <!-- {{ form.permissao_adicional(class="form-control", placeholder="Permissão adicinal") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Responsável por departamento">
+                         <!-- {{ form.responsavel_por_departamento(class="form-control", placeholder="Responsável por departamento") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Área de operação">
+                         <!-- {{ form.area_operacao(class="form-control", placeholder="Área de operação") }} -->
+                    </div>
+                    <div class="form">
+                        <input type="text" class="form-control" placeholder="Supervisor direto">
+                         <!-- {{ form.supervisor_direto(class="form-control", placeholder="Supervisor direto") }} -->
+                    </div>
+                </div>
+                <button type="submit" class="bt-registro">Registrar-se</button>
+            </form>
+    </section>
+</body>
+</html>

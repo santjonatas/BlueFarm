@@ -6,7 +6,7 @@ class OperadorEntity(BaseEntity):
 
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
-    id_supervisor = db.Column(db.Integer, db.ForeignKey('supervisor.id'))
+    id_supervisor = db.Column(db.Integer, db.ForeignKey('administrador.id'))
 
     supervisor = db.relationship('AdministradorEntity', back_populates='operador')
 

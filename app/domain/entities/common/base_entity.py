@@ -8,7 +8,7 @@ load_dotenv()
 
 class BaseEntity(db.Model):
     __abstract__ = True
-    __table_args__ = {'schema': os.getenv(key='SQLALCHEMY_DATABASE_SCHEMA', default='dbo')}
+    # __table_args__ = {'schema': os.getenv(key='SQLALCHEMY_DATABASE_SCHEMA', default='dbo')}
 
     id = db.Column(db.Integer, primary_key=True, index=True)
     created_at = db.Column(db.DateTime, default=datetime.now())

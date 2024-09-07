@@ -1,0 +1,45 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Login {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<div class="imagem-fazenda-urbana">
+    <div class="color-blue-imagem-fazenda-urbana">
+        <h1>Seja Bem-Vindo a BlueFarm!</h1>
+        <h3>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h3>
+    </div>
+</div>
+
+<section class="sessao-login">
+        <h2>BlueFarm | Login</h2>
+        <div id="sessao-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class=flashes>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <article class="logo-farmzul">
+
+        </article>
+        <form method="POST" class="form-login">
+            {{ form.hidden_tag() }}
+            <div class="form">
+                 {{ form.username(class="form-control", placeholder="Username") }}
+            </div>
+            <div class="form">
+                 {{ form.senha(class="form-control", placeholder="Senha") }}
+            </div>
+            {{ form.submit(class="bt-login") }}
+        </form>
+</section>
+{% endblock body %}
