@@ -9,9 +9,8 @@ from app.application.settings.extensions import session
 
 home_controller = Blueprint('home', __name__, template_folder='views/templates')
 
-
-@home_controller.route('/home', methods=['GET','POST'])
 @login_required
+@home_controller.route('/home', methods=['GET','POST'])
 def home():
 
     print(f"Usuário autenticado: {current_user.is_authenticated}")

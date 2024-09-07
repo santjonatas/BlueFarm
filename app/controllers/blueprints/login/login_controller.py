@@ -38,3 +38,9 @@ def login():
                 flash(message=f"Erro no campo {field}: {error}", category='danger')
     
     return render_template('login.html', form=form)
+
+
+@login_controller.route('/logout', methods=['GET','POST'])
+def logout():
+    logout_user()
+    return redirect(url_for('login.login'))
