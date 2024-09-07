@@ -12,13 +12,11 @@ class CreateAdminUserInputDto:
         email: Optional[str] = None,
         endereco: Optional[str] = None,
         data_admissao: Optional[datetime] = None,
-        id_cargo: Optional[int] = None,
-        id_pessoa: Optional[int] = None,
+        cargo: Optional[str] = None,
         username: Optional[str] = None,
         senha: Optional[str] = None,
-        id_usuario: Optional[int] = None,
-        id_departamento: Optional[int] = None) -> None:
-        
+        departamento: Optional[str] = None) -> None:
+    
         # Atributos de CreatePessoaInputDto
         self.nome = nome
         self.data_nascimento = data_nascimento
@@ -30,13 +28,11 @@ class CreateAdminUserInputDto:
 
         # Atributos de CreateFuncionarioInputDto
         self.data_admissao = data_admissao
-        self.id_cargo = id_cargo
-        self.id_pessoa = id_pessoa
+        self.cargo = cargo
         
         # Atributos de CreateUsuarioInputDto
         self.username = username
         self.senha = senha
         
         # Atributos de CreateAdministradorInputDto
-        self.id_usuario = id_usuario
-        self.id_departamento = id_departamento
+        self.departamento = departamento

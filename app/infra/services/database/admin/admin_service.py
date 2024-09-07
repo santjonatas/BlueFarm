@@ -1,9 +1,9 @@
 from app.application.contracts.data.repositories.i_administrador_repository import IAdministradorRepository
-from app.application.usecases.dto.input.create.create_administrador_input_dto import CreateAdministradorInputDto
+from app.application.usecases.dto.input.entities.create_administrador_input_dto import CreateAdministradorInputDto
 from app.domain.entities.administrador_entity import AdministradorEntity
 
 
-class AdminService:
+class AdministradorService:
     def __init__(self, administrador_repository: IAdministradorRepository) -> None:
         self.administrador_repository = administrador_repository
     

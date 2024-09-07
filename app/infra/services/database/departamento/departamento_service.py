@@ -1,5 +1,5 @@
 from app.application.contracts.data.repositories.i_departamento_repository import IDepartamentoRepository
-from app.application.usecases.dto.input.create_departamento_input_dto import CreateDepartamentoInputDto
+from app.application.usecases.dto.input.entities.create_departamento_input_dto import CreateDepartamentoInputDto
 from app.domain.entities import DepartamentoEntity
 
 class DepartamentoService:

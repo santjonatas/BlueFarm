@@ -4,4 +4,5 @@ from app.domain.entities.cargo_entity import CargoEntity
 
 
 class ICargoRepository(ABC, BaseRepository[CargoEntity]):
-    pass
+    def get_by_funcao(self, funcao: str) -> CargoEntity:
+        ...

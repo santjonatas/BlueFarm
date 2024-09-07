@@ -51,3 +51,19 @@ class RegisterAdmForm(BaseForm):
         with current_app.app_context():
             self.cargo.choices = [(cargo.id, cargo.funcao) for cargo in CargoEntity.query.all()]
             self.departamento.choices = [(departamento.id, departamento.area) for departamento in DepartamentoEntity.query.all()]
+
+    def to_dict(self) -> dict:
+        return {
+            'nome': self.nome.data,
+            'data_nascimento': self.data_nascimento.data,
+            'cpf': self.cpf.data,
+            'genero': self.genero.data,
+            'telefone': self.telefone.data,
+            'email': self.email.data,
+            'username': self.username.data,
+            'senha': self.senha.data,
+            'endereco': self.endereco.data,
+            'data_admissao': self.data_admissao.data,
+            'cargo': self.cargo.data,
+            'departamento': self.departamento.data,
+        }

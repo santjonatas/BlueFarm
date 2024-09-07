@@ -1,5 +1,5 @@
 from app.application.contracts.data.repositories.i_cargo_repository import ICargoRepository
-from app.application.usecases.dto.input.create_cargo_input_dto import CreateCargoInputDto
+from app.application.usecases.dto.input.entities.create_cargo_input_dto import CreateCargoInputDto
 from app.domain.entities.cargo_entity import CargoEntity
 
 class CargoService:

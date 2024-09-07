@@ -4,4 +4,5 @@ from app.domain.entities.departamento_entity import DepartamentoEntity
 
 
 class IDepartamentoRepository(ABC, BaseRepository[DepartamentoEntity]):
-    pass
+    def get_by_departamento(self, area: str) -> DepartamentoEntity:
+        ...

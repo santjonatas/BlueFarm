@@ -7,7 +7,7 @@ class PessoaEntity(BaseEntity):
 
     nome = db.Column(db.Text, nullable=False)
     data_nascimento = db.Column(db.Date, nullable=False)
-    cpf = db.Column(db.String(11), nullable=False, unique=True)
+    cpf = db.Column(db.String(100), nullable=False, unique=True)
     genero = db.Column(db.String(25), nullable=True)
     telefone = db.Column(db.String(11), nullable=True, unique=True)
     email = db.Column(db.String(100), nullable=True, unique=True)

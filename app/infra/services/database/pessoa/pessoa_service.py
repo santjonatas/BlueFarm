@@ -1,5 +1,5 @@
 from app.application.contracts.data.repositories.i_pessoa_repository import IPessoaRepository
-from app.application.usecases.dto.input.create.create_pessoa_input_dto import CreatePessoaInputDto
+from app.application.usecases.dto.input.entities.create_pessoa_input_dto import CreatePessoaInputDto
 from app.domain.entities.pessoa_entity import PessoaEntity
 
 

@@ -1,5 +1,5 @@
 from app.application.contracts.data.repositories.i_funcionario_repository import IFuncionarioRepository
-from app.application.usecases.dto.input.create.create_funcionario_input_dto import CreateFuncionarioInputDto
+from app.application.usecases.dto.input.entities.create_funcionario_input_dto import CreateFuncionarioInputDto
 from app.domain.entities.funcionario_entity import FuncionarioEntity
 
 
