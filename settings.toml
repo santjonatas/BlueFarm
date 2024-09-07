@@ -1,0 +1,4 @@
+[default]
+EXTENSIONS = [
+    'app.application.config.global_inits:GlobalInits'
+]
