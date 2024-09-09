@@ -20,7 +20,7 @@ class PessoaRepository(IPessoaRepository):
         return self.get_by_email(email=email) is not None
     
     def get_by_phone_number(self, phone_number: str) -> PessoaEntity:
-        return self.session.query(self.entity).filter(self.entity.phone_number==phone_number).first()
+        return self.session.query(self.entity).filter(self.entity.telefone==phone_number).first()
     
     def phone_number_exists(self, phone_number: str) -> bool:
         return self.get_by_phone_number(phone_number=phone_number) is not None

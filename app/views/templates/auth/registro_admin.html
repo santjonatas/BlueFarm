@@ -28,7 +28,7 @@
         {% endwith %}
     </div>
 
-    <form action="/registro-operador" method="POST" class="form-registro">
+    <form method="POST" class="form-registro">
         {{ form.csrf_token }}
         <div id="formularios">
             <div class="form">
@@ -75,7 +75,7 @@
 
             </article>
         </div>
-        <button type="submit" class="bt-registro">Registrar-se</button>
+        {{ form.submit(class="bt-registro", value="Registrar-se") }}
     </form>
 
 {% endblock body %}

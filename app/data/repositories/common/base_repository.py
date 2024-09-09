@@ -30,6 +30,7 @@ class BaseRepository(Generic[T]):
         try:
             self.session.merge(obj)
             self.session.commit()
+            self.session.refresh(obj)
             return obj
         except Exception as e:
             self.session.rollback()

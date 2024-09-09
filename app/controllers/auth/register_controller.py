@@ -1,3 +1,4 @@
+from pprint import pprint
 from flask import current_app, flash, render_template, redirect, url_for, Blueprint
 from flask_wtf import FlaskForm
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
@@ -18,6 +19,7 @@ class RegisterController:
 
         if form.validate_on_submit():
             try:
+                pprint(form.to_dict())
                 input_dto = CreateAdminUserInputDto(**form.to_dict())
 
                 usecase: CreateAdminUserUseCase = current_app.global_usecases.create_admin_user_usecase
@@ -26,7 +28,7 @@ class RegisterController:
 
                 flash(message='Administrador Registrado', category='info')
 
-                return redirect(url_for('login.login'))
+                return redirect(url_for('register.register_admin'))
             except Exception as e:
                 flash(message=str(e), category='danger')
         

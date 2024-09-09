@@ -143,20 +143,23 @@ input::placeholder {
     opacity: 1;
 }
 
-.bt-login{
+.bt-login {
     width: 80px;
     height: 45px;
     border-radius: 25px;
     border: 0px solid;
-
     margin-top: 1%;
-
     font-size: 15px;
     background-color: #0A73B0;
     color: white;
+    background: linear-gradient(to right bottom, #151C1A, #27282C, #47533E);
 
-    background: linear-gradient(to right bottom, 
-    #151C1A, 
-    #27282C, 
-    #47533E);
+    /* Alinha o texto verticalmente e centraliza */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Garante que padding/border sejam incluídos nas dimensões */
+    box-sizing: border-box;
+    padding: 0;
 }
