@@ -2,6 +2,7 @@ from flask_login import UserMixin
 from app.application.settings.extensions_setting import db
 from app.domain.entities.common.base_entity import BaseEntity
 
+
 class UsuarioEntity(BaseEntity, UserMixin):
     __tablename__ = 'usuario'
 
@@ -9,7 +10,6 @@ class UsuarioEntity(BaseEntity, UserMixin):
     username = db.Column(db.String(50), nullable=False)
     senha = db.Column(db.String, nullable=False)
 
-    
     pessoa = db.relationship('PessoaEntity', back_populates='usuario')
     funcionario = db.relationship('FuncionarioEntity', uselist=False, back_populates='usuario')
 
@@ -24,7 +24,7 @@ class UsuarioEntity(BaseEntity, UserMixin):
 
     def __repr__(self):
         return "<Usuario %r>" % self.username
-    
+
     @property
     def is_authenticated(self):
         return True
