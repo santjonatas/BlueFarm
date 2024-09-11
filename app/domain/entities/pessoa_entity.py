@@ -13,7 +13,7 @@ class PessoaEntity(BaseEntity):
     email = db.Column(db.String(100), nullable=True, unique=True)
     endereco = db.Column(db.Text, nullable=True)
 
-    funcionario = db.relationship('FuncionarioEntity', back_populates='pessoa')
+    usuario = db.relationship('UsuarioEntity', back_populates='pessoa')
 
     def __init__(self, 
         nome: str, 

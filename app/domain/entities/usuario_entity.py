@@ -5,11 +5,13 @@ from app.domain.entities.common.base_entity import BaseEntity
 class UsuarioEntity(BaseEntity, UserMixin):
     __tablename__ = 'usuario'
 
-    id_funcionario = db.Column(db.Integer, db.ForeignKey(f'funcionario.id'))
+    id_pessoa = db.Column(db.Integer, db.ForeignKey(f'pessoa.id'))
     username = db.Column(db.String(50), nullable=False)
     senha = db.Column(db.String, nullable=False)
 
-    funcionario = db.relationship('FuncionarioEntity', back_populates='usuario')
+    
+    pessoa = db.relationship('PessoaEntity', back_populates='usuario')
+    funcionario = db.relationship('FuncionarioEntity', uselist=False, back_populates='usuario')
 
     def __init__(self, 
         username: str,
