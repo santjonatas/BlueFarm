@@ -1,6 +1,6 @@
 from app.application.config.global_utils import GlobalUtils
 from app.application.usecases.dto.input.auth.validate_user_input_dto import ValidateUserInputDto
-from app.application.usecases.dto.output.auth.validate_user_output_dto import ValidateUserOutputDto
+from app.application.usecases.dto.outputs.auth.validate_user_output_dto import ValidateUserOutputDto
 from app.exceptions.auth.UserDoesntExistsException import UserDoesntExistsException
 from app.infra.services.database.usuario.usuario_service import UsuarioService
 

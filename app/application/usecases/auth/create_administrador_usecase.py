@@ -4,7 +4,7 @@ from app.application.usecases.dto.input.entities.create_funcionario_input_dto im
 from app.application.usecases.dto.input.entities.create_pessoa_input_dto import CreatePessoaInputDto
 from app.application.usecases.dto.input.entities.create_usuario_input_dto import CreateUsuarioInputDto
 from app.application.usecases.dto.input.users.create_admin_user_input_dto import CreateAdminUserInputDto
-from app.application.usecases.dto.output.users.create_admin_user_output_dto import CreateAdminUserOutputDto
+from app.application.usecases.dto.outputs.users.create_admin_user_output_dto import CreateAdminUserOutputDto
 from app.exceptions.auth.InvalidFieldException import InvalidFieldException
 from app.exceptions.auth.UserAlreadyExistsException import UserAlreadyExistsException
 from app.exceptions.database.AdministradorEntityException import AdministradorEntityException
