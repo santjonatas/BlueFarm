@@ -9,8 +9,8 @@ class CargoEntity(BaseEntity):
     funcao = db.Column(db.String(50), nullable=False)
     salario = db.Column(db.Numeric(10, 2), nullable=False)
 
-    funcionarios = db.relationship('FuncionarioEntity', uselist=False, back_populates='cargos')
-    niveis = db.relationship('NiveisEntity', uselist=False, back_populates='cargos')
+    funcionario = db.relationship('FuncionarioEntity', uselist=False, back_populates='cargo')
+    nivel = db.relationship('NiveisEntity', uselist=False, back_populates='cargo')
 
     def __init__(self,
         id_nivel: int,

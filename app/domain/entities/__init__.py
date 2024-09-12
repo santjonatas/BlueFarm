@@ -5,3 +5,4 @@ from .funcionario_entity import FuncionarioEntity
 from .usuario_entity import UsuarioEntity
 from .administrador_entity import AdministradorEntity
 from .operador_entity import OperadorEntity
+from .nivel_enity import NivelEntity

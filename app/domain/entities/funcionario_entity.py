@@ -6,15 +6,15 @@ from app.domain.entities.common.base_entity import BaseEntity
 class FuncionarioEntity(BaseEntity):
     __tablename__ = 'funcionarios'
 
-    id = db.Column(db.Integer, primary_key=True)
+    # id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
     id_cargo = db.Column(db.Integer, db.ForeignKey('cargos.id'))
     data_admissao = db.Column(db.Date, nullable=False)
 
-    usuario = db.relationship('UsuarioEntity', uselist=False, back_populates='funcionarios')
-    cargo = db.relationship('CargoEntity', uselist=False, back_populates='funcionarios')
-    administradores = db.relationship('AdministradorEntity', uselist=False, back_populates='funcionarios')
-    operadores = db.relationship('OperadorEntity', uselist=False, back_populates='funcionarios')
+    usuario = db.relationship('UsuarioEntity', uselist=False, back_populates='funcionario')
+    cargo = db.relationship('CargoEntity', uselist=False, back_populates='funcionario')
+    administrador = db.relationship('AdministradorEntity', uselist=False, back_populates='funcionario')
+    operador= db.relationship('OperadorEntity', uselist=False, back_populates='funcionario')
 
     def __init__(self, 
         data_admissao: datetime,
