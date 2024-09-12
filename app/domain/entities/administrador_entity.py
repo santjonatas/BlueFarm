@@ -2,14 +2,15 @@ from app.application.settings.extensions_setting import db
 from app.domain.entities.common.base_entity import BaseEntity
 
 class AdministradorEntity(BaseEntity):
-    __tablename__ = 'administrador'
+    __tablename__ = 'administradores'
 
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id'))
-    id_departamento = db.Column(db.Integer, db.ForeignKey('departamento.id'))
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
+    id_departamento = db.Column(db.Integer, db.ForeignKey('departamentos.id'))
 
-    departamento = db.relationship('DepartamentoEntity', back_populates='administrador')
-    operador = db.relationship('OperadorEntity', uselist=False, back_populates='supervisor')
+    funcionarios = db.relationship('FuncionarioEntity', uselist=False, back_populates='administradores')
+    departamento = db.relationship('DepartamentoEntity', uselist=False, back_populates='administradores')
+    operador = db.relationship('OperadorEntity', uselist=False, back_populates='administradores')
 
     def __init__(self,
         id_usuario: int,
