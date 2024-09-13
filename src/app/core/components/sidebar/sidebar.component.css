@@ -10,3 +10,9 @@
     border-radius: 24px 60px;
     background-color: red;
 }
+
+:host ::ng-deep section app-button-sidebar {
+    width: 100%;
+
+    background-color: blue;
+}

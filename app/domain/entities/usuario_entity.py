@@ -1,13 +1,12 @@
 from flask_login import UserMixin
 from app.application.settings.extensions_setting import db
-from app.domain.entities.common.base_entity import BaseEntity
+from app.domain.entities.common.base_entity import BaseEntity, schema
 
 
 class UsuarioEntity(BaseEntity, UserMixin):
     __tablename__ = 'usuarios'
 
-    # id = db.Column(db.Integer, primary_key=True)
-    id_pessoa = db.Column(db.Integer, db.ForeignKey(f'pessoas.id'))
+    id_pessoa = db.Column(db.Integer, db.ForeignKey(f'{schema}.pessoas.id'))
     username = db.Column(db.String(50), nullable=False)
     senha = db.Column(db.String, nullable=False)
 

@@ -3,10 +3,11 @@
     justify-content: center;
     align-items: center;
 
-    width: 250px;
+    /* width: 250px; */
     height: 70px;
+    /* width: 100%; */
 
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     border: 0px;
 
     font-size: 22px;
