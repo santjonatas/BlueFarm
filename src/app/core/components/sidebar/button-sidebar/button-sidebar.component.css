@@ -1,0 +1,14 @@
+.botao-sidebar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 250px;
+    height: 70px;
+
+    background-color: blueviolet;
+    border: 0px;
+
+    font-size: 22px;
+    text-align: center;
+}
