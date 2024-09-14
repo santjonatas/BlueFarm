@@ -1,0 +1,39 @@
+a{
+    text-decoration: none;
+}
+
+app-card-modulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-modulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 200px;
+    height: 200px;
+
+    background-color: cadetblue;
+    border-radius: 5%;
+}
+
+.img-modulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 130px;
+    height: 130px;
+
+    /* background-color: red; */
+}
+
+.nome-modulo{
+    text-align: center;
+    color: black; 
+    font-size: 17px;
+}

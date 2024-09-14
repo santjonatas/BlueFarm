@@ -6,10 +6,14 @@ class NivelEntity(BaseEntity):
 
     acesso = db.Column(db.Boolean, nullable=False, default=False)
 
-    cargo = db.relationship('CargoEntity', uselist=False, back_populates='nivel')
+
+    cargo = db.relationship('CargoEntity', back_populates='nivel')
 
     def __init__(self,
             acesso: bool = False
             ) -> None:
 
         self.acesso = acesso
+
+    def __repr__(self):
+        return "<Nível %r>" % self.acesso

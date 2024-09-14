@@ -12,7 +12,8 @@
 }
 
 :host ::ng-deep section app-button-sidebar {
+    
     width: 100%;
 
-    background-color: blue;
+    background-color: blueviolet;
 }

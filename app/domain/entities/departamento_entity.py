@@ -10,3 +10,6 @@ class DepartamentoEntity(BaseEntity):
 
     def __init__(self, area: str) -> None:
         self.area = area
+
+    def __repr__(self):
+        return "<Departamento %r>" % self.area

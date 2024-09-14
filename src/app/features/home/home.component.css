@@ -19,7 +19,22 @@ main{
 }
 
 .section-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     width: 75%;
     height: 100%;
     background-color: green;
+}
+
+:host ::ng-deep .section-main app-dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%;
+
+    background-color: blueviolet;
 }

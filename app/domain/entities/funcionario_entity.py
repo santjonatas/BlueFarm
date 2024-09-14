@@ -16,12 +16,12 @@ class FuncionarioEntity(BaseEntity):
     operador= db.relationship('OperadorEntity', uselist=False, back_populates='funcionario')
 
     def __init__(self, 
-        id_cargo: int = None,
-        id_pessoa: int = None,
-        data_admissao: datetime = None
+        id_usuario: int,
+        id_cargo: int,
+        data_admissao: datetime
         ) -> None:
+        self.id_usuario = id_usuario
         self.id_cargo = id_cargo
-        self.id_pessoa = id_pessoa
         self.data_admissao = data_admissao
 
     def __repr__(self):

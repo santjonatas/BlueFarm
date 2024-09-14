@@ -12,15 +12,16 @@ class UsuarioEntity(BaseEntity, UserMixin):
 
     pessoa = db.relationship('PessoaEntity', uselist=False, back_populates='usuario')
     funcionario = db.relationship('FuncionarioEntity', uselist=False, back_populates='usuario')
+    cliente = db.relationship('ClienteEntity', uselist=False, back_populates='usuario')
 
     def __init__(self, 
+        id_pessoa: int,
         username: str,
-        senha: str,
-        id_funcionario: int = None
+        senha: str
         ) -> None:
+        self.id_pessoa = id_pessoa
         self.username = username
         self.senha = senha
-        self.id_funcionario = id_funcionario
 
     def __repr__(self):
         return "<Usuario %r>" % self.username
