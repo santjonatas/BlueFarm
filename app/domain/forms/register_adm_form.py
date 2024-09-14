@@ -15,6 +15,7 @@ class RegisterAdmForm(BaseForm):
     ])
     cpf = StringField('CPF',
         validators=[DataRequired(),
+                    Length(min=11, max=11, message="O CPF deve ter 11 caracteres."),
             Regexp(r'^\d{11}$', message="O CPF deve ter 11 dígitos sem pontos ou traços.")
     ])
     genero = SelectField('Gênero', validators=[DataRequired()], choices=[
@@ -24,8 +25,8 @@ class RegisterAdmForm(BaseForm):
     ])
     telefone = StringField('Telefone',
         validators=[DataRequired(),
-            Regexp(r'^\d{10,11}$',
-                   message="O telefone deve ter entre 10 e 11 dígitos sem pontos ou traços.")
+            Length(min=10, max=11, message="O telefone deve ter pelo menos 10 caracteres."),
+            Regexp(r'^\d{10,11}$', message="O telefone deve ter entre 10 e 11 dígitos sem pontos ou traços.")
     ])
     email = EmailField('Email', validators=[DataRequired(), Email(message="Email inválido.")
     ])

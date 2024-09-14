@@ -6,7 +6,7 @@ class CargoEntity(BaseEntity):
 
     id_nivel = db.Column(db.Integer, db.ForeignKey(f'{schema}.niveis.id'))
     funcao = db.Column(db.String(50), nullable=False)
-    salario = db.Column(db.Decimal(10, 2), nullable=False)
+    salario = db.Column(db.DECIMAL(10, 2), nullable=False)
 
 
     funcionario = db.relationship('FuncionarioEntity', uselist=False, back_populates='cargo')

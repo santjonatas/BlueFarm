@@ -7,8 +7,8 @@ class ProdutoEntity(BaseEntity, UserMixin):
     __tablename__ = 'produtos'
 
     nome = db.Column(db.String(50), nullable=False)
-    descricao = db.Column(db.String(max), nullable=False)
-    preco = db.Column(db.Decimal, nullable=False)
+    descricao = db.Column(db.String(255), nullable=False)
+    preco = db.Column(db.DECIMAL(10, 2), nullable=False)
 
 
     item_pedido = db.relationship('ItemPedidoEntity', back_populates='produto')

@@ -13,7 +13,7 @@ class BaseEntity(db.Model):
     __table_args__ = {'schema': schema}
 
     id = db.Column(db.Integer, primary_key=True, index=True)
-    created_at = db.Column(db.DateTime, default=datetime.now)
+    created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=True)
 
     @property

@@ -7,8 +7,8 @@ class InsumoEntity(BaseEntity, UserMixin):
     __tablename__ = 'insumos'
 
     nome = db.Column(db.String(100), nullable=False)
-    descricao = db.Column(db.String(max), nullable=False)
-    preco = db.Column(db.Decimal, nullable=False)
+    descricao = db.Column(db.String(255), nullable=False)
+    preco = db.Column(db.DECIMAL(10, 2), nullable=False)
     comprado_em = db.Column(db.DateTime, nullable=False)
 
 

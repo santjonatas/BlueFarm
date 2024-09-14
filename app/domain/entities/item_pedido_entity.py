@@ -9,10 +9,10 @@ class ItemPedidoEntity(BaseEntity, UserMixin):
     id_pedido = db.Column(db.Integer, db.ForeignKey(f'{schema}.pedidos.id'))
     id_produto = db.Column(db.Integer, db.ForeignKey(f'{schema}.produtos.id'))
     quantidade = db.Column(db.Integer, nullable=False)
-    preco_unitario = db.Column(db.Decimal, nullable=False)
+    preco_unitario = db.Column(db.DECIMAL(10, 2), nullable=False)
 
     pedido = db.relationship('PedidoEntity', back_populates='item_pedido')
-    produto = db.relationship('ProdutoEntity', uselist=False, back_populates='item_produto')
+    produto = db.relationship('ProdutoEntity', uselist=False, back_populates='item_pedido')
 
     def __init__(self, 
         id_pedido: int,
