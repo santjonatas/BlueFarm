@@ -1,3 +1,4 @@
+import traceback
 from app.application.config.global_utils import GlobalUtils
 from app.application.usecases.dto.input.entities.create_administrador_input_dto import CreateAdministradorInputDto
 from app.application.usecases.dto.input.entities.create_funcionario_input_dto import CreateFuncionarioInputDto
@@ -75,38 +76,45 @@ class CreateAdminUserUseCase:
 
                 pessoa_entity = self.pessoa_service.create(input_dto=pessoa_input)
             except Exception as e:
+                stacktrace = traceback.format_exc()
                 raise PessoaEntityException(str(e))
 
-            try:
-                funcionario_input = CreateFuncionarioInputDto(
-                    data_admissao=input_dto.data_admissao,
-                    id_cargo=input_dto.cargo,
-                    id_pessoa=pessoa_entity.id
-                )
-
-                funcionario_entity = self.funcionario_service.create(input_dto=funcionario_input)
-            except Exception as e:
-                raise FuncionarioEntityException(str(e))
-
+            
             try:
                 usuario_input = CreateUsuarioInputDto(
-                    id_funcionario=funcionario_entity.id,
+                    id_pessoa=pessoa_entity.id,
                     username=input_dto.username,
                     senha=input_dto.senha
                 )
 
                 usuario_entity = self.usuario_service.create(input_dto=usuario_input)
             except Exception as e:
+                stacktrace = traceback.format_exc()
                 raise UsuarioEntityException(str(e))
 
             try:
-                administrador_input = CreateAdministradorInputDto(
+                funcionario_input = CreateFuncionarioInputDto(
                     id_usuario=usuario_entity.id,
+                    id_cargo=input_dto.cargo,
+                    data_admissao=input_dto.data_admissao,
+                )
+
+                funcionario_entity = self.funcionario_service.create(input_dto=funcionario_input)
+            except Exception as e:
+                stacktrace = traceback.format_exc()
+                raise FuncionarioEntityException(str(e))
+
+            try:
+                administrador_input = CreateAdministradorInputDto(
+                    id_funcionario=funcionario_entity.id,
                     id_departamento=input_dto.departamento
                 )
 
                 administrador_entity = self.administrador_service.create(input_dto=administrador_input)
+
+                print('Registrou tudo paizao')
             except Exception as e:
+                stacktrace = traceback.format_exc()
                 raise AdministradorEntityException(str(e))
         except PessoaEntityException:
             pass
@@ -120,6 +128,7 @@ class CreateAdminUserUseCase:
             self.funcionario_service.funcionario_repository.delete(funcionario_entity.id)
             self.usuario_service.usuario_repository.delete(usuario_entity.id)
         finally:
-            print('Registrou tudo paizao')
+            pass
+            # print('Registrou tudo paizao')
 
         return CreateAdminUserOutputDto(admin_entity=administrador_entity)
