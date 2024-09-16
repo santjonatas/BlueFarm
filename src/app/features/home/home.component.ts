@@ -32,11 +32,12 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ControleProducaoComponent } from "./controle-producao/controle-producao.component";
 import { GestaoEstoqueComponent } from "./gestao-estoque/gestao-estoque.component";
 import { GestaoVendasComponent } from "./gestao-vendas/gestao-vendas.component";
+import { ConfiguracoesComponent } from "./configuracoes/configuracoes.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, SidebarComponent, DashboardComponent, ControleProducaoComponent, GestaoEstoqueComponent, GestaoVendasComponent],
+  imports: [CommonModule, HeaderComponent, SidebarComponent, DashboardComponent, ControleProducaoComponent, GestaoEstoqueComponent, GestaoVendasComponent, ConfiguracoesComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

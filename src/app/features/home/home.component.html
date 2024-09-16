@@ -1,12 +1,3 @@
-<!-- <app-header></app-header>
-<main>
-  <section class="section-sidebar" *ngIf="sidebarVisible">
-    <app-sidebar id="sidebar"></app-sidebar>
-  </section>
-  <section class="section-main">
-    <app-dashboard></app-dashboard>
-  </section>
-</main> -->
 <app-header></app-header>
 <main>
   <section class="section-sidebar" *ngIf="sidebarVisible">
@@ -25,6 +16,9 @@
       </section>
       <section *ngSwitchCase="'Gestão de Vendas'" class="ng-switch-case">
         <app-gestao-vendas></app-gestao-vendas>
+      </section>
+      <section *ngSwitchCase="'Configurações'" class="ng-switch-case">
+        <app-configuracoes></app-configuracoes>
       </section>
     </ng-container>
   </section>
