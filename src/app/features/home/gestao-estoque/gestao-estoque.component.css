@@ -1,0 +1,13 @@
+.section-gestao-estoque{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    grid-template-columns: repeat(2, 1fr);
+
+
+    width: 80%;
+    height: 80%;
+
+    background-color: deeppink;
+}
