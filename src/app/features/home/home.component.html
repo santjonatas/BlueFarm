@@ -1,9 +1,18 @@
-<app-header></app-header>
+<!-- <app-header></app-header>
 <main>
     <section class="section-sidebar">
-        <app-sidebar></app-sidebar>
+        <app-sidebar id="sidebar"></app-sidebar>
     </section>
     <section class="section-main">
         <app-dashboard></app-dashboard>
     </section>
+</main> -->
+<app-header></app-header>
+<main>
+  <section class="section-sidebar" *ngIf="sidebarVisible">
+    <app-sidebar id="sidebar"></app-sidebar>
+  </section>
+  <section class="section-main">
+    <app-dashboard></app-dashboard>
+  </section>
 </main>

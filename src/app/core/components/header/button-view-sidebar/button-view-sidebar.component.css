@@ -1,0 +1,22 @@
+app-button-view-sidebar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 33px;
+    height: 33px;
+}
+
+.img-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 33px;
+    height: 33px;
+
+    background-image: url('../../../../assets/images/menu.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}

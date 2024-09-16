@@ -20,10 +20,10 @@ header{
     width: 33px;
     height: 33px;
 
-    background-image: url('../../../assets/images/menu.png');
+    /* background-image: url('../../../assets/images/menu.png');
     background-repeat: no-repeat;
     background-size: contain;
-    background-position: center;
+    background-position: center; */
 }
 
 .img-bluefarm{

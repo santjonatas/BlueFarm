@@ -11,3 +11,4 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 export class ButtonSidebarComponent {
   @Input() button_text: string = "Texto";
 }
+
