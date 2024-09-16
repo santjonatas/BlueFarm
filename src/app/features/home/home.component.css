@@ -28,7 +28,69 @@ main{
     background-color: green;
 }
 
-:host ::ng-deep .section-main app-dashboard {
+.ng-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.ng-switch-case{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.section-main section app-dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%;
+
+    background-color: blueviolet;
+}
+
+.section-main section app-controle-producao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%;
+
+    background-color: blueviolet;
+}
+
+.section-main section app-gestao-estoque {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%;
+
+    background-color: blueviolet;
+}
+
+.section-main section app-gestao-vendas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%;
+
+    background-color: blueviolet;
+}
+
+.section-main section app-configuracoes {
     display: flex;
     justify-content: center;
     align-items: center;
