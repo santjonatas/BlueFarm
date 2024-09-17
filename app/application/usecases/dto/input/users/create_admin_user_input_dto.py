@@ -12,10 +12,10 @@ class CreateAdminUserInputDto:
         email: Optional[str] = None,
         endereco: Optional[str] = None,
         data_admissao: Optional[datetime] = None,
-        cargo: Optional[str] = None,
+        cargo: Optional[int] = None,
         username: Optional[str] = None,
         senha: Optional[str] = None,
-        departamento: Optional[str] = None) -> None:
+        departamento: Optional[int] = None) -> None:
     
         # Atributos de CreatePessoaInputDto
         self.nome = nome

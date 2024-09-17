@@ -13,6 +13,6 @@ class HomeController:
     @login_required
     def index(self):
         try:
-            return current_user.funcionario.pessoa.nome
+            return current_user.pessoa.nome
         except:
             return current_user.username

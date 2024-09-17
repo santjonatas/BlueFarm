@@ -1,2 +1,5 @@
-class FuncionarioEntityException(Exception):
+from app.exceptions.database.DatabaseException import DatabaseException
+
+
+class FuncionarioEntityException(DatabaseException):
     ...
