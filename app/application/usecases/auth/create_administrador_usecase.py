@@ -18,6 +18,7 @@ from app.infra.services.database.departamento.departamento_service import Depart
 from app.infra.services.database.funcionario.funcionario_service import FuncionarioService
 from app.infra.services.database.pessoa.pessoa_service import PessoaService
 from app.infra.services.database.usuario.usuario_service import UsuarioService
+from app.infra.utils.security.crypto_util import CryptoUtil
 
 
 class CreateAdminUserUseCase:
@@ -60,7 +61,6 @@ class CreateAdminUserUseCase:
             raise UserAlreadyExistsException('Username em uso.')
 
         input_dto.senha = self.global_utils.pwd_hasher_util.hash_password(password=input_dto.senha)
-        input_dto.cpf = self.global_utils.crypto_util.encrypt(value=input_dto.cpf)
 
         try:
             try:
@@ -79,7 +79,6 @@ class CreateAdminUserUseCase:
                 stacktrace = traceback.format_exc()
                 raise PessoaEntityException(str(e))
 
-            
             try:
                 usuario_input = CreateUsuarioInputDto(
                     id_pessoa=pessoa_entity.id,
@@ -128,7 +127,4 @@ class CreateAdminUserUseCase:
             self.funcionario_service.funcionario_repository.delete(funcionario_entity.id)
             self.usuario_service.usuario_repository.delete(usuario_entity.id)
         finally:
-            pass
-            # print('Registrou tudo paizao')
-
-        return CreateAdminUserOutputDto(admin_entity=administrador_entity)
+            return CreateAdminUserOutputDto(admin_entity=administrador_entity)
