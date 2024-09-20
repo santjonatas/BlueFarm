@@ -1,5 +1,4 @@
 from flask import Flask
-from app.application.settings.api_setting import ApiSetting
 from app.application.settings.env_setting import EnvSetting
 from app.application.settings.extensions_setting import ExtensionsSettings
 from app.application.settings.globals_setting import GlobalsSetting
@@ -14,4 +13,3 @@ class GlobalInits:
         GlobalsSetting(app=app)
         RoutesSetting(app=app)
         LoginSetting(app=app)
-        ApiSetting(app=app)

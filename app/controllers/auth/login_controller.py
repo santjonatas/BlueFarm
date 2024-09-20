@@ -29,7 +29,7 @@ class LoginController:
 
                 login_user(output_dto.usuario)
 
-                return redirect(url_for('home.index'))
+                return redirect(url_for('home.home'))
 
             except Exception as e:
                 flash(message=str(e), category='danger')
