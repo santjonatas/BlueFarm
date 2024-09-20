@@ -25,31 +25,79 @@
 <main>
     <section class="section-sidebar">
         <section class="sidebar">
-            <button class="botao-sidebar">Texto</button>
-            <button class="botao-sidebar">Texto</button>
-            <button class="botao-sidebar">Texto</button>
-            <button class="botao-sidebar">Texto</button>
-            <button class="botao-sidebar">Texto</button>
+            <button class="botao-sidebar" data-section="dashboard">Dashboard</button>
+            <button class="botao-sidebar" data-section="producao">Controle de Produção</button>
+            <button class="botao-sidebar" data-section="estoque">Gestão de Estoque</button>
+            <button class="botao-sidebar" data-section="vendas">Gestão de Vendas</button>
+            <button class="botao-sidebar" data-section="configuracoes">Configurações</button>
         </section>
     </section>
     <section class="section-main">
         <div class="modulo-main">
-            <section class="section-dashboard">
+            <section class="section-dashboard section-content" id="dashboard">
                 <a class="card-modulo" href="">
                     <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Texto</h3>
+                    <h3 class="nome-modulo">Produção Atual</h3>
                 </a>
                 <a class="card-modulo" href="">
                     <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Texto</h3>
+                    <h3 class="nome-modulo">Vendas Recentes</h3>
                 </a>
                 <a class="card-modulo" href="">
                     <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Texto</h3>
+                    <h3 class="nome-modulo">Estoque de Produtos</h3>
+                </a>
+            </section>
+        
+            <section class="section-producao section-content" id="producao" style="display: none;">
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Plantio</h3>
                 </a>
                 <a class="card-modulo" href="">
                     <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Texto</h3>
+                    <h3 class="nome-modulo">Irrigação</h3>
+                </a>
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Colheita</h3>
+                </a>
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Controle de Temperatura</h3>
+                </a>
+            </section>
+        
+            <section class="section-estoque section-content" id="estoque" style="display: none;">
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Estoque de Produtos Agrícolas</h3>
+                </a>
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Estoque de Insumos</h3>
+                </a>
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Movimentação de Estoques</h3>
+                </a>
+            </section>
+        
+            <section class="section-vendas section-content" id="vendas" style="display: none;">
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Registro de Vendas</h3>
+                </a>
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Gestão de Clientes</h3>
+                </a>
+            </section>
+        
+            <section class="section-configuracoes section-content" id="configuracoes" style="display: none;">
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Configurações</h3>
                 </a>
             </section>
         </div>

@@ -199,13 +199,29 @@ p{
     background-color: yellow;
 }
 
-.section-dashboard{
+/* .section-dashboard{
     display: grid;
     justify-content: center;
     align-items: center;
 
     grid-template-columns: repeat(2, 1fr);
 
+    width: 80%;
+    height: 80%;
+
+    background-color: palegoldenrod;
+} */
+
+.section-dashboard,
+.section-producao,
+.section-estoque,
+.section-vendas,
+.section-configuracoes {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    grid-template-columns: repeat(2, 1fr);
 
     width: 80%;
     height: 80%;
