@@ -1,5 +1,4 @@
 from flask import Flask
-from app.application.config.global_apis import GlobalApis
 from app.application.config.global_controllers import GlobalControllers
 from app.application.config.global_repositories import GlobalRepositories
 from app.application.config.global_services import GlobalServices
@@ -17,4 +16,3 @@ class GlobalsSetting:
             global_utils=app.global_utils
         )
         app.global_controllers = GlobalControllers()
-        app.global_apis = GlobalApis()
