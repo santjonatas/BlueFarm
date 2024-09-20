@@ -1,0 +1,59 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Home {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+<link rel="stylesheet" href="../../static/styles/home.css">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <article class="img-menu">
+        <article class="img-menu"></article>
+    </article>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">João</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-sidebar">
+        <section class="sidebar">
+            <button class="botao-sidebar">Texto</button>
+            <button class="botao-sidebar">Texto</button>
+            <button class="botao-sidebar">Texto</button>
+            <button class="botao-sidebar">Texto</button>
+            <button class="botao-sidebar">Texto</button>
+        </section>
+    </section>
+    <section class="section-main">
+        <div class="modulo-main">
+            <section class="section-dashboard">
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Texto</h3>
+                </a>
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Texto</h3>
+                </a>
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Texto</h3>
+                </a>
+                <a class="card-modulo" href="">
+                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                    <h3 class="nome-modulo">Texto</h3>
+                </a>
+            </section>
+        </div>
+    </section>
+</main>
+<script src="../../static/scripts/main.js"></script>
+{% endblock body %}

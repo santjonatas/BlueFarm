@@ -6,12 +6,14 @@ load_dotenv()
 
 
 class CryptoUtil:
-    def __init__(self):
+    @staticmethod
+    def encrypt(value: str) -> str:
         key = os.getenv("CRYPTO_KEY")
-        self.cipher = Fernet(key)
+        cipher = Fernet(key)
+        return cipher.encrypt(value.encode()).decode()
 
-    def encrypt(self, value: str) -> str:
-        return self.cipher.encrypt(value.encode()).decode()
-
-    def decrypt(self, encrypted_value: str) -> str:
-        return self.cipher.decrypt(encrypted_value.encode()).decode()
+    @staticmethod
+    def decrypt(encrypted_value: str) -> str:
+        key = os.getenv("CRYPTO_KEY")
+        cipher = Fernet(key)
+        return cipher.decrypt(encrypted_value.encode()).decode()

@@ -13,4 +13,3 @@ class GlobalInits:
         GlobalsSetting(app=app)
         RoutesSetting(app=app)
         LoginSetting(app=app)
-    

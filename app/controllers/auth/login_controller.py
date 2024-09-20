@@ -1,7 +1,6 @@
 from flask import current_app, flash, render_template, redirect, url_for, Blueprint
 from flask_login import login_user, logout_user
 from flask_wtf import FlaskForm
-
 from app.application.usecases.auth.validate_user_usecase import ValidateUserUseCase
 from app.application.usecases.dto.input.auth.validate_user_input_dto import ValidateUserInputDto
 from app.domain.forms.login_form import LoginForm
@@ -30,7 +29,7 @@ class LoginController:
 
                 login_user(output_dto.usuario)
 
-                return redirect(url_for('home.index'))
+                return redirect(url_for('home.home'))
 
             except Exception as e:
                 flash(message=str(e), category='danger')

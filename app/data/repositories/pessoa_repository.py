@@ -1,6 +1,7 @@
 from requests import Session
 from app.application.contracts.data.repositories.i_pessoa_repository import IPessoaRepository
 from app.domain.entities.pessoa_entity import PessoaEntity
+from app.infra.utils.security.crypto_util import CryptoUtil
 
 
 class PessoaRepository(IPessoaRepository):

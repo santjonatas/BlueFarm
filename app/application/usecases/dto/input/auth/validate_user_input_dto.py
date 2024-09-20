@@ -2,7 +2,7 @@ class ValidateUserInputDto:
     def __init__(self, username: str=None, senha: str=None):
         self.username = username
         self.senha = senha
-    
+
     @property
     def to_dict(self):
         return {
