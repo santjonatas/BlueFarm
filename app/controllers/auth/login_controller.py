@@ -29,7 +29,15 @@ class LoginController:
 
                 login_user(output_dto.usuario)
 
-                return redirect(url_for('main.main'))
+                #
+                if '@adm' in output_dto.usuario.username:
+                    return redirect(url_for('main.main'))
+                
+                if not '@adm' in output_dto.usuario.username:
+                    return redirect(url_for('main.main_client'))
+                #
+
+                # return redirect(url_for('main.main'))
 
             except Exception as e:
                 flash(message=str(e), category='danger')

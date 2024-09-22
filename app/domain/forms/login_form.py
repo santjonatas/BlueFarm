@@ -13,7 +13,7 @@ class LoginForm(BaseForm):
             Length(min=4,
                 max=50,
                 message="O username deve ter entre 4 e 20 caracteres."),
-                Regexp(r'^\w+$', message="O username deve conter apenas letras, números e underscores.")])
+                Regexp(r'^[\w@]+$', message="O username deve conter apenas letras, números e underscores.")])
 
     senha = PasswordField('Senha',
         validators=[DataRequired(),

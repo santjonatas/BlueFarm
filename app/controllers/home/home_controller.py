@@ -12,6 +12,7 @@ class HomeController:
         self.blueprint.add_url_rule('/home', view_func=self.home, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/', view_func=self.index)
 
+
     def home(self) -> None:
         try:
             return render_template('home/home.html')
@@ -21,9 +22,3 @@ class HomeController:
         
     def index(self) -> None:
         return redirect(url_for('home.home'))
-
-    def login(self) -> None:
-        try:
-            return redirect(url_for('login.login'))
-        except Exception as e:
-            return e

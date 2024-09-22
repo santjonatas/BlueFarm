@@ -3,6 +3,14 @@
     padding: 0px;
 }
 
+html, body{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+}
+
 main{
     display: flex;
     justify-content: center;
@@ -59,10 +67,10 @@ main{
     flex-direction: column;
     gap: 1%;
 
-    margin-top: 5%;
+    margin-top: 3%;
 
     width: 270px;
-    height: 475px;
+    height: 350px;
     border-radius: 24px 60px;
     background-color: red;
 }
@@ -212,19 +220,18 @@ p{
     background-color: palegoldenrod;
 } */
 
-.section-dashboard,
-.section-producao,
-.section-estoque,
-.section-vendas,
-.section-configuracoes {
+.section-produtos,
+.section-pedidos {
     display: grid;
     justify-content: center;
     align-items: center;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
-    width: 80%;
-    height: 80%;
+    margin-top: 5%;
+
+    width: 95%;
+    height: 95%;
 
     background-color: palegoldenrod;
 }
