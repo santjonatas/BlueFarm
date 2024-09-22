@@ -11,3 +11,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+//////////////////////////////////
+
+document.querySelectorAll('.botao-sidebar').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('.section-content').forEach(section => {
+            section.style.display = 'none';
+        });
+
+        const sectionId = this.getAttribute('data-section');
+        const sectionToShow = document.getElementById(sectionId);
+
+        sectionToShow.style.display = 'grid';
+    });
+});
+

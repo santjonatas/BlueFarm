@@ -29,12 +29,12 @@ class LoginController:
 
                 login_user(output_dto.usuario)
 
-                return redirect(url_for('home.home'))
+                return redirect(url_for('main.main'))
 
             except Exception as e:
                 flash(message=str(e), category='danger')
         
-        return render_template('features/auth/login/login.component.html', form=form)
+        return render_template('auth/login.html', form=form)
 
     def logout(self) -> None:
         logout_user()
