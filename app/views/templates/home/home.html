@@ -4,104 +4,58 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css' ) }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 <link rel="stylesheet" href="../../static/styles/home.css">
 {% endblock style %}
 
 {% block body %}
 <header>
-    <article class="img-menu">
-        <article class="img-menu"></article>
-    </article>
-    <article class="img-bluefarm"></article>
-    <section class="section-perfil">
-        <div class="align-nome">
-            <p>Olá, </p>
-            <p id="nome-usuario">João</p>
+    <div class="borrao-header">
+        <div class="conteudo-header">
+            <button type="submit">Sobre Nós</button>
+            <button type="submit">Serviços</button>
+            <button type="submit">Produtos</button>
         </div>
-        <article class="img-perfil"></article>
-    </section>
+    </div>
 </header>
-<main>
-    <section class="section-sidebar">
-        <section class="sidebar">
-            <button class="botao-sidebar" data-section="dashboard">Dashboard</button>
-            <button class="botao-sidebar" data-section="producao">Controle de Produção</button>
-            <button class="botao-sidebar" data-section="estoque">Gestão de Estoque</button>
-            <button class="botao-sidebar" data-section="vendas">Gestão de Vendas</button>
-            <button class="botao-sidebar" data-section="configuracoes">Configurações</button>
-        </section>
-    </section>
-    <section class="section-main">
-        <div class="modulo-main">
-            <section class="section-dashboard section-content" id="dashboard">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produção Atual</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Vendas Recentes</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Estoque de Produtos</h3>
-                </a>
-            </section>
-        
-            <section class="section-producao section-content" id="producao" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Plantio</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Irrigação</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Colheita</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Controle de Temperatura</h3>
-                </a>
-            </section>
-        
-            <section class="section-estoque section-content" id="estoque" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Estoque de Produtos Agrícolas</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Estoque de Insumos</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Movimentação de Estoques</h3>
-                </a>
-            </section>
-        
-            <section class="section-vendas section-content" id="vendas" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Registro de Vendas</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Gestão de Clientes</h3>
-                </a>
-            </section>
-        
-            <section class="section-configuracoes section-content" id="configuracoes" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Configurações</h3>
-                </a>
-            </section>
+<section class="secao-principal">
+    <div class="borrao-secao">
+        <div class="conteudo-secao">
+            <h1>Seja Bem-Vindo a BlueFarm!</h1>
+            <h2>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h2>
+            <form action="{{ url_for('home.login') }}" method="get">
+                <button type="submit" class="bt-contato">Realizar Login</button>
+            </form>
+
+            <!-- <button type="submit" class="bt-contato">Realizar Login</button> -->
         </div>
-    </section>
-</main>
-<script src="../../static/scripts/main.js"></script>
+    </div>
+</section>
+<section class="secao-sobre-nos">
+    <article class="img-fazenda-sobre-nos">
+
+    </article>
+    <div class="txt-sobre-nos">
+        <h3>Sobre Nós</h3>
+        <p id="txt-sobre-nos">
+            Bem-vindo à FarmZul! Somos uma fazenda urbana inovadora, localizada no coração da cidade, que nasceu do sonho de trazer alimentos frescos, saudáveis e sustentáveis diretamente para você. Aqui, na FarmZul, acreditamos que é possível cultivar o futuro de forma consciente, integrando tecnologia e natureza para transformar a maneira como produzimos e consumimos nossos alimentos.
+
+            Nossa missão é oferecer uma alternativa ecológica e acessível para quem busca uma alimentação de qualidade, enquanto cuidamos do meio ambiente e promovemos a sustentabilidade. Utilizando técnicas de cultivo modernas, como hidroponia e aquaponia, conseguimos cultivar uma ampla variedade de vegetais, ervas e frutas, tudo sem o uso de agrotóxicos e com o menor impacto ambiental possível.
+
+            Mais do que uma fazenda, a FarmZul é um espaço de aprendizado e conexão com a natureza. Oferecemos visitas guiadas, workshops e experiências imersivas para que todos possam conhecer de perto nosso trabalho e se inspirar a adotar práticas mais sustentáveis no dia a dia.
+
+            Na FarmZul, cada folha, cada fruto, cada colheita reflete nosso compromisso com a qualidade e com a sustentabilidade. Estamos aqui para trazer o melhor da terra direto para a sua mesa, cultivando saúde, bem-estar e um futuro mais verde para todos.
+
+            Venha nos conhecer e descubra como, juntos, podemos fazer a diferença!
+        </p>
+    </div>
+</section>
+<section class="secao-servicos">
+    <div class="borrao-secao">
+        <div class="conteudo-secao">
+            
+        </div>
+    </div>
+</section>
+</body>
+</html>
 {% endblock body %}
