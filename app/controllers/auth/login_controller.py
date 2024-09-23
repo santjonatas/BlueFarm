@@ -33,7 +33,7 @@ class LoginController:
                 if '@adm' in output_dto.usuario.username:
                     return redirect(url_for('main.main'))
                 
-                if not '@adm' in output_dto.usuario.username:
+                if not '@adm' in output_dto.usuario.username and not '@op' in output_dto.usuario.username:
                     return redirect(url_for('main.main_client'))
                 #
 

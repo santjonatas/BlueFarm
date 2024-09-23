@@ -1,6 +1,6 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} Bluefarm | Registro Administrador {% endblock title %}
+{% block title %} Bluefarm | Registro Operador {% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
@@ -13,7 +13,7 @@
 <section class="sessao-registro">
     <div class="titulo-pagina">
         <div class="color-blue-imagem-fazenda-urbana">
-            <h2>BlueFarm | Registro - Administrador</h2>
+            <h2>BlueFarm | Registro - Operador</h2>
         </div>
     </div>
     <div id="sessao-messages">
@@ -68,8 +68,8 @@
                 {{ form.senha(class="form-control", placeholder="Senha") }}
             </div>
             <div class="form">
-                <label>Departamento</label>
-                {{ form.departamento(class="form-control") }}
+                <label>Supervisor</label>
+                {{ form.supervisor(class="form-control") }}
             </div>
             <article class="logo-farmzul">
 
