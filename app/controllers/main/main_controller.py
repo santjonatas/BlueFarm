@@ -20,6 +20,7 @@ class MainController:
         logout_user()
         return redirect(url_for('login.login'))
     
+    @login_required
     def main_client(self) -> None:
 
         return render_template('main/main_client.html')

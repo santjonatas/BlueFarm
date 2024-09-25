@@ -1,5 +1,6 @@
 from pprint import pprint
 from flask import current_app, flash, render_template, redirect, url_for, Blueprint
+from flask_login import login_required
 from flask_wtf import FlaskForm
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
 from app.application.usecases.auth.create_operador import CreateOperadorUserUseCase
@@ -18,6 +19,7 @@ class RegisterController:
         self.blueprint.add_url_rule('/register_admin/', view_func=self.register_admin, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/register_operador/', view_func=self.register_operador, methods=['GET', 'POST'])
     
+    @login_required
     def register_admin(self) -> None:
         form: FlaskForm = RegisterAdmForm()
 
@@ -38,9 +40,7 @@ class RegisterController:
         
         return render_template('auth/registro_admin.html', form=form)
     
-
-
-    #########################################################################
+    @login_required
     def register_operador(self) -> None:
         form: FlaskForm = RegisterOpForm()
 

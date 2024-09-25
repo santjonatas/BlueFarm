@@ -1,6 +1,7 @@
 from app.application.settings.extensions_setting import db
 from app.data.repositories.admistrador_repository import AdministradorRepository
 from app.data.repositories.cargo_repository import CargoRepository
+from app.data.repositories.cliente_repository import ClienteRepository
 from app.data.repositories.departamento_repository import DepartamentoRepository
 from app.data.repositories.funcionario_repository import FuncionarioRepository
 from app.data.repositories.nivel_repository import NivelRepository
@@ -20,3 +21,4 @@ class GlobalRepositories:
         self.administrador_repository = AdministradorRepository(session=session)
         self.nivel_repository = NivelRepository(session=session)
         self.operador_repository = OperadorRepository(session=session)
+        self.cliente_repository = ClienteRepository(session=session)

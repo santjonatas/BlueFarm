@@ -1,3 +1,4 @@
+import traceback
 from flask import current_app, flash, render_template, redirect, url_for, Blueprint
 from flask_login import login_user, logout_user
 from flask_wtf import FlaskForm
@@ -33,6 +34,9 @@ class LoginController:
                 if '@adm' in output_dto.usuario.username:
                     return redirect(url_for('main.main'))
                 
+                if '@op' in output_dto.usuario.username:
+                    return redirect(url_for('main.main'))
+                
                 if not '@adm' in output_dto.usuario.username and not '@op' in output_dto.usuario.username:
                     return redirect(url_for('main.main_client'))
                 #
@@ -40,6 +44,7 @@ class LoginController:
                 # return redirect(url_for('main.main'))
 
             except Exception as e:
+                stacktracr = traceback.format_exc()
                 flash(message=str(e), category='danger')
         
         return render_template('auth/login.html', form=form)

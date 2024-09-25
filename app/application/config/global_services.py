@@ -1,6 +1,7 @@
 from app.application.config.global_repositories import GlobalRepositories
 from app.infra.services.database.admin.admin_service import AdministradorService
 from app.infra.services.database.cargo.cargo_service import CargoService
+from app.infra.services.database.cliente.cliente_service import ClienteService
 from app.infra.services.database.departamento.departamento_service import DepartamentoService
 from app.infra.services.database.funcionario.funcionario_service import FuncionarioService
 from app.infra.services.database.operador.operador_service import OperadorService
@@ -27,4 +28,7 @@ class GlobalServices:
         )
         self.operador_service = OperadorService(
             operador_repository=global_repositories.operador_repository
+        )
+        self.cliente_service = ClienteService(
+            cliente_repository=global_repositories.cliente_repository
         )
