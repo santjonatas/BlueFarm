@@ -1,6 +1,9 @@
 from flask import current_app, flash, render_template, redirect, url_for, Blueprint
 from flask_login import login_required, login_user, logout_user
 
+from app.application.config.global_repositories import GlobalRepositories
+
+repositories = GlobalRepositories()
 
 class MainController:
     def __init__(self):
@@ -23,4 +26,7 @@ class MainController:
     @login_required
     def main_client(self) -> None:
 
-        return render_template('main/main_client.html')
+        produto_entity = repositories.produto_repository.list()
+        print(produto_entity)
+
+        return render_template('main/main_client.html', produtos=produto_entity)

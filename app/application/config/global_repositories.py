@@ -7,6 +7,7 @@ from app.data.repositories.funcionario_repository import FuncionarioRepository
 from app.data.repositories.nivel_repository import NivelRepository
 from app.data.repositories.operador_repository import OperadorRepository
 from app.data.repositories.pessoa_repository import PessoaRepository
+from app.data.repositories.produto_repository import ProdutoRepository
 from app.data.repositories.usuario_repository import UsuarioRepository
 
 class GlobalRepositories:
@@ -22,3 +23,5 @@ class GlobalRepositories:
         self.nivel_repository = NivelRepository(session=session)
         self.operador_repository = OperadorRepository(session=session)
         self.cliente_repository = ClienteRepository(session=session)
+
+        self.produto_repository = ProdutoRepository(session=session)

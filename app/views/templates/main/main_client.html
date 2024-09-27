@@ -27,114 +27,29 @@
         <section class="sidebar">
             <button class="botao-sidebar" data-section="produtos">Produtos</button>
             <button class="botao-sidebar" data-section="pedidos">Pedidos</button>
+            <button class="botao-sidebar" data-section="carrinho">Carrinho</button>
         </section>
     </section>
-    <!-- <section class="section-main">
-        <div class="modulo-main">
-            <section class="section-produtos section-content" id="produtos">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produto</h3>
-                </a>
-            </section>
-        
-            <section class="section-pedidos section-content" id="pedidos" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Pedido</h3>
-                </a>
-            </section>
-        </div>
-    </section> -->
     <section class="section-main">
         <section class="section-produtos section-content" id="produtos">
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
-            <a class="card-modulo" href="">
-                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Produto</h3>
-            </a>
+            {% for produto in produtos %}
+            <div class="card-modulo" href="">
+                <img class="img-modulo" src="../../static/images/produtos/{{ produto.nome }}.png" alt="Imagem do Produto">
+                <h3 class="nome-modulo">{{ produto.nome }}</h3>
+                <p>Preço: {{ produto.preco }}</p>
+            </div>
+            {% endfor %}
         </section>
-    
         <section class="section-pedidos section-content" id="pedidos" style="display: none;">
             <a class="card-modulo" href="">
                 <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                <h3 class="nome-modulo">Pedido</h3>
+                <h3 class="nome-modulo">teste</h3>
+            </a>
+        </section>
+        <section class="section-carrinho section-content" id="carrinho" style="display: none;">
+            <a class="card-modulo" href="">
+                <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                <h3 class="nome-modulo">teste</h3>
             </a>
         </section>
     </section>

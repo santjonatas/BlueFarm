@@ -233,7 +233,8 @@ p{
 } */
 
 .section-produtos,
-.section-pedidos {
+.section-pedidos,
+.section-carrinho {
     display: grid;
     justify-content: center;
     align-items: center;
