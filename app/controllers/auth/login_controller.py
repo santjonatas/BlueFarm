@@ -20,6 +20,7 @@ class LoginController:
         form: FlaskForm = LoginForm()
 
         if form.validate_on_submit():
+            e = ''
             try:
                 input_dto = ValidateUserInputDto(**form.to_dict)
                 usecase = ValidateUserUseCase(
