@@ -45,38 +45,24 @@
         <section class="section-pedidos section-content" id="pedidos" style="display: none;">
             
         </section>
-    <!-- <section class="section-carrinho section-content" id="carrinho" style="display: none;">
-        {% for item in session['carrinho'] %}
-        <div class="card-produto-carrinho">
-            <img class="img-produto-carrinho" src="../../static/images/produtos/{{ item.nome }}.png" alt="{{ item.nome }}">
-            <h3 class="nome-produto-carrinho">{{ item.nome }}</h3>
-            <output class="out-preco">{{ item.preco }}</output>
-            <div class="div-quantidade-produtos">
-                <output class="out-quantidade">1</output> 
-                <button class="img-mais">+</button>
-                <button class="img-menos">-</button>
-                <button class="img-lixeira"></button>
+        <section class="section-carrinho section-content" id="carrinho" style="display: none;">
+            {% for item in session['carrinho'] %}
+            <div class="card-produto-carrinho">
+                <img class="img-produto-carrinho" src="../../static/images/produtos/{{ item.nome }}.png" alt="{{ item.nome }}">
+                <h3 class="nome-produto-carrinho">{{ item.nome }}</h3>
+                <output class="out-preco">{{ item.preco * item.quantidade }}</output>
+                <div class="div-quantidade-produtos">
+                    <output class="out-quantidade">{{ item.quantidade }}</output> 
+                    <button class="img-mais">+</button>
+                    <button class="img-menos">-</button>
+                    <form method="POST" action="{{ url_for('main.remove_from_cart') }}">
+                        <input type="hidden" name="produto_id" value="{{ item.id }}">
+                        <button type="submit" class="img-lixeira"></button>
+                    </form>
+                </div>
             </div>
-        </div>
-        {% endfor %}
-    </section> -->
-    <section class="section-carrinho section-content" id="carrinho" style="display: none;">
-        {% for item in session['carrinho'] %}
-        <div class="card-produto-carrinho">
-            <img class="img-produto-carrinho" src="../../static/images/produtos/{{ item.nome }}.png" alt="{{ item.nome }}">
-            <h3 class="nome-produto-carrinho">{{ item.nome }}</h3>
-            <output class="out-preco">{{ item.preco }}</output>
-            <div class="div-quantidade-produtos">
-                <output class="out-quantidade">1</output> <!-- Você pode mudar essa lógica se precisar de mais controle sobre a quantidade -->
-                <button class="img-mais">+</button>
-                <button class="img-menos">-</button>
-                <form method="POST" action="{{ url_for('main.remove_from_cart') }}">
-                    <input type="hidden" name="produto_id" value="{{ item.id }}">
-                    <button type="submit" class="img-lixeira"></button>
-                </form>
-            </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        </section>
     </section>
 </main>
 <script src="../../static/scripts/main_client.js"></script>

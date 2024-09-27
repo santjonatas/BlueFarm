@@ -14,9 +14,9 @@ class MainController:
         self.blueprint.add_url_rule('/main/', view_func=self.main, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/main_client/', view_func=self.main_client, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/add_to_cart/', view_func=self.add_to_cart, methods=['POST'])
-        #
-        self.blueprint.add_url_rule('/remove_from_cart/', view_func=self.remove_from_cart, methods=['POST'])  # Nova rota
+        self.blueprint.add_url_rule('/remove_from_cart/', view_func=self.remove_from_cart, methods=['POST'])
         
+
     @login_required
     def main(self) -> None:
         return render_template('main/main.html')
@@ -30,40 +30,44 @@ class MainController:
         produto_entity = repositories.produto_repository.list()
         return render_template('main/main_client.html', produtos=produto_entity)
 
-    @login_required
-    def add_to_cart(self):
-        produto_id = request.form.get('produto_id')
-        
-        # Obtém o produto usando o ID
-        produto = repositories.produto_repository.get(produto_id)
-
-        # Lógica para adicionar o produto ao carrinho
-        if 'carrinho' not in session:
-            session['carrinho'] = []
-
-        # Adiciona o objeto do produto ao carrinho
-        if produto:
-            session['carrinho'].append({
-                'id': produto.id,
-                'nome': produto.nome,
-                'preco': produto.preco,
-                # Adicione mais campos se necessário
-            })
-
-        print(session['carrinho'])  # Para debug
-        flash('Produto adicionado ao carrinho!')
-        return redirect(url_for('main.main_client'))
-   
-########################################
 
     @login_required
     def remove_from_cart(self):
         produto_id = int(request.form.get('produto_id'))
 
         if 'carrinho' in session:
-            # Filtra os itens do carrinho, removendo o item com o produto_id correspondente
             session['carrinho'] = [item for item in session['carrinho'] if item['id'] != produto_id]
 
-        print(session['carrinho'])  # Para debug
+        print(f'removeu: {session['carrinho']}') 
         flash('Produto removido do carrinho!')
+        return redirect(url_for('main.main_client'))
+    
+#####################################
+
+    @login_required
+    def add_to_cart(self):
+        produto_id = request.form.get('produto_id')
+        produto = repositories.produto_repository.get(produto_id)
+
+        if 'carrinho' not in session:
+            session['carrinho'] = []
+
+        if produto:
+            # Garantindo que o preço é um float
+            preco_produto = float(produto.preco) if produto.preco is not None else 0.0
+            
+            for item in session['carrinho']:
+                if item['id'] == produto.id:
+                    item['quantidade'] += 1
+                    break
+            else:
+                session['carrinho'].append({
+                    'id': produto.id,
+                    'nome': produto.nome,
+                    'preco': preco_produto,  # Armazenando o preço como float
+                    'quantidade': 1
+                })
+
+        print(session['carrinho'])  
+        flash('Produto adicionado ao carrinho!')
         return redirect(url_for('main.main_client'))
