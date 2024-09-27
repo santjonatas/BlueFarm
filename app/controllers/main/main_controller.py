@@ -13,7 +13,9 @@ class MainController:
     def register_routes(self):
         self.blueprint.add_url_rule('/main/', view_func=self.main, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/main_client/', view_func=self.main_client, methods=['GET', 'POST'])
-        self.blueprint.add_url_rule('/add_to_cart/', view_func=self.add_to_cart, methods=['POST'])  # Somente POST
+        self.blueprint.add_url_rule('/add_to_cart/', view_func=self.add_to_cart, methods=['POST'])
+        #
+        self.blueprint.add_url_rule('/remove_from_cart/', view_func=self.remove_from_cart, methods=['POST'])  # Nova rota
         
     @login_required
     def main(self) -> None:
@@ -27,8 +29,6 @@ class MainController:
     def main_client(self) -> None:
         produto_entity = repositories.produto_repository.list()
         return render_template('main/main_client.html', produtos=produto_entity)
-
-
 
     @login_required
     def add_to_cart(self):
@@ -54,3 +54,16 @@ class MainController:
         flash('Produto adicionado ao carrinho!')
         return redirect(url_for('main.main_client'))
    
+########################################
+
+    @login_required
+    def remove_from_cart(self):
+        produto_id = int(request.form.get('produto_id'))
+
+        if 'carrinho' in session:
+            # Filtra os itens do carrinho, removendo o item com o produto_id correspondente
+            session['carrinho'] = [item for item in session['carrinho'] if item['id'] != produto_id]
+
+        print(session['carrinho'])  # Para debug
+        flash('Produto removido do carrinho!')
+        return redirect(url_for('main.main_client'))
