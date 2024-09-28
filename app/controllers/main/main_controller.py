@@ -17,8 +17,10 @@ class MainController:
         self.blueprint.add_url_rule('/main_client/', view_func=self.main_client, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/add_to_cart/', view_func=self.add_to_cart, methods=['POST'])
         self.blueprint.add_url_rule('/remove_from_cart/', view_func=self.remove_from_cart, methods=['POST'])
-        ###############
         self.blueprint.add_url_rule('/increment_item/', view_func=self.increment_item, methods=['POST'])
+        ####################
+        self.blueprint.add_url_rule('/decrement_item/', view_func=self.decrement_item, methods=['POST'])
+
 
     @login_required
     def main(self) -> None:
@@ -91,4 +93,22 @@ class MainController:
                     break
 
         flash('Quantidade incrementada!')
+        return redirect(url_for('main.main_client'))
+    
+
+    ########################################
+    @login_required
+    def decrement_item(self):
+        produto_id = int(request.form.get('produto_id'))
+        produto_entity = repositories.produto_repository.get(obj_id=produto_id)
+
+        if 'carrinho' in session:
+            for item in session['carrinho']:
+                if item['id'] == produto_id:
+                    item['quantidade'] -= 1
+                    item['preco'] = Decimal(item['preco']) 
+                    item['preco'] -= Decimal(produto_entity.preco)   
+                    break
+
+        flash('Quantidade decrementada!')
         return redirect(url_for('main.main_client'))
