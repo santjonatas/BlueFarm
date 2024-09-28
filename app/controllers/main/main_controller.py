@@ -33,7 +33,12 @@ class MainController:
     @login_required
     def main_client(self) -> None:
         produto_entity = repositories.produto_repository.list()
-        return render_template('main/main_client.html', produtos=produto_entity)
+
+        #
+        total_precos = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
+        #
+
+        return render_template('main/main_client.html', produtos=produto_entity, total_precos=total_precos)
 
 
     @login_required
