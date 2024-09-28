@@ -1,9 +1,14 @@
+from datetime import datetime
+import traceback
 from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
 
 
 from app.application.config.global_repositories import GlobalRepositories
+from app.application.usecases.dto.input.entities.create_pedido_input_dto import CreatePedidoInputDto
+from app.application.usecases.dto.input.users.create_operador_user_input_dto import CreateOperadorUserInputDto
+from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
 
 repositories = GlobalRepositories()
 
@@ -18,8 +23,9 @@ class MainController:
         self.blueprint.add_url_rule('/add_to_cart/', view_func=self.add_to_cart, methods=['POST'])
         self.blueprint.add_url_rule('/remove_from_cart/', view_func=self.remove_from_cart, methods=['POST'])
         self.blueprint.add_url_rule('/increment_item/', view_func=self.increment_item, methods=['POST'])
-        ####################
         self.blueprint.add_url_rule('/decrement_item/', view_func=self.decrement_item, methods=['POST'])
+        ####################
+        self.blueprint.add_url_rule('/fazer_pedido/', view_func=self.fazer_pedido, methods=['POST'])
 
 
     @login_required
@@ -34,10 +40,8 @@ class MainController:
     def main_client(self) -> None:
         produto_entity = repositories.produto_repository.list()
 
-        #
         total_precos = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
-        #
-
+        
         return render_template('main/main_client.html', produtos=produto_entity, total_precos=total_precos)
 
 
@@ -51,8 +55,6 @@ class MainController:
         print(f'removeu: {session['carrinho']}') 
         flash('Produto removido do carrinho!')
         return redirect(url_for('main.main_client'))
-    
-#####################################
 
     @login_required
     def add_to_cart(self):
@@ -81,8 +83,6 @@ class MainController:
         print(session['carrinho'])  
         flash('Produto adicionado ao carrinho!')
         return redirect(url_for('main.main_client'))
-    
-    #####################################
 
     @login_required
     def increment_item(self):
@@ -100,8 +100,6 @@ class MainController:
         flash('Quantidade incrementada!')
         return redirect(url_for('main.main_client'))
     
-
-    ########################################
     @login_required
     def decrement_item(self):
         produto_id = int(request.form.get('produto_id'))
@@ -116,4 +114,31 @@ class MainController:
                     break
 
         flash('Quantidade decrementada!')
+        return redirect(url_for('main.main_client'))
+    
+
+    ######################################
+
+    @login_required
+    def fazer_pedido(self):
+
+        try:
+            input_dto = CreatePedidoInputDto(
+                id_cliente = current_user.cliente.id,
+                data_pedido = datetime.now(),
+                status ='Aguardando Pagamento',
+                valor_total = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
+            )
+
+            usecase: CreatePedidoUseCase = current_app.global_usecases.create_pedido_usecase
+
+            pedido_entity = usecase.execute(input_dto=input_dto)
+
+            flash(message='Operador Registrado', category='info')
+
+            return redirect(url_for('register.register_operador'))
+        except Exception as e:
+            stacktrace = traceback.format_exc()
+            flash(message=str(e), category='danger')
+
         return redirect(url_for('main.main_client'))

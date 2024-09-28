@@ -31,6 +31,9 @@
             <div class="total-carrinho">
                 <article class="img-carrinho"></article>
                 <output class="out-total-preco">Total: {{ total_precos }}</output>
+                <form method="POST" action="{{ url_for('main.fazer_pedido') }}" class="form-bt-fazer-pedido">
+                    <button type="submit" class="bt-fazer-pedido">Fazer Pedido</button>
+                </form>
             </div>
         </section>
     </section>

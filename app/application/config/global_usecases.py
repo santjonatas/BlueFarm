@@ -2,7 +2,8 @@ from app.application.config.global_services import GlobalServices
 from app.application.config.global_utils import GlobalUtils
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
 from app.application.usecases.auth.create_cliente_usecase import CreateClienteUserUseCase
-from app.application.usecases.auth.create_operador import CreateOperadorUserUseCase
+from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
+from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
 
 
 class GlobalUseCases:
@@ -32,4 +33,12 @@ class GlobalUseCases:
             usuario_service=global_services.usuario_service,
             cliente_service=global_services.cliente_service,
             global_utils=global_utils
+        )
+
+        self.create_pedido_usecase = CreatePedidoUseCase(
+            cliente_service = global_services.cliente_service,
+            pedido_service = global_services.pedido_service,
+            item_pedido_service = global_services.item_pedido_service,
+            produto_service = global_services.produto_service,
+            estoque_service = global_services.estoque_service
         )

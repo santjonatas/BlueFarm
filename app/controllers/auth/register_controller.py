@@ -3,7 +3,7 @@ from flask import current_app, flash, render_template, redirect, url_for, Bluepr
 from flask_login import login_required
 from flask_wtf import FlaskForm
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
-from app.application.usecases.auth.create_operador import CreateOperadorUserUseCase
+from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
 from app.application.usecases.dto.input.users.create_admin_user_input_dto import CreateAdminUserInputDto
 from app.application.usecases.dto.input.users.create_operador_user_input_dto import CreateOperadorUserInputDto
 from app.domain.forms.register_adm_form import RegisterAdmForm

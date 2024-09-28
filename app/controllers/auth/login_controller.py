@@ -1,5 +1,5 @@
 import traceback
-from flask import current_app, flash, render_template, redirect, url_for, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, Blueprint
 from flask_login import login_user, logout_user
 from flask_wtf import FlaskForm
 from app.application.usecases.auth.validate_user_usecase import ValidateUserUseCase
@@ -17,10 +17,11 @@ class LoginController:
         self.blueprint.add_url_rule('/logout/', view_func=self.logout)
     
     def login(self) -> None:
+        get_flashed_messages()
+        
         form: FlaskForm = LoginForm()
 
         if form.validate_on_submit():
-            e = ''
             try:
                 input_dto = ValidateUserInputDto(**form.to_dict)
                 usecase = ValidateUserUseCase(

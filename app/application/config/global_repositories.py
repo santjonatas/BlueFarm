@@ -3,9 +3,12 @@ from app.data.repositories.admistrador_repository import AdministradorRepository
 from app.data.repositories.cargo_repository import CargoRepository
 from app.data.repositories.cliente_repository import ClienteRepository
 from app.data.repositories.departamento_repository import DepartamentoRepository
+from app.data.repositories.estoque_repository import EstoqueRepository
 from app.data.repositories.funcionario_repository import FuncionarioRepository
+from app.data.repositories.item_pedido_repository import ItemPedidoRepository
 from app.data.repositories.nivel_repository import NivelRepository
 from app.data.repositories.operador_repository import OperadorRepository
+from app.data.repositories.pedido_repository import PedidoRepository
 from app.data.repositories.pessoa_repository import PessoaRepository
 from app.data.repositories.produto_repository import ProdutoRepository
 from app.data.repositories.usuario_repository import UsuarioRepository
@@ -25,3 +28,6 @@ class GlobalRepositories:
         self.cliente_repository = ClienteRepository(session=session)
 
         self.produto_repository = ProdutoRepository(session=session)
+        self.pedido_repository = PedidoRepository(session=session)
+        self.item_pedido_repository = ItemPedidoRepository(session=session)
+        self.estoque_repository = EstoqueRepository(session=session)
