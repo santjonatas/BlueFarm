@@ -50,10 +50,13 @@
             <div class="card-produto-carrinho">
                 <img class="img-produto-carrinho" src="../../static/images/produtos/{{ item.nome }}.png" alt="{{ item.nome }}">
                 <h3 class="nome-produto-carrinho">{{ item.nome }}</h3>
-                <output class="out-preco">{{ item.preco * item.quantidade }}</output>
+                <output class="out-preco">{{ item.preco }}</output>
                 <div class="div-quantidade-produtos">
                     <output class="out-quantidade">{{ item.quantidade }}</output> 
-                    <button class="img-mais">+</button>
+                    <form method="POST" action="{{ url_for('main.increment_item') }}">
+                        <input type="hidden" name="produto_id" value="{{ item.id }}">
+                        <button type="submit" class="img-mais">+</button>
+                    </form>                    
                     <button class="img-menos">-</button>
                     <form method="POST" action="{{ url_for('main.remove_from_cart') }}">
                         <input type="hidden" name="produto_id" value="{{ item.id }}">
