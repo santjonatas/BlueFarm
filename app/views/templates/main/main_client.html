@@ -29,11 +29,11 @@
             <button class="botao-sidebar" data-section="pedidos">Pedidos</button>
             <button class="botao-sidebar" data-section="carrinho">Carrinho</button>
             <div class="total-carrinho">
-                <article class="img-carrinho"></article>
-                <output class="out-total-preco">Total: {{ total_precos }}</output>
                 <form method="POST" action="{{ url_for('main.fazer_pedido') }}" class="form-bt-fazer-pedido">
                     <button type="submit" class="bt-fazer-pedido">Fazer Pedido</button>
                 </form>
+                <article class="img-carrinho"></article>
+                <output class="out-total-preco">Total: {{ total_precos }}</output>
             </div>
         </section>
     </section>

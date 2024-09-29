@@ -62,7 +62,7 @@ main{
     width: 25px;
     height: 25px;
 
-    margin-left: 1%;
+    margin-left: 3%;
 
     background-image: url('../../static/images/carrinho.png');
     background-repeat: no-repeat;
@@ -94,7 +94,7 @@ main{
 
     height: 40px;
 
-    margin-left: 20%;
+    margin-left: 1%;
 }
 
 .section-main{

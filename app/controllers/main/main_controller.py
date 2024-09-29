@@ -117,7 +117,7 @@ class MainController:
         return redirect(url_for('main.main_client'))
     
 
-    ######################################
+    ##################################################
 
     @login_required
     def fazer_pedido(self):
@@ -132,11 +132,13 @@ class MainController:
 
             usecase: CreatePedidoUseCase = current_app.global_usecases.create_pedido_usecase
 
-            pedido_entity = usecase.execute(input_dto=input_dto)
+            pedido_entity = usecase.execute(input_dto=input_dto, list_carrinho=session['carrinho'])
 
             flash(message='Operador Registrado', category='info')
 
-            return redirect(url_for('register.register_operador'))
+            session['carrinho'] = []
+
+            return redirect(url_for('main.main_client'))
         except Exception as e:
             stacktrace = traceback.format_exc()
             flash(message=str(e), category='danger')
