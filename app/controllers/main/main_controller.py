@@ -119,7 +119,10 @@ class MainController:
                 if item['id'] == produto_id:
                     item['quantidade'] -= 1
                     item['preco'] = Decimal(item['preco']) 
-                    item['preco'] -= Decimal(produto_entity.preco)   
+                    item['preco'] -= Decimal(produto_entity.preco) 
+
+                    if item['quantidade'] == 0:
+                        session['carrinho'].remove(item) 
                     break
 
         flash('Quantidade decrementada!')

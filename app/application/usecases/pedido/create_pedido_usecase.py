@@ -47,8 +47,8 @@ class CreatePedidoUseCase:
         self.estoque_service = estoque_service
     
     def execute(self, input_dto: CreatePedidoInputDto, list_carrinho: list) -> CreatePedidoOutputDto:
-        # if not self.global_utils.regex_validator_util.verificar_email(email=input_dto.email):
-        #     raise InvalidFieldException('Email inválido.')
+        if not list_carrinho:
+            raise PedidoEntityException('O seu carrinho não pode estar vazio.')
 
         try:
             try:
