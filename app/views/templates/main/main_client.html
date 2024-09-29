@@ -47,7 +47,9 @@
                 <p>Preço: {{ produto.preco }}</p>
                 <input type="hidden" name="produto_id" value="{{ produto.id }}">
                 <div class="info-estoque-produto">
+                    {% if quantidade_produto > 0 %}
                     <button type="submit" class="add-to-cart">+</button>
+                    {% endif %}
                     <output>Estoque: {{ quantidade_produto }}</output>
                 </div>
             </form>
