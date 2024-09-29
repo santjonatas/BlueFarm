@@ -50,7 +50,25 @@
             {% endfor %}
         </section>
         <section class="section-pedidos section-content" id="pedidos" style="display: none;">
-            
+            <div class="card-pedido">
+                <div class="detalhes-pedido-1">
+                    <output>Id do Pedido:</output>
+                    <output>Status:</output>
+                </div>
+                <div class="detalhes-item-pedido">
+                    <!-- Loop nos Itens do Pedido -->
+                    <output>Nome do Produto:</output>
+                    <output>Quantidade:</output>
+                    <output>Preço Unitário:</output>
+                </div>
+                <div class="detalhes-pedido-2">
+                    <output>Data do Pedido:</output>
+                    <output>Valor Total:</output>
+                </div>
+                <div class="div-bt-pagar-pedido">
+                    <button type="submit" class="bt-pagar-pedido">Pagar</button>
+                </div>
+            </div>
         </section>
         <section class="section-carrinho section-content" id="carrinho" style="display: none;">
             {% for item in session['carrinho'] %}

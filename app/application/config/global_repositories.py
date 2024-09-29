@@ -26,7 +26,6 @@ class GlobalRepositories:
         self.nivel_repository = NivelRepository(session=session)
         self.operador_repository = OperadorRepository(session=session)
         self.cliente_repository = ClienteRepository(session=session)
-
         self.produto_repository = ProdutoRepository(session=session)
         self.pedido_repository = PedidoRepository(session=session)
         self.item_pedido_repository = ItemPedidoRepository(session=session)

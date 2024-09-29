@@ -11,21 +11,16 @@ class EstoqueRepository(IEstoqueRepository):
 
     def decrementar_estoque(self, id_produto: int, quantidade: int):
         try:
-            # Buscar o registro do produto no estoque
             estoque = self.session.query(EstoqueEntity).filter_by(id_produto=id_produto).one()
             
             if estoque.quantidade_disponivel < quantidade:
                 raise ValueError("Quantidade insuficiente no estoque.")
             
-            # Verifica se a quantidade disponível é suficiente
             if estoque.quantidade_disponivel >= quantidade:
-                # Decrementa a quantidade
                 estoque.quantidade_disponivel -= quantidade
                 
-                # Atualiza a data da última atualização
                 estoque.ultima_atualizacao = datetime.now()
 
-                # Commit no banco de dados
                 self.session.commit()
         
         except NoResultFound:

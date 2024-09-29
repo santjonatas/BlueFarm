@@ -24,7 +24,6 @@ class MainController:
         self.blueprint.add_url_rule('/remove_from_cart/', view_func=self.remove_from_cart, methods=['POST'])
         self.blueprint.add_url_rule('/increment_item/', view_func=self.increment_item, methods=['POST'])
         self.blueprint.add_url_rule('/decrement_item/', view_func=self.decrement_item, methods=['POST'])
-        ####################
         self.blueprint.add_url_rule('/fazer_pedido/', view_func=self.fazer_pedido, methods=['POST'])
 
 
@@ -43,7 +42,6 @@ class MainController:
         total_precos = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
         
         return render_template('main/main_client.html', produtos=produto_entity, total_precos=total_precos)
-
 
     @login_required
     def remove_from_cart(self):
@@ -116,8 +114,6 @@ class MainController:
         flash('Quantidade decrementada!')
         return redirect(url_for('main.main_client'))
     
-
-    ##################################################
 
     @login_required
     def fazer_pedido(self):
