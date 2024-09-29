@@ -38,10 +38,22 @@ class MainController:
     @login_required
     def main_client(self) -> None:
         produto_entity = repositories.produto_repository.list()
+        #
+        pedidos_entity = repositories.pedido_repository.get_pedidos_by_cliente(id_cliente=current_user.cliente.id)
+        print(pedidos_entity)
+        #
+        
+        #
 
         total_precos = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
         
-        return render_template('main/main_client.html', produtos=produto_entity, total_precos=total_precos)
+        return render_template(
+            'main/main_client.html',
+            produtos=produto_entity, 
+            total_precos=total_precos, 
+            pedidos=pedidos_entity,
+            repositories=repositories
+            )
 
     @login_required
     def remove_from_cart(self):

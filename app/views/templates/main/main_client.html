@@ -50,25 +50,30 @@
             {% endfor %}
         </section>
         <section class="section-pedidos section-content" id="pedidos" style="display: none;">
-            <div class="card-pedido">
-                <div class="detalhes-pedido-1">
-                    <output>Id do Pedido:</output>
-                    <output>Status:</output>
+            {% for pedido in pedidos %}
+                <div class="card-pedido">
+                    <div class="detalhes-pedido-1">
+                        <output>Id do Pedido: {{ pedido.id }}</output>
+                        <output>Status: {{ pedido.status }}</output>
+                    </div>
+                    {% set itens_pedido = repositories.item_pedido_repository.get_itens_by_pedido(id_pedido=pedido.id) %}
+                    {% for item in itens_pedido %}
+                        <div class="detalhes-item-pedido">
+                            {% set nome_produto = repositories.produto_repository.get_name_by_produto(id=item.id_produto) %}
+                            <output>Nome do Produto: {{ nome_produto }}</output>
+                            <output>Quantidade: {{ item.quantidade }}</output>
+                            <output>Preço Unitário: {{ item.preco_unitario }}</output>
+                        </div>
+                    {% endfor %}
+                    <div class="detalhes-pedido-2">
+                        <output>Data do Pedido: {{ pedido.data_pedido }}</output>
+                        <output>Valor Total: {{ pedido.valor_total }}</output>
+                    </div>
+                    <div class="div-bt-pagar-pedido">
+                        <button type="submit" class="bt-pagar-pedido">Pagar</button>
+                    </div>
                 </div>
-                <div class="detalhes-item-pedido">
-                    <!-- Loop nos Itens do Pedido -->
-                    <output>Nome do Produto:</output>
-                    <output>Quantidade:</output>
-                    <output>Preço Unitário:</output>
-                </div>
-                <div class="detalhes-pedido-2">
-                    <output>Data do Pedido:</output>
-                    <output>Valor Total:</output>
-                </div>
-                <div class="div-bt-pagar-pedido">
-                    <button type="submit" class="bt-pagar-pedido">Pagar</button>
-                </div>
-            </div>
+            {% endfor %}
         </section>
         <section class="section-carrinho section-content" id="carrinho" style="display: none;">
             {% for item in session['carrinho'] %}
