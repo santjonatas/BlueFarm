@@ -40,12 +40,16 @@
     <section class="section-main">
         <section class="section-produtos section-content" id="produtos">
             {% for produto in produtos %}
+            {% set quantidade_produto = repositories.estoque_repository.get_quantidade_por_produto(id_produto=produto.id) %}
             <form method="POST" action="{{ url_for('main.add_to_cart') }}" class="card-produto">
                 <img class="img-produto" src="../../static/images/produtos/{{ produto.nome }}.png" alt="{{ produto.nome }}">
                 <h3 class="nome-produto">{{ produto.nome }}</h3>
                 <p>Preço: {{ produto.preco }}</p>
                 <input type="hidden" name="produto_id" value="{{ produto.id }}">
-                <button type="submit" class="add-to-cart">+</button>
+                <div class="info-estoque-produto">
+                    <button type="submit" class="add-to-cart">+</button>
+                    <output>Estoque: {{ quantidade_produto }}</output>
+                </div>
             </form>
             {% endfor %}
         </section>
@@ -53,21 +57,24 @@
             {% for pedido in pedidos %}
                 <div class="card-pedido">
                     <div class="detalhes-pedido-1">
-                        <output>Id do Pedido: {{ pedido.id }}</output>
-                        <output>Status: {{ pedido.status }}</output>
+                        <output class="out-dados-pedido">Id do Pedido: {{ pedido.id }}</output>
+                        <output class="out-dados-pedido">Status: {{ pedido.status }}</output>
                     </div>
                     {% set itens_pedido = repositories.item_pedido_repository.get_itens_by_pedido(id_pedido=pedido.id) %}
                     {% for item in itens_pedido %}
-                        <div class="detalhes-item-pedido">
-                            {% set nome_produto = repositories.produto_repository.get_name_by_produto(id=item.id_produto) %}
-                            <output>Nome do Produto: {{ nome_produto }}</output>
-                            <output>Quantidade: {{ item.quantidade }}</output>
-                            <output>Preço Unitário: {{ item.preco_unitario }}</output>
+                    <div class="detalhes-item-pedido">
+                        {% set nome_produto = repositories.produto_repository.get_name_by_produto(id=item.id_produto) %}
+                        <div class="div-info-item-pedido">
+                            <output class="out-dados-pedido">Nome do Produto: {{ nome_produto }}</output>
+                            <output class="out-dados-pedido">Quantidade: {{ item.quantidade }}</output>
+                            <output class="out-dados-pedido">Preço Unitário: {{ item.preco_unitario }}</output>
                         </div>
+                        <img src="../../static/images/produtos/{{ nome_produto }}.png" alt="{{ nome_produto }}" class="img-produto-pedido">
+                    </div>
                     {% endfor %}
                     <div class="detalhes-pedido-2">
-                        <output>Data do Pedido: {{ pedido.data_pedido }}</output>
-                        <output>Valor Total: {{ pedido.valor_total }}</output>
+                        <output class="out-dados-pedido">Data do Pedido: {{ pedido.data_pedido }}</output>
+                        <output class="out-dados-pedido">Valor Total: {{ pedido.valor_total }}</output>
                     </div>
                     <div class="div-bt-pagar-pedido">
                         <button type="submit" class="bt-pagar-pedido">Pagar</button>

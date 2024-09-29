@@ -25,3 +25,9 @@ class EstoqueRepository(IEstoqueRepository):
         
         except NoResultFound:
             raise ValueError(f"Produto com id {id_produto} não encontrado no estoque.")
+
+    def get_quantidade_por_produto(self, id_produto: int):
+        resultado = self.session.query(EstoqueEntity.quantidade_disponivel)\
+            .filter_by(id_produto=id_produto)\
+            .first() 
+        return resultado[0] if resultado else None
