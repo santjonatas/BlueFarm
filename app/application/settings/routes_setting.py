@@ -7,3 +7,4 @@ class RoutesSetting:
         app.register_blueprint(app.global_controllers.register_controller.blueprint)
         app.register_blueprint(app.global_controllers.home_controller.blueprint)
         app.register_blueprint(app.global_controllers.main_controller.blueprint)
+        app.register_blueprint(app.global_controllers.dashboard_controller.blueprint)

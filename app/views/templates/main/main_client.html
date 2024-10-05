@@ -78,9 +78,10 @@
                         <output class="out-dados-pedido">Data do Pedido: {{ pedido.data_pedido }}</output>
                         <output class="out-dados-pedido">Valor Total: {{ pedido.valor_total }}</output>
                     </div>
-                    <div class="div-bt-pagar-pedido">
+                    <form method="POST" action="{{ url_for('main.fazer_pagamento') }}" class="div-bt-pagar-pedido">
+                        <input type="hidden" name="pedido_id" value="{{ pedido.id }}">
                         <button type="submit" class="bt-pagar-pedido">Pagar</button>
-                    </div>
+                    </form>
                 </div>
             {% endfor %}
         </section>

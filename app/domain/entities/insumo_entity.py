@@ -9,7 +9,7 @@ class InsumoEntity(BaseEntity, UserMixin):
     nome = db.Column(db.String(100), nullable=False)
     descricao = db.Column(db.String(255), nullable=False)
     preco = db.Column(db.DECIMAL(10, 2), nullable=False)
-    comprado_em = db.Column(db.DateTime, nullable=False)
+    comprado_em = db.Column(db.Date, nullable=False)
     quantidade = db.Column(db.Integer, nullable=False)
 
 

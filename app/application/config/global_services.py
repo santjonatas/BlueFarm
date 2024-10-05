@@ -5,6 +5,7 @@ from app.infra.services.database.cliente.cliente_service import ClienteService
 from app.infra.services.database.departamento.departamento_service import DepartamentoService
 from app.infra.services.database.estoque.estoque_service import EstoqueService
 from app.infra.services.database.funcionario.funcionario_service import FuncionarioService
+from app.infra.services.database.insumo.insumo_service import InsumoService
 from app.infra.services.database.item_pedido.item_pedido_service import ItemPedidoService
 from app.infra.services.database.operador.operador_service import OperadorService
 from app.infra.services.database.pedido.pedido_service import PedidoService
@@ -50,4 +51,7 @@ class GlobalServices:
         )
         self.estoque_service = EstoqueService(
             estoque_repository=global_repositories.estoque_repository
+        )
+        self.insumo_service = InsumoService(
+            insumo_repository=global_repositories.insumo_repository
         )

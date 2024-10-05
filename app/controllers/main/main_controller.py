@@ -1,14 +1,23 @@
 from datetime import datetime
+import os
 import traceback
 from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
-
+import qrcode
+import uuid
+from PIL import Image
+import requests
 
 from app.application.config.global_repositories import GlobalRepositories
 from app.application.usecases.dto.input.entities.create_pedido_input_dto import CreatePedidoInputDto
 from app.application.usecases.dto.input.users.create_operador_user_input_dto import CreateOperadorUserInputDto
 from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 repositories = GlobalRepositories()
 
@@ -25,7 +34,9 @@ class MainController:
         self.blueprint.add_url_rule('/increment_item/', view_func=self.increment_item, methods=['POST'])
         self.blueprint.add_url_rule('/decrement_item/', view_func=self.decrement_item, methods=['POST'])
         self.blueprint.add_url_rule('/fazer_pedido/', view_func=self.fazer_pedido, methods=['POST'])
-
+        self.blueprint.add_url_rule('/fazer_pagamento/', view_func=self.fazer_pagamento, methods=['GET', 'POST'])
+        self.blueprint.add_url_rule('/confirm/<qr_id>', view_func=self.acessar_qr_code, methods=['GET', 'POST'])
+        self.blueprint.add_url_rule('/confirmar_pagamento/', view_func=self.confirmar_pagamento, methods=['GET', 'POST'])
 
     @login_required
     def main(self) -> None:
@@ -37,12 +48,12 @@ class MainController:
     
     @login_required
     def main_client(self) -> None:
+        if 'carrinho' not in session:
+            session['carrinho'] = []
+        
         produto_entity = repositories.produto_repository.list()
         
         pedidos_entity = repositories.pedido_repository.get_pedidos_by_cliente(id_cliente=current_user.cliente.id)
-        #
-        
-        #
 
         total_precos = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
         
@@ -131,7 +142,6 @@ class MainController:
 
     @login_required
     def fazer_pedido(self):
-
         try:
             input_dto = CreatePedidoInputDto(
                 id_cliente = current_user.cliente.id,
@@ -154,3 +164,50 @@ class MainController:
             flash(message=str(e), category='danger')
 
         return redirect(url_for('main.main_client'))
+    
+    @login_required
+    def fazer_pagamento(self):
+        pedido_id = request.form.get('pedido_id') 
+        print(pedido_id)
+        id_qr_code = pedido_id
+
+        def obter_url_ngrok():
+            try:
+                ngrok = os.getenv('HTTP_NGROK')
+                # response = requests.get('http://127.0.0.1:4040/api/tunnels')
+                response = requests.get(ngrok)
+                tunnels = response.json().get('tunnels', [])
+                if tunnels:
+                    return tunnels[0]['public_url']  # Retorna a primeira URL pública
+            except Exception as e:
+                print(f"Erro ao obter URL do ngrok: {e}")
+            return None
+
+        def gerar_qr_code():
+            ngrok_url = obter_url_ngrok()
+
+            qr_id = str(pedido_id)
+            qr_data = f"{ngrok_url}/confirm/{qr_id}"
+            
+            qr_img = qrcode.make(qr_data)
+            qr_img.save(f"app/views/static/qr_codes/{qr_id}.png")
+        
+            return qr_id
+
+        if not os.path.exists(f"app/views/static/qr_codes/{pedido_id}.png"):
+            id_qr_code = gerar_qr_code()
+
+        return render_template('main/pagamento.html', qr_id=id_qr_code)
+
+    def acessar_qr_code(self, qr_id):
+        if request.method == 'POST':
+            if session.get(f'{qr_id}_confirmed'):
+                return "QR Code já foi confirmado!"
+            
+            session[f'{qr_id}_confirmed'] = True
+            return "Pagamento confirmado com sucesso!"
+        
+        return render_template('main/acessar_qr_code.html', qr_id=qr_id)
+
+    def confirmar_pagamento(self):
+        return 'foi'

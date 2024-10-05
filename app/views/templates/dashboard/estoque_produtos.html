@@ -1,0 +1,45 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/estoque_produtos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+<link rel="stylesheet" href="../../static/styles/estoque_produtos.css">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('dashboard.add_produto') }}" class="card-modulo">
+        <button type="submit">Adicionar Produto</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <section class="section-produtos section-content" id="produtos">
+            {% for produto in produtos %}
+            {% set quantidade_produto = repositories.estoque_repository.get_quantidade_por_produto(id_produto=produto.id) %}
+            <form method="POST" action="{{ url_for('dashboard.editar_produto') }}" class="card-produto">
+                <img class="img-produto" src="../../static/images/produtos/{{ produto.nome }}.png" alt="{{ produto.nome }}">
+                <h3 class="nome-produto">{{ produto.nome }}</h3>
+                <p>Preço: {{ produto.preco }}</p>
+                <input type="hidden" name="produto_id" value="{{ produto.id }}">
+                <div class="info-estoque-produto">
+                    <button type="submit" class="editar-produto">editar</button>
+                    <output>Estoque: {{ quantidade_produto }}</output>
+                </div>
+            </form>
+            {% endfor %}
+        </section>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+{% endblock body %}
