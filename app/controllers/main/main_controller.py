@@ -187,13 +187,14 @@ class MainController:
         def gerar_qr_code():
             ngrok_url = obter_url_ngrok()
 
-            qr_id = str(pedido_id)
-            qr_data = f"{ngrok_url}/confirm/{qr_id}"
+            if ngrok_url is not None:   
+                qr_id = str(pedido_id)
+                qr_data = f"{ngrok_url}/confirm/{qr_id}"
+                
+                qr_img = qrcode.make(qr_data)
+                qr_img.save(f"app/views/static/qr_codes/{qr_id}.png")
             
-            qr_img = qrcode.make(qr_data)
-            qr_img.save(f"app/views/static/qr_codes/{qr_id}.png")
-        
-            return qr_id
+                return qr_id
 
         if not os.path.exists(f"app/views/static/qr_codes/{pedido_id}.png"):
             id_qr_code = gerar_qr_code()
