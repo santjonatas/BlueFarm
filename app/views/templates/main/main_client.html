@@ -52,6 +52,9 @@
                 </div>
             </form>
             {% endfor %}
+            {% if produtos|length == 0 %}
+            <div style="height: 750px"></div>
+            {% endif %}
         </section>
         <section class="section-pedidos section-content" id="pedidos" style="display: none;">
             {% for pedido in pedidos %}
@@ -84,6 +87,9 @@
                     </form>
                 </div>
             {% endfor %}
+            {% if pedidos|length == 0 %}
+            <div style="height: 750px"></div>
+            {% endif %}
         </section>
         <section class="section-carrinho section-content" id="carrinho" style="display: none;">
             {% for item in session['carrinho'] %}
@@ -96,20 +102,23 @@
                         <output class="out-quantidade">{{ item.quantidade }}</output> 
                         <form method="POST" action="{{ url_for('main.increment_item') }}">
                             <input type="hidden" name="produto_id" value="{{ item.id }}">
-                            <button type="submit" class="img-mais">+</button>
+                            <button type="submit" class="img-mais bt-item-carrinho">+</button>
                         </form>   
                         <form method="POST" action="{{ url_for('main.decrement_item') }}">
                             <input type="hidden" name="produto_id" value="{{ item.id }}">
-                            <button type="submit" class="img-menos">-</button>
+                            <button type="submit" class="img-menos bt-item-carrinho">-</button>
                         </form>                  
                         <form method="POST" action="{{ url_for('main.remove_from_cart') }}">
                             <input type="hidden" name="produto_id" value="{{ item.id }}">
-                            <button type="submit" class="img-lixeira"></button>
+                            <button type="submit" class="img-lixeira bt-item-carrinho"></button>
                         </form>
                     </div>
                 </div>
                 {% endif %}
             {% endfor %}
+            {% if session['carrinho']|length == 0 %}
+            <div style="height: 750px"></div>
+            {% endif %}
         </section>
     </section>
 </main>
