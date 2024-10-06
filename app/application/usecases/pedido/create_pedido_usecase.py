@@ -77,11 +77,6 @@ class CreatePedidoUseCase:
 
                     item_pedido_entity = self.item_pedido_service.create(input_dto=item_pedido_input)
 
-                    repositories.estoque_repository.decrementar_estoque(
-                        id_produto=item_produto['id'], 
-                        quantidade=item_produto['quantidade']
-                    )
-
             except Exception as e:
                 stacktrace = traceback.format_exc()
                 raise ItemPedidoEntityException(str(e))

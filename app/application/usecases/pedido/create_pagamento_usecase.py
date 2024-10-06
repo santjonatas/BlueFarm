@@ -60,6 +60,14 @@ class CreatePagamentoUseCase:
 
                 repositories.pedido_repository.atualizar_status(id_pedido=input_dto.id_pedido, status='Pago')
 
+                itens_pedido = repositories.item_pedido_repository.get_itens_by_pedido(id_pedido=input_dto.id_pedido)
+
+                for item in itens_pedido:
+                    repositories.estoque_repository.decrementar_estoque(
+                        id_produto=item.id_produto, 
+                        quantidade=item.quantidade
+                    )
+
             except Exception as e:
                 stacktrace = traceback.format_exc()
                 raise PagamentoEntityException(str(e))
