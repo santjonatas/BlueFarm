@@ -1,0 +1,33 @@
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-bt-pagar-pedido{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bt-pagar {
+    width: 200px;
+    height: 45px;
+    border-radius: 25px;
+    border: 0px solid;
+    margin-top: 3%;
+    font-size: 15px;
+    background-color: #0A73B0;
+    color: white;
+    background: linear-gradient(to right bottom, #151C1A, #27282C, #47533E);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 0;
+
+    margin-bottom: 30px;
+} 

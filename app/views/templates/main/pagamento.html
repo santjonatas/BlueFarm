@@ -1,0 +1,32 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/pagamento.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+<link rel="stylesheet" href="../../static/styles/pagamento.css">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="POST" action="{{ url_for('main.main_client') }}" class="div-bt-voltar">
+        <button type="submit" class="bt-voltar"></button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <h2 class="msg-qr-code">Leia o QR Code a baixo para realizar o pagamento do pedido: {{ qr_id }}</h2>
+        <img src="../../static/qr_codes/{{ qr_id }}.png" alt="" class="img-qr-code-pedido">
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main.js"></script> -->
+{% endblock body %}g

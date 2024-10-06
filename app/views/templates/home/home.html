@@ -22,13 +22,50 @@
         <div class="conteudo-secao">
             <h1>Seja Bem-Vindo a BlueFarm!</h1>
             <h2>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h2>
-            <form action="{{ url_for('home.login') }}" method="get">
+            <form action="{{ url_for('login.login') }}" method="get">
                 <button type="submit" class="bt-contato">Realizar Login</button>
             </form>
-
-            <!-- <button type="submit" class="bt-contato">Realizar Login</button> -->
         </div>
     </div>
+</section>
+<section class="secao-registro">
+    <form method="POST" class="form-registro">
+        {{ form.csrf_token }}
+        <div id="formularios">
+            <div class="form">
+                {{ form.nome(class="form-control", placeholder="Nome") }}
+            </div>
+            <div class="form">
+                <label>Data de nascimento</label>
+                {{ form.data_nascimento(class="form-control", placeholder="Data de nascimento") }}
+            </div>
+            <div class="form">
+                {{ form.cpf(class="form-control", placeholder="CPF") }}
+            </div>
+            <div class="form">
+                {{ form.genero(class="form-control") }}
+            </div>
+            <div class="form">
+                {{ form.telefone(class="form-control", placeholder="Telefone") }}
+            </div>
+            <div class="form">
+                {{ form.email(class="form-control", placeholder="Email") }}
+            </div>
+            <div class="form">
+                {{ form.endereco(class="form-control", placeholder="Endereço") }}
+            </div>
+            <div class="form">
+                {{ form.username(class="form-control", placeholder="Username") }}
+            </div>
+            <div class="form">
+                {{ form.senha(class="form-control", placeholder="Senha") }}
+            </div>
+            <!-- <div class="form">
+                {{ form.status(class="form-control", placeholder="Status") }}
+            </div> -->
+        </div>
+        {{ form.submit(class="bt-registro", value="Registrar-se") }}
+    </form>
 </section>
 <section class="secao-sobre-nos">
     <article class="img-fazenda-sobre-nos">

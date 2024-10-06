@@ -16,3 +16,5 @@ class EnvSetting:
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
 
         app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+
+        app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER')

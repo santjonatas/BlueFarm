@@ -7,4 +7,4 @@ def create_app() -> Flask:
     FlaskDynaconf(app=app, extensions_list=True)
     return app
 
-# create_app()
+create_app()

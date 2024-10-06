@@ -10,9 +10,7 @@
 
 {% block body %}
 <header>
-    <article class="img-menu">
-        <article class="img-menu"></article>
-    </article>
+    <article class="img-menu"></article>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
         <div class="align-nome">
@@ -25,83 +23,104 @@
 <main>
     <section class="section-sidebar">
         <section class="sidebar">
-            <button class="botao-sidebar" data-section="dashboard">Dashboard</button>
-            <button class="botao-sidebar" data-section="producao">Controle de Produção</button>
-            <button class="botao-sidebar" data-section="estoque">Gestão de Estoque</button>
-            <button class="botao-sidebar" data-section="vendas">Gestão de Vendas</button>
-            <button class="botao-sidebar" data-section="configuracoes">Configurações</button>
+            <button class="botao-sidebar" data-section="produtos">Produtos</button>
+            <button class="botao-sidebar" data-section="pedidos">Pedidos</button>
+            <button class="botao-sidebar" data-section="carrinho">Carrinho</button>
+            <div class="total-carrinho">
+                <form method="POST" action="{{ url_for('main.fazer_pedido') }}" class="form-bt-fazer-pedido">
+                    <button type="submit" class="bt-fazer-pedido">Fazer Pedido</button>
+                </form>
+                <article class="img-carrinho"></article>
+                <output class="out-total-preco">Total: {{ total_precos }}</output>
+            </div>
         </section>
     </section>
     <section class="section-main">
-        <div class="modulo-main">
-            <section class="section-dashboard section-content" id="dashboard">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Produção Atual</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Vendas Recentes</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Estoque de Produtos</h3>
-                </a>
-            </section>
-        
-            <section class="section-producao section-content" id="producao" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Plantio</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Irrigação</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Colheita</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Controle de Temperatura</h3>
-                </a>
-            </section>
-        
-            <section class="section-estoque section-content" id="estoque" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Estoque de Produtos Agrícolas</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Estoque de Insumos</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Movimentação de Estoques</h3>
-                </a>
-            </section>
-        
-            <section class="section-vendas section-content" id="vendas" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Registro de Vendas</h3>
-                </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Gestão de Clientes</h3>
-                </a>
-            </section>
-        
-            <section class="section-configuracoes section-content" id="configuracoes" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Configurações</h3>
-                </a>
-            </section>
-        </div>
+        <section class="section-produtos section-content" id="produtos">
+            {% for produto in produtos %}
+            {% set quantidade_produto = repositories.estoque_repository.get_quantidade_por_produto(id_produto=produto.id) %}
+            <form method="POST" action="{{ url_for('main.add_to_cart') }}" class="card-produto">
+                <img class="img-produto" src="../../static/images/produtos/{{ produto.nome }}.png" alt="{{ produto.nome }}">
+                <h3 class="nome-produto">{{ produto.nome }}</h3>
+                <p class="preco-produto">Preço: {{ produto.preco }}</p>
+                <input type="hidden" name="produto_id" value="{{ produto.id }}">
+                <div class="info-estoque-produto">
+                    {% if quantidade_produto > 0 %}
+                    <button type="submit" class="add-to-cart">+</button>
+                    {% endif %}
+                    <output>Estoque: {{ quantidade_produto }}</output>
+                </div>
+            </form>
+            {% endfor %}
+            {% if produtos|length == 0 %}
+            <div style="height: 750px"></div>
+            {% endif %}
+        </section>
+        <section class="section-pedidos section-content" id="pedidos" style="display: none;">
+            {% for pedido in pedidos %}
+                <div class="card-pedido">
+                    <div class="detalhes-pedido-1">
+                        <output class="out-dados-pedido id-pedido">Id do Pedido: {{ pedido.id }}</output>
+                        <output class="out-dados-pedido status-pedido">Status: {{ pedido.status }}</output>
+                    </div>
+                    {% set itens_pedido = repositories.item_pedido_repository.get_itens_by_pedido(id_pedido=pedido.id) %}
+                    {% for item in itens_pedido %}
+                    <div class="detalhes-item-pedido">
+                        {% set nome_produto = repositories.produto_repository.get_name_by_produto(id=item.id_produto) %}
+                        <div class="div-info-item-pedido">
+                            <output class="out-dados-pedido">Nome do Produto: {{ nome_produto }}</output>
+                            <output class="out-dados-pedido quantidade-pedido">Quantidade: {{ item.quantidade }}</output>
+                            <output class="out-dados-pedido valor-pedido">Preço Unitário: {{ item.preco_unitario }}</output>
+                        </div>
+                        <img src="../../static/images/produtos/{{ nome_produto }}.png" alt="{{ nome_produto }}" class="img-produto-pedido">
+                    </div>
+                    {% endfor %}
+                    <div class="detalhes-pedido-2">
+                        <output class="out-dados-pedido">Data do Pedido: {{ pedido.data_pedido }}</output>
+                        <output class="out-dados-pedido valor-pedido">Valor Total: {{ pedido.valor_total }}</output>
+                    </div>
+                    <form method="POST" action="{{ url_for('main.fazer_pagamento') }}" class="div-bt-pagar-pedido">
+                        {% if not repositories.pagamento_repository.get_pagamento_by_id_pedido(id_pedido=pedido.id) %}
+                        <input type="hidden" name="pedido_id" value="{{ pedido.id }}">
+                        <button type="submit" class="bt-pagar-pedido">Pagar</button>
+                        {% endif %}
+                    </form>
+                </div>
+            {% endfor %}
+            {% if pedidos|length == 0 %}
+            <div style="height: 750px"></div>
+            {% endif %}
+        </section>
+        <section class="section-carrinho section-content" id="carrinho" style="display: none;">
+            {% for item in session['carrinho'] %}
+                {% if item.quantidade != 0 %}
+                <div class="card-produto-carrinho">
+                    <img class="img-produto-carrinho" src="../../static/images/produtos/{{ item.nome }}.png" alt="{{ item.nome }}">
+                    <h3 class="nome-produto-carrinho">{{ item.nome }}</h3>
+                    <output class="out-preco">{{ item.preco }}</output>
+                    <div class="div-quantidade-produtos">
+                        <output class="out-quantidade">{{ item.quantidade }}</output> 
+                        <form method="POST" action="{{ url_for('main.increment_item') }}">
+                            <input type="hidden" name="produto_id" value="{{ item.id }}">
+                            <button type="submit" class="img-mais bt-item-carrinho">+</button>
+                        </form>   
+                        <form method="POST" action="{{ url_for('main.decrement_item') }}">
+                            <input type="hidden" name="produto_id" value="{{ item.id }}">
+                            <button type="submit" class="img-menos bt-item-carrinho">-</button>
+                        </form>                  
+                        <form method="POST" action="{{ url_for('main.remove_from_cart') }}">
+                            <input type="hidden" name="produto_id" value="{{ item.id }}">
+                            <button type="submit" class="img-lixeira bt-item-carrinho"></button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            {% if session['carrinho']|length == 0 %}
+            <div style="height: 750px"></div>
+            {% endif %}
+        </section>
     </section>
 </main>
-<script src="../../static/scripts/main.js"></script>
+<script src="../../static/scripts/main_client.js"></script>
 {% endblock body %}

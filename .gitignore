@@ -137,3 +137,7 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+
+/qr_codes/**/
+!qr_codes/.gitkeep

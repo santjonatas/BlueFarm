@@ -1,4 +1,5 @@
-from flask import current_app, flash, render_template, redirect, url_for, Blueprint
+import traceback
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, Blueprint
 from flask_login import login_user, logout_user
 from flask_wtf import FlaskForm
 from app.application.usecases.auth.validate_user_usecase import ValidateUserUseCase
@@ -16,6 +17,8 @@ class LoginController:
         self.blueprint.add_url_rule('/logout/', view_func=self.logout)
     
     def login(self) -> None:
+        get_flashed_messages()
+        
         form: FlaskForm = LoginForm()
 
         if form.validate_on_submit():
@@ -29,9 +32,22 @@ class LoginController:
 
                 login_user(output_dto.usuario)
 
-                return redirect(url_for('main.main'))
+                #
+                if '@adm' in output_dto.usuario.username:
+                    return redirect(url_for('main.main'))
+                
+                if '@op' in output_dto.usuario.username:
+                    return redirect(url_for('main.main'))
+                
+                if not '@adm' in output_dto.usuario.username and not '@op' in output_dto.usuario.username:
+
+                    return redirect(url_for('main.main_client'))
+                #
+
+                # return redirect(url_for('main.main'))
 
             except Exception as e:
+                stacktracr = traceback.format_exc()
                 flash(message=str(e), category='danger')
         
         return render_template('auth/login.html', form=form)

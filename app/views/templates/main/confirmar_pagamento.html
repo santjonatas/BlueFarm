@@ -1,0 +1,28 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/confirmar_pagamento.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+<link rel="stylesheet" href="../../static/styles/confirmar_pagamento.css">
+{% endblock style %}
+
+{% block body %}
+<main>
+    <div id="sessao-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                <li>Pedido: {{ qr_id }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</main>
+<!-- <script src="../../static/scripts/main.js"></script> -->
+{% endblock body %}
+

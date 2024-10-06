@@ -82,7 +82,7 @@ class CreateAdminUserUseCase:
             try:
                 usuario_input = CreateUsuarioInputDto(
                     id_pessoa=pessoa_entity.id,
-                    username=input_dto.username,
+                    username=f'{input_dto.username}@adm',
                     senha=input_dto.senha
                 )
 

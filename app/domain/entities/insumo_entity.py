@@ -9,7 +9,8 @@ class InsumoEntity(BaseEntity, UserMixin):
     nome = db.Column(db.String(100), nullable=False)
     descricao = db.Column(db.String(255), nullable=False)
     preco = db.Column(db.DECIMAL(10, 2), nullable=False)
-    comprado_em = db.Column(db.DateTime, nullable=False)
+    comprado_em = db.Column(db.Date, nullable=False)
+    quantidade = db.Column(db.Integer, nullable=False)
 
 
     cultivo = db.relationship('CultivoEntity', back_populates='insumo')
@@ -19,11 +20,13 @@ class InsumoEntity(BaseEntity, UserMixin):
         descricao: str,
         preco: float,
         comprado_em: str,
+        quantidade: int
         ) -> None:
         self.nome = nome
         self.descricao = descricao
         self.preco = preco
         self.comprado_em = comprado_em
+        self.quantidade = quantidade
 
     def __repr__(self):
         return "<Insumo %r>" % self.nome

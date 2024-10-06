@@ -1,0 +1,71 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/add_produto.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+<link rel="stylesheet" href="../../static/styles/add_produto.css">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <article class="img-menu">
+        <article class="img-menu"></article>
+    </article>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        
+            <form method="POST" enctype="multipart/form-data" class="form-registro">
+                {{ form.csrf_token }}
+                <div id="formularios">
+                    <div class="form">
+                        {{ form.nome(class="form-control", placeholder="Nome") }}
+                    </div>
+                    <div class="form">
+                        {{ form.descricao(class="form-control", placeholder="Descrição") }}
+                    </div>
+                    <div class="form">
+                        {{ form.preco(class="form-control", placeholder="Preço") }}
+                    </div>
+                    <div class="form">
+                        {{ form.quantidade_disponivel(class="form-control", placeholder="Quantidade disponível") }}
+                    </div>
+                    <div class="form">
+                        {{ form.nome_insumo(class="form-control", placeholder="Nome insumo") }}
+                    </div>
+                    <div class="form">
+                        {{ form.descricao_insumo(class="form-control", placeholder="Descrição insumo") }}
+                    </div>
+                    <div class="form">
+                        {{ form.preco_insumo(class="form-control", placeholder="Preço insumo") }}
+                    </div>
+                    <div class="form">
+                        {{ form.quantidade_disponivel_insumo(class="form-control", placeholder="Quantidade disponível insumo") }}
+                    </div>
+                    <div class="form">
+                        <label>Data de compra insumo</label>
+                        {{ form.comprado_em(class="form-control", placeholder="Data de compra insumo") }}
+                    </div>
+                    <div class="form">
+                        <label>Adicione uma imagem PNG deste produto</label>
+                        {{ form.file(class="form-control", placeholder="Data de compra insumo") }}
+                    </div>
+                </div>
+                {{ form.submit(class="bt-registro", value="Registrar") }}
+            </form>
+        
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main.js"></script> -->
+{% endblock body %}
+
