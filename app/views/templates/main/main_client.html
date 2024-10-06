@@ -10,9 +10,7 @@
 
 {% block body %}
 <header>
-    <article class="img-menu">
-        <article class="img-menu"></article>
-    </article>
+    <article class="img-menu"></article>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
         <div class="align-nome">
@@ -44,7 +42,7 @@
             <form method="POST" action="{{ url_for('main.add_to_cart') }}" class="card-produto">
                 <img class="img-produto" src="../../static/images/produtos/{{ produto.nome }}.png" alt="{{ produto.nome }}">
                 <h3 class="nome-produto">{{ produto.nome }}</h3>
-                <p>Preço: {{ produto.preco }}</p>
+                <p class="preco-produto">Preço: {{ produto.preco }}</p>
                 <input type="hidden" name="produto_id" value="{{ produto.id }}">
                 <div class="info-estoque-produto">
                     {% if quantidade_produto > 0 %}
@@ -59,8 +57,8 @@
             {% for pedido in pedidos %}
                 <div class="card-pedido">
                     <div class="detalhes-pedido-1">
-                        <output class="out-dados-pedido">Id do Pedido: {{ pedido.id }}</output>
-                        <output class="out-dados-pedido">Status: {{ pedido.status }}</output>
+                        <output class="out-dados-pedido id-pedido">Id do Pedido: {{ pedido.id }}</output>
+                        <output class="out-dados-pedido status-pedido">Status: {{ pedido.status }}</output>
                     </div>
                     {% set itens_pedido = repositories.item_pedido_repository.get_itens_by_pedido(id_pedido=pedido.id) %}
                     {% for item in itens_pedido %}
@@ -68,15 +66,15 @@
                         {% set nome_produto = repositories.produto_repository.get_name_by_produto(id=item.id_produto) %}
                         <div class="div-info-item-pedido">
                             <output class="out-dados-pedido">Nome do Produto: {{ nome_produto }}</output>
-                            <output class="out-dados-pedido">Quantidade: {{ item.quantidade }}</output>
-                            <output class="out-dados-pedido">Preço Unitário: {{ item.preco_unitario }}</output>
+                            <output class="out-dados-pedido quantidade-pedido">Quantidade: {{ item.quantidade }}</output>
+                            <output class="out-dados-pedido valor-pedido">Preço Unitário: {{ item.preco_unitario }}</output>
                         </div>
                         <img src="../../static/images/produtos/{{ nome_produto }}.png" alt="{{ nome_produto }}" class="img-produto-pedido">
                     </div>
                     {% endfor %}
                     <div class="detalhes-pedido-2">
                         <output class="out-dados-pedido">Data do Pedido: {{ pedido.data_pedido }}</output>
-                        <output class="out-dados-pedido">Valor Total: {{ pedido.valor_total }}</output>
+                        <output class="out-dados-pedido valor-pedido">Valor Total: {{ pedido.valor_total }}</output>
                     </div>
                     <form method="POST" action="{{ url_for('main.fazer_pagamento') }}" class="div-bt-pagar-pedido">
                         {% if not repositories.pagamento_repository.get_pagamento_by_id_pedido(id_pedido=pedido.id) %}

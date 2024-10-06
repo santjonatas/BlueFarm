@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-//////////////////////////////////
-
 document.querySelectorAll('.botao-sidebar').forEach(button => {
     button.addEventListener('click', function() {
         document.querySelectorAll('.section-content').forEach(section => {
@@ -26,4 +24,3 @@ document.querySelectorAll('.botao-sidebar').forEach(button => {
         sectionToShow.style.display = 'grid';
     });
 });
-
