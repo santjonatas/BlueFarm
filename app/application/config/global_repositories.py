@@ -9,6 +9,7 @@ from app.data.repositories.insumo_repository import InsumoRepository
 from app.data.repositories.item_pedido_repository import ItemPedidoRepository
 from app.data.repositories.nivel_repository import NivelRepository
 from app.data.repositories.operador_repository import OperadorRepository
+from app.data.repositories.pagamento_repository import PagamentoRepository
 from app.data.repositories.pedido_repository import PedidoRepository
 from app.data.repositories.pessoa_repository import PessoaRepository
 from app.data.repositories.produto_repository import ProdutoRepository
@@ -32,3 +33,4 @@ class GlobalRepositories:
         self.item_pedido_repository = ItemPedidoRepository(session=session)
         self.estoque_repository = EstoqueRepository(session=session)
         self.insumo_repository = InsumoRepository(session=session)
+        self.pagamento_repository = PagamentoRepository(session=session)

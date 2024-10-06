@@ -10,8 +10,10 @@ from PIL import Image
 import requests
 
 from app.application.config.global_repositories import GlobalRepositories
+from app.application.usecases.dto.input.entities.create_pagamento_item_input_dto import CreatePagamentoInputDto
 from app.application.usecases.dto.input.entities.create_pedido_input_dto import CreatePedidoInputDto
 from app.application.usecases.dto.input.users.create_operador_user_input_dto import CreateOperadorUserInputDto
+from app.application.usecases.pedido.create_pagamento_usecase import CreatePagamentoUseCase
 from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
 
 import os
@@ -36,7 +38,7 @@ class MainController:
         self.blueprint.add_url_rule('/fazer_pedido/', view_func=self.fazer_pedido, methods=['POST'])
         self.blueprint.add_url_rule('/fazer_pagamento/', view_func=self.fazer_pagamento, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/confirm/<qr_id>', view_func=self.acessar_qr_code, methods=['GET', 'POST'])
-        self.blueprint.add_url_rule('/confirmar_pagamento/', view_func=self.confirmar_pagamento, methods=['GET', 'POST'])
+        self.blueprint.add_url_rule('/confirmar_pagamento/<qr_id>', view_func=self.confirmar_pagamento, methods=['GET', 'POST'])
 
     @login_required
     def main(self) -> None:
@@ -174,11 +176,10 @@ class MainController:
         def obter_url_ngrok():
             try:
                 ngrok = os.getenv('HTTP_NGROK')
-                # response = requests.get('http://127.0.0.1:4040/api/tunnels')
                 response = requests.get(ngrok)
                 tunnels = response.json().get('tunnels', [])
                 if tunnels:
-                    return tunnels[0]['public_url']  # Retorna a primeira URL pública
+                    return tunnels[0]['public_url'] 
             except Exception as e:
                 print(f"Erro ao obter URL do ngrok: {e}")
             return None
@@ -209,5 +210,26 @@ class MainController:
         
         return render_template('main/acessar_qr_code.html', qr_id=qr_id)
 
-    def confirmar_pagamento(self):
-        return 'foi'
+    def confirmar_pagamento(self, qr_id):
+        print(qr_id)
+        try:
+            input_dto = CreatePagamentoInputDto(
+                id_pedido=qr_id,
+                metodo_pagamento='QR Code',
+                data_pagamento=datetime.now(),
+                status_pagamento='Pago'
+            )
+
+            usecase: CreatePagamentoUseCase = current_app.global_usecases.create_pagamento_usecase
+
+            pagamento_entity = usecase.execute(input_dto=input_dto)
+
+            flash(message='Pagamento Realizado', category='info')
+
+            return render_template('main/confirmar_pagamento.html', qr_id=qr_id)
+        
+        except Exception as e:
+            stacktrace = traceback.format_exc()
+            flash(message=str(e), category='danger')
+        
+        return render_template('main/confirmar_pagamento.html', qr_id=qr_id)

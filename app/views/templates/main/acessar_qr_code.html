@@ -10,7 +10,7 @@
 
 {% block body %}
 <main>
-    <form method="POST" action="{{ url_for('main.confirmar_pagamento') }}" class="div-bt-pagar-pedido">
+    <form method="POST" action="{{ url_for('main.confirmar_pagamento', qr_id=qr_id) }}" class="div-bt-pagar-pedido">
         <input type="hidden" name="pedido_id" value="{{ qr_id }}">
         <button type="submit" class="bt-pagar">Confirmar Pagamento (fictício)</button>
     </form>

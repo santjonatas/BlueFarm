@@ -8,6 +8,7 @@ from app.infra.services.database.funcionario.funcionario_service import Funciona
 from app.infra.services.database.insumo.insumo_service import InsumoService
 from app.infra.services.database.item_pedido.item_pedido_service import ItemPedidoService
 from app.infra.services.database.operador.operador_service import OperadorService
+from app.infra.services.database.pagamento.pagamento_service import PagamentoService
 from app.infra.services.database.pedido.pedido_service import PedidoService
 from app.infra.services.database.pessoa.pessoa_service import PessoaService
 from app.infra.services.database.produto.produto_service import ProdutoService
@@ -54,4 +55,7 @@ class GlobalServices:
         )
         self.insumo_service = InsumoService(
             insumo_repository=global_repositories.insumo_repository
+        )
+        self.pagamento_service = PagamentoService(
+            pagamento_repository=global_repositories.pagamento_repository
         )

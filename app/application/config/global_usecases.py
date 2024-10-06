@@ -4,6 +4,7 @@ from app.application.usecases.auth.create_administrador_usecase import CreateAdm
 from app.application.usecases.auth.create_cliente_usecase import CreateClienteUserUseCase
 from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
 from app.application.usecases.auth.create_produto_usecase import CreateProdutoUseCase
+from app.application.usecases.pedido.create_pagamento_usecase import CreatePagamentoUseCase
 from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
 
 
@@ -48,4 +49,8 @@ class GlobalUseCases:
             produto_service = global_services.produto_service,
             insumo_service = global_services.insumo_service,
             estoque_service = global_services.estoque_service
+        )
+
+        self.create_pagamento_usecase = CreatePagamentoUseCase(
+            pagamento_service= global_services.pagamento_service
         )
