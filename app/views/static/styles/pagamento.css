@@ -1,6 +1,8 @@
 *{
     margin: 0px;
     padding: 0px;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 html, body{
@@ -11,63 +13,19 @@ body{
     height: 100%;
 }
 
-/* main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 100%; 
-    width: 100%;
-    background-color: red;
-} */
-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* height: 100%;  */
-    width: 100%;
-    background-color: red;
-}
-
-.section-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    width: 75%;
-    height: 100%;
-    background-color: green;
-}
-
-/*################################*/
+/* CABEÇALHO */
 
 header{
     position: fixed;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 35%;
 
     width: 100%;
     height: 60px;
-
-    gap: 35%;
-
-    background-color: blueviolet;
-}
-
-.img-menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 33px;
-    height: 33px;
-
-    /* background-image: url('../../../assets/images/menu.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center; */
+    background-color: #D5D1FF;
+    z-index: 10;
 }
 
 .img-bluefarm{
@@ -77,8 +35,7 @@ header{
 
     width: 50px;
     height: 50px;
-
-    background-image: url('../../../assets/images/logo-BlueFarm-sem-fundo-sem-nome.png');
+    background-image: url('../images/logo-BlueFarm-sem-fundo-sem-nome.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -88,21 +45,15 @@ header{
     display: flex;
     justify-content: end;
     align-items: center;
-
-    /* background-color: green; */
-    width: 200px;
 }
 
 .align-nome{
     display: flex;
     justify-content: center;
     align-items: center;
-
     gap: 5px;
 
     margin-right: 10px;
-
-    /* background-color: aqua; */
 }
 
 p{
@@ -117,44 +68,91 @@ p{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-
     background-image: url('../../static/images/profile.jpg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
 
-.img-menu{
+.div-bt-voltar{
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 33px;
     height: 33px;
-
     background-image: url('../../static/images/menu.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
 
-
-/*################################*/
-
-.modulo-main{
+.bt-voltar{
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    /* height: 100%; */
+    width: 33px;
+    height: 33px;
+    background-image: url('../../static/images/voltar.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: rgb(206, 206, 206);
+    border: none;
+    border-radius: 5px;
+}
 
-    background-color: yellow;
+/* MENU */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.226); 
+    position: relative; 
+}
+main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/background_fazenda_urbana_main_qr_code.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.section-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    width: 75%;
+    background-color: rgba(0, 128, 0, 0);
+}
+
+/* QR CODE */
+
+.msg-qr-code{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 9%;
+    color: white;
 }
 
 .img-qr-code-pedido{
     width: 300px;
     height: 300px;
 
-    margin: 150px;
+    margin: 100px;
 }
