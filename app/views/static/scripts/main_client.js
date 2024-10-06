@@ -24,3 +24,19 @@ document.querySelectorAll('.botao-sidebar').forEach(button => {
         sectionToShow.style.display = 'grid';
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.card-produto');
+    
+    cards.forEach(function(card) {
+        card.addEventListener('mouseover', function() {
+            card.style.backgroundColor = '#ffffff21'; 
+            card.style.boxshadow = '0px 0px 15px green';
+        });
+        
+        card.addEventListener('mouseout', function() {
+            card.style.backgroundColor = '';  
+            card.style.boxshadow = ''
+        });
+    });
+});

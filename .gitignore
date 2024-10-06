@@ -139,5 +139,5 @@ dmypy.json
 cython_debug/
 
 
-qr_codes/*
-!qr_codes/
+/qr_codes/**/
+!qr_codes/.gitkeep
