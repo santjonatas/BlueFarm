@@ -1,7 +1,7 @@
 @media (min-width: 1201px) and (max-width: 1265px){
-    /* main{
+    main{
         background-color: red;
-    } */
+    }
 
     .card-produto{
         display: flex;
@@ -22,9 +22,9 @@
 }    
 
 @media (min-width: 1025px) and (max-width: 1200px){
-    /* main{
+    main{
         background-color: green;
-    } */
+    }
 
     .section-sidebar{
         display: flex;
@@ -57,12 +57,26 @@
         background-color: rgba(238, 232, 170, 0);
         padding-bottom: 5%;
     }
+
+    .card-produto-carrinho{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5%;
+    
+        width: 500px;
+        height: 60px;
+        border-radius: 10px;
+        margin-top: 9%;
+        background-color: #ffffff33;
+        backdrop-filter: blur(15px);
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px){
-    /* main{
+    main{
         background-color:brown;
-    } */
+    }
 
     .section-sidebar{
         display: flex;
@@ -95,12 +109,26 @@
         background-color: rgba(238, 232, 170, 0);
         padding-bottom: 5%;
     }
+
+    .card-produto-carrinho{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5%;
+    
+        width: 400px;
+        height: 60px;
+        border-radius: 10px;
+        margin-top: 12%;
+        background-color: #ffffff33;
+        backdrop-filter: blur(15px);
+    }
 }
 
 @media (min-width: 481px) and (max-width: 768px){
-    /* main{
+    main{
         background-color: blueviolet;
-    } */
+    }
 
     main {
         display: flex;
@@ -161,13 +189,27 @@
         background-color: #ffffff33;
         backdrop-filter: blur(15px);
     }
+
+    .card-produto-carrinho{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5%;
+    
+        width: 400px;
+        height: 60px;
+        border-radius: 10px;
+        margin-top: 12%;
+        background-color: #ffffff33;
+        backdrop-filter: blur(15px);
+    }
 }
 
 
 @media (min-width: 320px) and (max-width: 480px){
-    /* main{
+    main{
         background-color: blue;
-    } */
+    }
 
     main {
         display: flex;
@@ -225,6 +267,19 @@
         border-radius: 5%;
         color: rgb(238, 238, 238);
         margin-top: 5%;
+        background-color: #ffffff33;
+        backdrop-filter: blur(15px);
+    }
+
+    .card-produto-carrinho{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        text-align: center;
+    
+        width: 300px;
+        height: 140px;
+        border-radius: 10px;
+        margin-top: 12%;
         background-color: #ffffff33;
         backdrop-filter: blur(15px);
     }
