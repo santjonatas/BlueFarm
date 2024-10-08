@@ -32,6 +32,9 @@
                 <h3 class="nome-produto">{{ produto.nome }}</h3>
                 <p>Preço: {{ produto.preco }}</p>
                 <input type="hidden" name="produto_id" value="{{ produto.id }}">
+                <input type="hidden" name="produto_nome" value="{{ produto.nome }}">
+                <input type="hidden" name="produto_preco" value="{{ produto.preco }}">
+                <input type="hidden" name="produto_quantidade" value="{{ quantidade_produto }}">
                 <div class="info-estoque-produto">
                     <button type="submit" class="editar-produto">editar</button>
                     <output>Estoque: {{ quantidade_produto }}</output>

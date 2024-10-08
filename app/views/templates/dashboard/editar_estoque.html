@@ -1,0 +1,40 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/editar_estoque.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <article class="img-menu">
+        <article class="img-menu"></article>
+    </article>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+            <form method="POST" enctype="multipart/form-data" class="form-registro">
+                {{ form.csrf_token }}
+                <img class="img-produto" src="../../static/images/produtos/{{ produto_nome }}.png" alt="{{ produto_nome }}">
+                    <div class="form">
+                        {{ form.quantidade_disponivel(class="form-control", placeholder="Quantidade disponível") }}
+                    </div>
+                </div>
+                
+                {{ form.submit(class="bt-registro", value="Alterar") }}
+            </form>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main.js"></script> -->
+{% endblock body %}
+

@@ -47,7 +47,22 @@ class DashboardController:
     
     @login_required
     def editar_produto(self) -> None:
-        return 'teste'
+        produto_id = request.form.get('produto_id')
+        produto_nome = request.form.get('produto_nome')
+        produto_preco = request.form.get('produto_preco')
+        produto_quantidade = request.form.get('produto_quantidade')
+        print(produto_id)
+        print(produto_nome)
+        print(produto_preco)
+        print(produto_quantidade)
+        
+
+        form: FlaskForm = AddProdutoForm()
+
+        if form.validate_on_submit():
+            pass
+
+        return render_template('dashboard/editar_estoque.html', form=form, produto_nome=produto_nome)
     
     @login_required
     def add_produto(self):
