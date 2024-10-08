@@ -31,3 +31,17 @@ class EstoqueRepository(IEstoqueRepository):
             .filter_by(id_produto=id_produto)\
             .first() 
         return resultado[0] if resultado else None
+    
+    def alterar_quantidade(self, produto_id: int, nova_quantidade: int) -> None:
+        # Busca o registro do produto pelo ID
+        estoque = self.session.query(EstoqueEntity).filter_by(id_produto=produto_id).first()
+
+        if estoque:
+            # Atualiza a quantidade disponível e a data da última atualização
+            estoque.quantidade_disponivel = nova_quantidade
+            estoque.ultima_atualizacao = datetime.now()  # Atualiza com a data e hora locais
+
+            # Comita a mudança no banco de dados
+            self.session.commit()
+        else:
+            raise ValueError(f"Produto com ID {produto_id} não encontrado no estoque.")

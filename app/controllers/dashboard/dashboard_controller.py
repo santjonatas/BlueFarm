@@ -8,16 +8,20 @@ from decimal import Decimal
 from werkzeug.utils import secure_filename
 
 from app.application.config.global_repositories import GlobalRepositories
+from app.application.usecases.auth.alter_estoque_produto_usecase import AlterEstoqueProdutoUseCase
 from app.application.usecases.auth.create_produto_usecase import CreateProdutoUseCase
 from app.application.usecases.dto.input.entities.create_estoque_input_dto import CreateEstoqueInputDto
 from app.application.usecases.dto.input.entities.create_pedido_input_dto import CreatePedidoInputDto
 from app.application.usecases.dto.input.entities.create_produto_input_dto import CreateProdutoInputDto
+from app.application.usecases.dto.input.produto.alter_estoque_produto_input_dto import AlterEstoqueProdutoInputDto
 from app.application.usecases.dto.input.produto.create_produto_item_input_dto import CreateProdutoItemInputDto
 from app.application.usecases.dto.input.users.create_admin_user_input_dto import CreateAdminUserInputDto
 from app.application.usecases.dto.input.users.create_operador_user_input_dto import CreateOperadorUserInputDto
 from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
 from app.domain.forms.add_produto import AddProdutoForm
 from flask_wtf import FlaskForm
+
+from app.domain.forms.editar_produto import EditarProdutoForm
 
 repositories = GlobalRepositories()
 
@@ -30,6 +34,7 @@ class DashboardController:
         self.blueprint.add_url_rule('/estoque_produtos/', view_func=self.estoque_produtos, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/editar_produto/', view_func=self.editar_produto, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/add_produto/', view_func=self.add_produto, methods=['GET', 'POST'])
+        self.blueprint.add_url_rule('/alterar_estoque/<int:produto_id>', view_func=self.alterar_estoque, methods=['GET', 'POST'])
 
     @login_required
     def estoque_produtos(self) -> None:
@@ -51,18 +56,36 @@ class DashboardController:
         produto_nome = request.form.get('produto_nome')
         produto_preco = request.form.get('produto_preco')
         produto_quantidade = request.form.get('produto_quantidade')
-        print(produto_id)
-        print(produto_nome)
-        print(produto_preco)
-        print(produto_quantidade)
         
+        form: FlaskForm = EditarProdutoForm()
 
-        form: FlaskForm = AddProdutoForm()
+        return render_template('dashboard/editar_estoque.html', form=form, produto_nome=produto_nome, produto_quantidade=produto_quantidade, produto_id=produto_id)
+    
+    @login_required
+    def alterar_estoque(self, produto_id):
+        form: FlaskForm = EditarProdutoForm()
 
         if form.validate_on_submit():
-            pass
+            try:
+                pprint(form.to_dict())
+                
+                input_dto = AlterEstoqueProdutoInputDto(**form.to_dict())
 
-        return render_template('dashboard/editar_estoque.html', form=form, produto_nome=produto_nome)
+                usecase: AlterEstoqueProdutoUseCase = current_app.global_usecases.alter_estoque_produto_usecase
+
+                estoque_entity = usecase.execute(input_dto=input_dto, produto_id=produto_id)
+
+                flash(message='Estoque Alterado', category='info')
+
+                return redirect(url_for('dashboard.estoque_produtos'))
+
+                pass
+            except Exception as e:
+                stacktrace = traceback.format_exc()
+                flash(message='Erro ao Alterar Quantidade', category='info')
+                pass
+
+        return redirect(url_for('dashboard.estoque_produtos'))
     
     @login_required
     def add_produto(self):
