@@ -10,9 +10,9 @@
 
 {% block body %}
 <header>
-    <article class="img-menu">
-        <article class="img-menu"></article>
-    </article>
+    <form method="GET" action="{{ url_for('dashboard.estoque_produtos') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
         <div class="align-nome">
