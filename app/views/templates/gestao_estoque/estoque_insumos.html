@@ -3,9 +3,8 @@
 {% block title %} BlueFarm | Main {% endblock title %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/estoque_produtos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/estoque_insumos.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
-<link rel="stylesheet" href="../../static/styles/estoque_produtos.css">
 {% endblock style %}
 
 {% block body %}
@@ -26,12 +25,16 @@
     <section class="section-main">
         <section class="section-produtos section-content" id="produtos">
             {% for insumo in insumos %}
-            <form method="POST" action="{{ url_for('dashboard.editar_produto') }}" class="card-produto">
+            <form method="POST" action="{{ url_for('gestao_estoque.editar_insumo') }}" class="card-produto">
                 <img class="img-produto" src="../../static/images/produtos/{{ insumo.nome }}.png" alt="{{ insumo.nome }}">
                 <h3 class="nome-produto">{{ insumo.nome }}</h3>
                 <p>Preço: {{ insumo.preco }}</p>
+                <input type="hidden" name="insumo_id" value="{{ insumo.id }}">
+                <input type="hidden" name="insumo_nome" value="{{ insumo.nome }}">
+                <input type="hidden" name="insumo_preco" value="{{ insumo.preco }}">
+                <input type="hidden" name="insumo_quantidade" value="{{ insumo.quantidade }}">
                 <div class="info-estoque-produto">
-                    <!-- <button type="submit" class="editar-produto">editar</button> -->
+                    <button type="submit" class="editar-produto">editar</button>
                     <output>Estoque: {{ insumo.quantidade }}</output>
                 </div>
             </form>

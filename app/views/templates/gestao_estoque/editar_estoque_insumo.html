@@ -9,7 +9,7 @@
 
 {% block body %}
 <header>
-    <form method="GET" action="{{ url_for('dashboard.estoque_produtos') }}" class="card-modulo">
+    <form method="GET" action="{{ url_for('gestao_estoque.estoque_insumos') }}" class="card-modulo">
         <button type="submit">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
@@ -23,11 +23,11 @@
 </header>
 <main>
     <section class="section-main">
-            <form method="POST" action="{{ url_for('dashboard.alterar_estoque', produto_id=produto_id) }}" enctype="multipart/form-data" class="form-registro">
+            <form method="POST" action="{{ url_for('gestao_estoque.alterar_estoque_insumo', insumo_id=insumo_id) }}" enctype="multipart/form-data" class="form-registro">
                 {{ form.csrf_token }}
-                <img class="img-produto" src="../../static/images/produtos/{{ produto_nome }}.png" alt="{{ produto_nome }}">
-                <h2>Produto: {{ produto_nome }}</h2>
-                <h2>Estoque: {{ produto_quantidade }}</h2>
+                <img class="img-produto" src="../../static/images/produtos/{{ insumo_nome }}.png" alt="{{ insumo_nome }}">
+                <h2>Insumo: {{ insumo_nome }}</h2>
+                <h2>Estoque: {{ insumo_quantidade }}</h2>
                     <div class="form">
                         {{ form.quantidade_disponivel(class="form-control", placeholder="Quantidade disponível") }}
                     </div>
