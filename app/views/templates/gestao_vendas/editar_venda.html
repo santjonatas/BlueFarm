@@ -1,0 +1,58 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/editar_venda.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('gestao_vendas.registro_vendas') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+            <div class="card-pedido">
+                <div class="detalhes-pedido-1">
+                    <output class="out-dados-pedido id-pedido">Id do Pedido: {{ pedido.id }}</output>
+                    <output class="out-dados-pedido status-pedido">Status: {{ pedido.status }}</output>
+                </div>
+                {% set itens_pedido = repositories.item_pedido_repository.get_itens_by_pedido(id_pedido=pedido.id) %}
+                    {% for item in itens_pedido %}
+                    <div class="detalhes-item-pedido">
+                        {% set nome_produto = repositories.produto_repository.get_name_by_produto(id=item.id_produto) %}
+                        <div class="div-info-item-pedido">
+                            <output class="out-dados-pedido">Nome do Produto: {{ nome_produto }}</output>
+                            <output class="out-dados-pedido quantidade-pedido">Quantidade: {{ item.quantidade }}</output>
+                            <output class="out-dados-pedido valor-pedido">Preço Unitário: {{ item.preco_unitario }}</output>
+                        </div>
+                        <img src="../../static/images/produtos/{{ nome_produto }}.png" alt="{{ nome_produto }}" class="img-produto-pedido">
+                    </div>
+                    {% endfor %}
+                <div class="detalhes-pedido-2">
+                    <output class="out-dados-pedido">Data do Pedido: {{ pedido.data_pedido }}</output>
+                    <output class="out-dados-pedido valor-pedido">Valor Total: {{ pedido.valor_total }}</output>
+                </div>
+                <form method="POST" action="{{ url_for('gestao_vendas.alterar_status_venda', pedido_id=pedido.id) }}" class="div-bt-pagar-pedido">
+                    {{ form.csrf_token }}
+                    {{ form.status(class="form-control", placeholder="Status do Pedido") }}
+                    <input type="hidden" name="pedido_id" value="{{ pedido.id }}">
+                    {{ form.submit(class="bt-registro", value="Alterar Status") }}
+                </form>
+            </div>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main.js"></script> -->
+{% endblock body %}
+

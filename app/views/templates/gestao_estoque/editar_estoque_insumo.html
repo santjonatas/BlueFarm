@@ -23,17 +23,17 @@
 </header>
 <main>
     <section class="section-main">
-            <form method="POST" action="{{ url_for('gestao_estoque.alterar_estoque_insumo', insumo_id=insumo_id) }}" enctype="multipart/form-data" class="form-registro">
-                {{ form.csrf_token }}
-                <img class="img-produto" src="../../static/images/produtos/{{ insumo_nome }}.png" alt="{{ insumo_nome }}">
-                <h2>Insumo: {{ insumo_nome }}</h2>
-                <h2>Estoque: {{ insumo_quantidade }}</h2>
-                    <div class="form">
-                        {{ form.quantidade_disponivel(class="form-control", placeholder="Quantidade disponível") }}
-                    </div>
+        <form method="POST" action="{{ url_for('gestao_estoque.alterar_estoque_insumo', insumo_id=insumo_id) }}" enctype="multipart/form-data" class="form-registro">
+            {{ form.csrf_token }}
+            <img class="img-produto" src="../../static/images/produtos/{{ insumo_nome }}.png" alt="{{ insumo_nome }}">
+            <h2>Insumo: {{ insumo_nome }}</h2>
+            <h2>Estoque: {{ insumo_quantidade }}</h2>
+                <div class="form">
+                    {{ form.quantidade_disponivel(class="form-control", placeholder="Quantidade disponível") }}
                 </div>
-                {{ form.submit(class="bt-registro", value="Alterar") }}
-            </form>
+            </div>
+            {{ form.submit(class="bt-registro", value="Alterar") }}
+        </form>
     </section>
 </main>
 <!-- <script src="../../static/scripts/main.js"></script> -->

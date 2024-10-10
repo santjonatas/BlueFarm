@@ -1,6 +1,7 @@
 from app.application.config.global_services import GlobalServices
 from app.application.config.global_utils import GlobalUtils
 from app.application.usecases.auth.alter_estoque_insumo_usecase import AlterEstoqueInsumoUseCase
+from app.application.usecases.auth.alter_status_pedido_usecase import AlterStatusPedidoUseCase
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
 from app.application.usecases.auth.create_cliente_usecase import CreateClienteUserUseCase
 from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
@@ -63,4 +64,8 @@ class GlobalUseCases:
 
         self.alter_estoque_insumo_usecase = AlterEstoqueInsumoUseCase(
             insumo_service = global_services.insumo_service
+        )
+
+        self.alter_status_pedido_usecase = AlterStatusPedidoUseCase(
+            pedido_service = global_services.pedido_service
         )

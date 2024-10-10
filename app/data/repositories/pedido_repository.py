@@ -26,3 +26,9 @@ class PedidoRepository(IPedidoRepository):
         if pedido:
             pedido.status = status  
             self.session.commit() 
+
+    def obter_pedidos_pagos(self):
+        return self.session.query(PedidoEntity).filter_by(status='Pago').order_by(PedidoEntity.id.desc()).all()
+    
+    def obter_pedidos_nao_aguardando_pagamento(self):
+        return self.session.query(PedidoEntity).filter(PedidoEntity.status != 'Aguardando Pagamento').order_by(PedidoEntity.id.desc()).all()
