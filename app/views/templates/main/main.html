@@ -82,10 +82,12 @@
                         <h3 class="nome-modulo">Registro de Vendas</h3>
                     </button>
                 </form>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Gestão de Clientes</h3>
-                </a>
+                <form method="GET" action="{{ url_for('gestao_vendas.lista_clientes') }}">
+                    <button type="submit" class="card-modulo">
+                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <h3 class="nome-modulo">Gestão de Clientes</h3>
+                    </button>
+                </form>
             </section>
         
             <section class="section-configuracoes section-content" id="configuracoes" style="display: none;">

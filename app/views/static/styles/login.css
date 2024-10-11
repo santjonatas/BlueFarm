@@ -35,7 +35,9 @@ body{
     align-items: center;
     gap: 10%;
 
-    background-color: rgba(21, 28, 26, 0.8);
+    /* background-color: rgba(21, 28, 26, 0.8); */
+    background-color: #00000069;
+    backdrop-filter: blur(3px);
 }
 
 h1{

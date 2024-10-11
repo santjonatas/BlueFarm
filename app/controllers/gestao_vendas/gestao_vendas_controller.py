@@ -40,7 +40,8 @@ class GestaoVendasController:
         self.blueprint.add_url_rule('/registro_vendas/', view_func=self.registro_vendas, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/editar_venda/', view_func=self.editar_venda, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/alterar_status_venda/<int:pedido_id>', view_func=self.alterar_status_venda, methods=['GET', 'POST'])
-        
+        self.blueprint.add_url_rule('/lista_clientes/', view_func=self.lista_clientes, methods=['GET', 'POST'])
+
     @login_required
     def registro_vendas(self) -> None:
         
@@ -69,7 +70,6 @@ class GestaoVendasController:
             pedido=pedido_entity, 
             repositories=repositories)
 
-
     @login_required
     def alterar_status_venda(self, pedido_id):
         form: FlaskForm = EditarPedidoForm()
@@ -97,3 +97,13 @@ class GestaoVendasController:
 
         return redirect(url_for('gestao_vendas.registro_vendas'))
     
+    @login_required
+    def lista_clientes(self) -> None:
+        
+        cliente_entity = repositories.cliente_repository.list()
+        
+        return render_template(
+            'gestao_vendas/lista_clientes.html',
+            clientes=cliente_entity,
+            repositories=repositories
+            )
