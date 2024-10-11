@@ -37,7 +37,8 @@ class GestaoEstoqueController:
         self.blueprint.add_url_rule('/estoque_insumos/', view_func=self.estoque_insumos, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/editar_insumo/', view_func=self.editar_insumo, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/alterar_estoque_insumo/<int:insumo_id>', view_func=self.alterar_estoque_insumo, methods=['GET', 'POST'])
-        
+        self.blueprint.add_url_rule('/movimentacao_estoque/', view_func=self.movimentacao_estoque, methods=['GET', 'POST'])
+
     @login_required
     def estoque_insumos(self) -> None:
         
@@ -87,3 +88,12 @@ class GestaoEstoqueController:
 
         return redirect(url_for('gestao_estoque.estoque_insumos'))
     
+    @login_required
+    def movimentacao_estoque(self) -> None:
+        
+        pedido_entity = repositories.pedido_repository.obter_pedidos_pagos_hoje()
+        
+        return render_template(
+            'gestao_estoque/movimentacao_estoque.html',
+            pedidos_hoje=pedido_entity
+            )

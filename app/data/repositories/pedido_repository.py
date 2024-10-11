@@ -1,6 +1,8 @@
 from requests import Session
 from app.application.contracts.data.repositories.i_pedido_repository import IPedidoRepository
 from app.domain.entities.pedido_entity import PedidoEntity
+from datetime import datetime
+from sqlalchemy import func, Date
 
 
 class PedidoRepository(IPedidoRepository):
@@ -27,8 +29,15 @@ class PedidoRepository(IPedidoRepository):
             pedido.status = status  
             self.session.commit() 
 
-    def obter_pedidos_pagos(self):
-        return self.session.query(PedidoEntity).filter_by(status='Pago').order_by(PedidoEntity.id.desc()).all()
+    def obter_pedidos_pagos_hoje(self):
+        hoje = datetime.now().date()  
+        return (
+            self.session.query(PedidoEntity)
+            .filter(PedidoEntity.status == 'Pago')  
+            .filter(func.cast(PedidoEntity.data_pedido, Date) == hoje) 
+            .order_by(PedidoEntity.id.desc())  
+            .all()
+        )
     
     def obter_pedidos_nao_aguardando_pagamento(self):
         return self.session.query(PedidoEntity).filter(PedidoEntity.status != 'Aguardando Pagamento').order_by(PedidoEntity.id.desc()).all()

@@ -1,0 +1,54 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/movimentacao_estoque.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <section class="section-pedidos section-content" id="pedidos">
+            {% for pedido in pedidos_hoje %}
+                <div class="card-pedido">
+                    <div class="detalhes-pedido-1">
+                        <output class="out-dados-pedido id-pedido">Id do Pedido: {{ pedido.id }}</output>
+                        <output class="out-dados-pedido status-pedido">Status: {{ pedido.status }}</output>
+                    </div>
+                    <div class="detalhes-pedido-2">
+                        <output class="out-dados-pedido">Data do Pedido: {{ pedido.data_pedido }}</output>
+                        <output class="out-dados-pedido valor-pedido">Valor Total: {{ pedido.valor_total }}</output>
+                    </div>
+                    <input type="hidden" name="pedido_id" value="{{ pedido.id }}">
+                    <input type="hidden" name="pedido_status" value="{{ pedido.status }}">
+                    <input type="hidden" name="pedido_valor_total" value="{{ pedido.valor_total }}">
+                    <form method="POST" action="{{ url_for('gestao_vendas.editar_venda') }}" class="div-bt-pagar-pedido">
+                        <form method="POST"  class="div-bt-pagar-pedido">
+                        <input type="hidden" name="pedido_id" value="{{ pedido.id }}">
+                        <button type="submit" class="bt-pagar-pedido">Alterar Status</button>
+                    </form>
+                </div>
+            {% endfor %}
+            {% if vendas|length == 0 %}
+            <div style="height: 750px"></div>
+            {% endif %}
+        </section>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+{% endblock body %}

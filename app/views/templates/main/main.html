@@ -69,10 +69,12 @@
                         <h3 class="nome-modulo">Estoque de Insumos</h3>
                     </button>
                 </form>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Movimentação de Estoques</h3>
-                </a>
+                <form method="GET" action="{{ url_for('gestao_estoque.movimentacao_estoque') }}">
+                    <button type="submit" class="card-modulo">
+                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <h3 class="nome-modulo">Movimentação de Estoques</h3>
+                    </button>
+                </form>
             </section>
         
             <section class="section-vendas section-content" id="vendas" style="display: none;">
