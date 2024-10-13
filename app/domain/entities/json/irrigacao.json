@@ -1,0 +1,25 @@
+{
+    "metodo_irrigacao": 
+    {
+        "metodo": "Gotejamento",
+        "descricao": "Sistema que libera pequenas quantidades de água diretamente na base das plantas, minimizando o desperdício e evitando a evaporação.",
+        "vantagens": [
+        "Economia de água",
+        "Aplicação direta nas raízes",
+        "Menos evaporação"
+        ],
+        "adequado_para": "Hortas e espaços urbanos pequenos"
+    },
+    "tipo_de_solo": {
+        "tipo": "Solo Arenoso",
+        "descricao": "Drena a água rapidamente, o que exige irrigação mais frequente para manter a umidade adequada para as plantas."
+    },
+    "pratica_sustentavel": {
+        "pratica": "Coleta de Água da Chuva",
+        "descricao": "Coleta de água da chuva para reuso na irrigação durante períodos de seca.",
+        "beneficios": [
+        "Economia de recursos hídricos",
+        "Sustentabilidade"
+        ]
+    }
+}

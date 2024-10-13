@@ -3,7 +3,7 @@
 {% block title %} BlueFarm | Main {% endblock title %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/movimentacao_estoque.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cultivo.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
@@ -11,6 +11,9 @@
 <header>
     <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
         <button type="submit">Voltar</button>
+    </form>
+    <form method="GET" action="{{ url_for('dashboard.add_cultivo') }}" class="card-modulo">
+        <button type="submit">Adicionar Cultivo</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -23,25 +26,27 @@
 </header>
 <main>
     <section class="section-main">
-        <h2 class="text-movimentacao-estoque">Movimentação de Estoque Diária</h2>
         <section class="section-pedidos section-content" id="pedidos">
-            {% for pedido in pedidos_hoje %}
+            {% for cultivo in cultivos %}
                 <div class="card-pedido">
                     <div class="detalhes-pedido-1">
-                        <output class="out-dados-pedido id-pedido">Id do Pedido: {{ pedido.id }}</output>
-                        <output class="out-dados-pedido status-pedido">Status: {{ pedido.status }}</output>
+                        <output class="out-dados-pedido id-pedido">Id do Cultivo: {{ cultivo.id }}</output>
+                        <output class="out-dados-pedido status-pedido">Status: {{ cultivo.status }}</output>
                     </div>
                     <div class="detalhes-pedido-2">
-                        <output class="out-dados-pedido">Data do Pedido: {{ pedido.data_pedido }}</output>
-                        <output class="out-dados-pedido valor-pedido">Valor Total: {{ pedido.valor_total }}</output>
+                        <output class="out-dados-pedido">Data de Início: {{ cultivo.data_inicio }}</output>
+                        <output class="out-dados-pedido valor-pedido">Data de Colheita: {{ cultivo.data_fim }}</output>
                     </div>
-                    <input type="hidden" name="pedido_id" value="{{ pedido.id }}">
-                    <input type="hidden" name="pedido_status" value="{{ pedido.status }}">
-                    <input type="hidden" name="pedido_valor_total" value="{{ pedido.valor_total }}">
+                    <input type="hidden" name="cultivo_status" value="{{ cultivo.status }}">
+                    <input type="hidden" name="cultivo_id_insumo" value="{{ cultivo.id_insumo }}">
+                    <input type="hidden" name="cultivo_quantidade" value="{{ cultivo.quantidade }}">
+                    <input type="hidden" name="cultivo_data_inicio" value="{{ cultivo.data_inicio }}">
+                    <input type="hidden" name="cultivo_data_fim" value="{{ cultivo.data_fim }}">
+
                     <form method="POST" action="{{ url_for('gestao_vendas.editar_venda') }}" class="div-bt-pagar-pedido">
                         <form method="POST"  class="div-bt-pagar-pedido">
-                        <input type="hidden" name="pedido_id" value="{{ pedido.id }}">
-                        <button type="submit" class="bt-pagar-pedido">Alterar Status</button>
+                        <input type="hidden" name="cultivo_id" value="{{ cultivo.id }}">
+                        <button type="submit" class="bt-pagar-pedido">Gerar Colheita</button>
                     </form>
                 </div>
             {% endfor %}

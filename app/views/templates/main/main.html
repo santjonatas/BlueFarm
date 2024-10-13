@@ -35,10 +35,12 @@
     <section class="section-main">
         <div class="modulo-main">
             <section class="section-dashboard section-content" id="dashboard">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Cultivo</h3>
-                </a>
+                <form method="GET" action="{{ url_for('dashboard.cultivo') }}">
+                    <button type="submit" class="card-modulo">
+                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <h3 class="nome-modulo">Cultivo</h3>
+                    </button>
+                </form>
                 <form method="GET" action="{{ url_for('dashboard.estoque_produtos') }}">
                     <button type="submit" class="card-modulo">
                         <img class="img-modulo" src="{{ url_for('static', filename='images/logo-BlueFarm.jpeg') }}" alt="">
@@ -48,10 +50,12 @@
             </section>
         
             <section class="section-producao section-content" id="producao" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Irrigação</h3>
-                </a>
+                <form method="GET" action="{{ url_for('controle_producao.irrigacao') }}">
+                    <button type="submit" class="card-modulo">
+                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <h3 class="nome-modulo">Irrigação</h3>
+                    </button>
+                </form>
                 <a class="card-modulo" href="">
                     <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
                     <h3 class="nome-modulo">Colheita</h3>

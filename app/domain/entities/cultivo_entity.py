@@ -10,6 +10,7 @@ class CultivoEntity(BaseEntity, UserMixin):
     quantidade = db.Column(db.Integer, nullable=False)
     data_inicio = db.Column(db.DateTime, nullable=False)
     data_fim = db.Column(db.DateTime, nullable=False)
+    status = db.Column(db.String(50), nullable=False)
 
 
     colheita = db.relationship('ColheitaEntity', uselist=False, back_populates='cultivo')

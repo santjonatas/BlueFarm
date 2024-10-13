@@ -1,5 +1,6 @@
 from app.controllers.auth.login_controller import LoginController
 from app.controllers.auth.register_controller import RegisterController
+from app.controllers.controle_producao.controle_producao_controller import ControleProducaoController
 from app.controllers.dashboard.dashboard_controller import DashboardController
 from app.controllers.gestao_estoque.gestao_estoque_controller import GestaoEstoqueController
 from app.controllers.gestao_vendas.gestao_vendas_controller import GestaoVendasController
@@ -16,3 +17,4 @@ class GlobalControllers:
         self.dashboard_controller = DashboardController()
         self.gestao_estoque = GestaoEstoqueController()
         self.gestao_vendas = GestaoVendasController()
+        self.controle_producao_controller = ControleProducaoController()

@@ -2,6 +2,7 @@ from app.application.settings.extensions_setting import db
 from app.data.repositories.admistrador_repository import AdministradorRepository
 from app.data.repositories.cargo_repository import CargoRepository
 from app.data.repositories.cliente_repository import ClienteRepository
+from app.data.repositories.cultivo_repository import CultivoRepository
 from app.data.repositories.departamento_repository import DepartamentoRepository
 from app.data.repositories.estoque_repository import EstoqueRepository
 from app.data.repositories.funcionario_repository import FuncionarioRepository
@@ -34,3 +35,4 @@ class GlobalRepositories:
         self.estoque_repository = EstoqueRepository(session=session)
         self.insumo_repository = InsumoRepository(session=session)
         self.pagamento_repository = PagamentoRepository(session=session)
+        self.cultivo_repository = CultivoRepository(session=session)
