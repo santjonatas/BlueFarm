@@ -51,9 +51,14 @@ class ControleProducaoController:
 
         with open(json_irrigacao, 'r', encoding='utf-8') as arquivo:
             dados_irrigacao = json.load(arquivo)
+
+        metodo_irrigacao = dados_irrigacao.get('metodo_irrigacao')
+
+        metodo = metodo_irrigacao.get('metodo')
         
         return render_template(
-            'controle_producao/irrigacao.html'
+            'controle_producao/irrigacao.html',
+            dados_irrigacao=dados_irrigacao
             )
     
     

@@ -1,34 +1,84 @@
 *{
     margin: 0px;
     padding: 0px;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-html, body{
-    /* height: 100%; */
+/* CABEÇALHO */
+header{
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 35%;
+
+    width: 100%;
+    height: 60px;
+    background-color: #D5D1FF;
+    z-index: 10;
 }
 
-body{
-    /* height: 100%; */
-}
-
-/* main{
+.img-bluefarm{
     display: flex;
     justify-content: center;
     align-items: center;
 
-    height: 100%; 
-    width: 100%;
-    background-color: red;
-} */
-main{
+    width: 50px;
+    height: 50px;
+    background-image: url('../images/logo-BlueFarm-sem-fundo-sem-nome.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.section-perfil{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.align-nome{
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
+    gap: 5px;
 
-    /* height: 100%;  */
-    width: 100%;
-    background-color: red;
+    margin-right: 10px;
 }
+
+p{
+    text-align: center;
+}
+
+.img-perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url('../../static/images/profile.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.img-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 33px;
+    height: 33px;
+    background-image: url('../../static/images/menu.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+/* SIDEBAR */
 
 .section-sidebar{
     display: flex;
@@ -37,10 +87,39 @@ main{
 
     width: 25%;
     height: 700px;
-    background-color: blue;
-
+    background-color: rgba(0, 0, 255, 0);
     margin-top: 7%;
     padding-bottom: 1%;
+}
+
+.sidebar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1%;
+
+    margin-top: 3%;
+    width: 270px;
+    height: 400px;
+    border-radius: 24px 60px;
+    background-color: #ffffff33;
+    backdrop-filter: blur(15px);
+}
+
+.botao-sidebar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 70px;
+    width: 95%;
+    border: 0px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 22px;
+    background-color: #ffffff48;
+    backdrop-filter: blur(15px);
 }
 
 .total-carrinho{
@@ -50,8 +129,8 @@ main{
 
     height: 50px;
     width: 95%;
-
-    background-color: blueviolet;
+    background-color: #00000073;
+    backdrop-filter: blur(15px);
 }
 
 .img-carrinho{
@@ -61,9 +140,7 @@ main{
 
     width: 25px;
     height: 25px;
-
     margin-left: 3%;
-
     background-image: url('../../static/images/carrinho.png');
     background-repeat: no-repeat;
     background-size: contain;
@@ -76,6 +153,7 @@ main{
     align-items: center;
 
     margin-left: 3%;
+    color: rgb(0, 255, 0);
 }
 
 .bt-fazer-pedido{
@@ -84,8 +162,10 @@ main{
     align-items: center;
 
     height: 40px;
-
-    /* margin-left: 20%; */
+    width: 90px;
+    border-radius: 5px;
+    border: none;
+    background-color: #D5D1FF;
 }
 .form-bt-fazer-pedido{
     display: flex;
@@ -93,8 +173,33 @@ main{
     align-items: center;
 
     height: 40px;
-
     margin-left: 1%;
+}
+
+/* MENU */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.226); 
+    position: relative; 
+}
+main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/background_fazenda_urbana_main_client.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    z-index: -1;
 }
 
 .section-main{
@@ -103,8 +208,7 @@ main{
     align-items: center;
     
     width: 75%;
-    /* height: 100%; */
-    background-color: green;
+    background-color: rgba(0, 128, 0, 0);
 }
 
 .ng-container{
@@ -125,186 +229,26 @@ main{
     height: 100%;
 }
 
-/*################################*/
-.sidebar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 1%;
-
-    margin-top: 3%;
-
-    width: 270px;
-    height: 400px;
-    border-radius: 24px 60px;
-    background-color: red;
-}
-
-
-/*################################*/
-
-.botao-sidebar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 70px;
-    width: 98%;
-
-    background-color: yellow;
-    border: 0px;
-
-    text-align: center;
-    font-size: 22px;
-}
-
-
-/*################################*/
-
-
-header{
-    position: fixed;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    width: 100%;
-    height: 60px;
-
-    gap: 35%;
-
-    background-color: blueviolet;
-}
-
-.img-menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 33px;
-    height: 33px;
-
-    /* background-image: url('../../../assets/images/menu.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center; */
-}
-
-.img-bluefarm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 50px;
-    height: 50px;
-
-    background-image: url('../../../assets/images/logo-BlueFarm-sem-fundo-sem-nome.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-.section-perfil{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-
-    /* background-color: green; */
-    width: 200px;
-}
-
-.align-nome{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    gap: 5px;
-
-    margin-right: 10px;
-
-    /* background-color: aqua; */
-}
-
-p{
-    text-align: center;
-}
-
-.img-perfil{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-
-    background-image: url('../../static/images/profile.jpg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-.img-menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 33px;
-    height: 33px;
-
-    background-image: url('../../static/images/menu.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-
-/*################################*/
-
 .modulo-main{
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 100%;
-    /* height: 100%; */
-
-    background-color: yellow;
 }
 
-/* .section-dashboard{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    width: 80%;
-    height: 80%;
-
-    background-color: palegoldenrod;
-} */
+/* PRODUTOS */
 
 .section-produtos{
     display: grid;
     justify-content: center;
     align-items: center;
-
     grid-template-columns: repeat(3, 1fr);
 
     width: 100%;
-    /* height: 100%; */
-
-    background-color: palegoldenrod;
-
+    background-color: rgba(238, 232, 170, 0);
     padding-bottom: 5%;
-    /* margin-top: 10%; */
 }
-
-
-
-/*################################*/
 
 a{
     display: flex;
@@ -319,19 +263,18 @@ a{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     gap: 5%;
 
     margin: auto;
-
     width: 230px;
     height: 230px;
-
-    background-color: cadetblue;
     border-radius: 5%;
-
-    margin-top: 20%;
+    color: rgb(238, 238, 238);
+    margin-top: 22%;
+    background-color: #ffffff33;
+    backdrop-filter: blur(15px);
 }
+
 
 .img-produto{
     display: flex;
@@ -340,78 +283,68 @@ a{
 
     width: 130px;
     height: 130px;
-
-    /* background-color: red; */
 }
 
 .nome-produto{
-    text-align: center;
-    color: black; 
+    text-align: center; 
     font-size: 17px;
+}
+
+.preco-produto{
+    color: rgb(0, 255, 0);
 }
 
 .info-estoque-produto{
     display: flex;
     justify-content: start;
     align-items: center;
-
     gap: 15%;
 
     width: 90%;
-
-    background-color: red;
+    color: red;
 }
 
-.editar-produto{
+.add-to-cart{
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 50px;
+    width: 20px;
     height: 20px;
-
     margin-left: 10%;
-
-    font-size: 17px;
+    font-size: 20px;
     text-align: center;
+    background-color: rgb(206, 206, 206);
+    border: none;
+    border-radius: 5px;
+    color: green;
 }
 
-
+/* CARRINHO */
 
 .section-carrinho {
     display: flex;
     justify-content: center;
     align-items: center;
-
     flex-direction: column;
 
     width: 100%;
-    /* height: 100%; */
-
-    background-color: palegoldenrod;
-
     padding-bottom: 5%;
     padding-top: 5%;
-    /* margin-top: 10%; */
 }
-
 
 .card-produto-carrinho{
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: 5%;
-
-    /* margin: auto; */
 
     width: 600px;
     height: 60px;
-
-    background-color: cadetblue;
     border-radius: 10px;
-
     margin-top: 5%;
+    background-color: #ffffff33;
+    backdrop-filter: blur(15px);
 }
 
 .img-produto-carrinho{
@@ -421,16 +354,21 @@ a{
 
     width: 40px;
     height: 40px;
-
     margin: 20px;
-
-    /* background-color: red; */
 }
 
 .nome-produto-carrinho{
     text-align: center;
-    color: black; 
+    color: rgb(255, 255, 255); 
     font-size: 17px;
+}
+
+.out-preco{
+    color: rgb(0, 255, 0);
+}
+
+.out-quantidade{
+    color: white;
 }
 
 .img-menos{
@@ -440,14 +378,11 @@ a{
 
     width: 30px;
     height: 30px;
-
     font-size: 25px;
     text-align: center;
-
-    /* background-image: url('../../static/images/menos.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center; */
+    background-color: rgb(206, 206, 206);
+    border: none;
+    border-radius: 5px;
 }
 
 .img-mais{
@@ -457,14 +392,11 @@ a{
 
     width: 30px;
     height: 30px;
-
     font-size: 25px;
     text-align: center;
-
-    /* background-image: url('../../static/images/mais.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center; */
+    background-color: rgb(206, 206, 206);
+    border: none;
+    border-radius: 5px;
 }
 
 .img-lixeira{
@@ -474,11 +406,13 @@ a{
 
     width: 30px;
     height: 30px;
-
     background-image: url('../../static/images/lixeira.png');
     background-repeat: no-repeat;
     background-size: 25px 25px;
     background-position: center;
+    background-color: rgb(206, 206, 206);
+    border: none;
+    border-radius: 5px;
 }
 
 .div-quantidade-produtos{
@@ -489,23 +423,17 @@ a{
     width: 175px;
 }
 
-/**********************************************************/
+/* PEDIDOS */
 
 .section-pedidos{
     display: flex;
     justify-content: center;
     align-items: center;
-
     flex-direction: column;
 
     width: 100%;
-    /* height: 100%; */
-
-    background-color: palegoldenrod;
-
     padding-bottom: 5%;
     padding-top: 5%;
-    /* margin-top: 10%; */
 }
 
 .card-pedido{
@@ -514,28 +442,25 @@ a{
     align-items: center;
     flex-direction: column;
 
-
     width: 600px;
-
-
-    background-color: white;
     border-radius: 10px;
-
     margin-top: 5%;
+    color: white;
+    background-color: #ffffff33;
+    backdrop-filter: blur(15px);
 }
 
 .detalhes-pedido-1{
     display: flex;
     justify-content: start;
     align-items: center;
-
     gap: 20%;
 
     width: 100%;
     height: 35px;
-
-    background-color: blue;
     border-radius: 10px 10px 0px 0px;
+    background-color: #00000073;
+    backdrop-filter: blur(15px);
 }
 
 .detalhes-item-pedido{
@@ -544,8 +469,6 @@ a{
     align-items: center;
 
     width: 100%;
-
-    background-color: red;
 }
 
 .div-info-item-pedido{
@@ -556,8 +479,6 @@ a{
 
     width: 90%;
     height: 70px;
-
-    background-color: blueviolet;
 }
 
 .img-produto-pedido{
@@ -567,35 +488,56 @@ a{
 
 .detalhes-pedido-2{
     display: flex;
-    justify-content: start;
-    align-items: center;
-
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
     gap: 20%;
 
     width: 100%;
-    height: 35px;
+    height: 100%;
+}
 
-    background-color: blue;
+#descricao{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
 
+p{
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .out-dados-pedido{
     margin-left: 5px;
 }
 
+.id-pedido{
+    color: yellow;
+}
+
+.status-pedido{
+    color: rgb(0, 247, 255);
+}
+
+.quantidade-pedido{
+    color: red;
+}
+
+.valor-pedido{
+    color: rgb(0, 255, 0);
+}
+
 .div-bt-pagar-pedido{
     display: flex;
     justify-content: end;
     align-items: center;
-
     gap: 30%;
 
     width: 100%;
     height: 40px;
-
-    background-color: orange;
     border-radius: 0px 0px 10px 10px;
-
+    background-color: #00000073;
+    backdrop-filter: blur(15px);
 }
 
 .bt-pagar-pedido{
@@ -605,6 +547,9 @@ a{
 
     width: 50px;
     height: 35px;
-
     margin-right: 5px;
+    color: white;
+    background-color: rgb(0, 116, 0);
+    border: none;
+    border-radius: 5px;
 }

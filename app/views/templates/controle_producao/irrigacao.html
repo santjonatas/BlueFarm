@@ -24,7 +24,62 @@
 <main>
     <section class="section-main">
         <section class="section-pedidos section-content" id="pedidos">
-            
+            {% set metodo_irrigacao = dados_irrigacao.get('metodo_irrigacao') %}
+            {% set metodo = metodo_irrigacao.get('metodo') %}
+            {% set descricao = metodo_irrigacao.get('descricao') %}
+            {% set vantagens = metodo_irrigacao.get('vantagens') %}
+            {% set adequado_para = metodo_irrigacao.get('adequado_para') %}
+            <div class="card-pedido">
+                <div class="detalhes-pedido-1">
+                    <output class="out-dados-pedido id-pedido">Irrigação</output>
+                    <output class="out-dados-pedido status-pedido">Método: {{ metodo }}</output>
+                </div>
+                <div class="detalhes-pedido-2">
+                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
+                    <h4 class="out-dados-pedido">Vantagens:</h4>
+                    {% for vantagem in vantagens %}
+                        <p class="out-dados-pedido valor-pedido">-{{ vantagem }}</p>
+                    {% endfor %}
+                </div>
+                <div class="div-bt-pagar-pedido">
+                    <output class="out-dados-pedido valor-pedido">Adequado Para: {{ adequado_para }}</output>
+                </div>
+            </div>
+
+            {% set tipo_de_solo = dados_irrigacao.get('tipo_de_solo') %}
+            {% set tipo = tipo_de_solo.get('tipo') %}
+            {% set descricao = tipo_de_solo.get('descricao') %}
+            <div class="card-pedido">
+                <div class="detalhes-pedido-1">
+                    <output class="out-dados-pedido id-pedido">Solo</output>
+                </div>
+                <div class="detalhes-pedido-2">
+                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
+                </div>
+                <div class="div-bt-pagar-pedido">
+                    <output class="out-dados-pedido valor-pedido">Tipo: {{ tipo }}</output>
+                </div>
+            </div>
+
+            {% set pratica_sustentavel = dados_irrigacao.get('pratica_sustentavel') %}
+            {% set pratica = pratica_sustentavel.get('pratica') %}
+            {% set descricao = pratica_sustentavel.get('descricao') %}
+            {% set beneficios = pratica_sustentavel.get('beneficios') %}
+            <div class="card-pedido">
+                <div class="detalhes-pedido-1">
+                    <output class="out-dados-pedido id-pedido">Prática Sustentável</output>
+                    <output class="out-dados-pedido status-pedido">Prática: {{ pratica }}</output>
+                </div>
+                <div class="detalhes-pedido-2">
+                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
+                    <h4 class="out-dados-pedido">Beneficios:</h4>
+                    {% for beneficio in beneficios %}
+                        <p class="out-dados-pedido valor-pedido">-{{ beneficio }}</p>
+                    {% endfor %}
+                </div>
+                <div class="div-bt-pagar-pedido">
+                </div>
+            </div>
         </section>
     </section>
 </main>
