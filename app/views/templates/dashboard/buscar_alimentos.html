@@ -1,0 +1,113 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/buscar_alimentos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <form method="POST" class="section-pedidos section-content" id="pedidos">
+            <div id="formularios">
+                {{ form.csrf_token }}
+                <div class="form">
+                    {{ form.alimento(class="form-control", placeholder="Alimento") }}
+                </div>
+                {{ form.submit(class="bt-registro", value="Buscar Alimento") }}
+            </div>
+            {% set info_alimento=info_alimento %}
+            {% if info_alimento and info_alimento != '"O parâmetro informado não é um alimento."' %}
+                <div class="card-pedido">
+                    {% set nome = info_alimento.get('nome', 'Informação não disponível') %}
+                    {% set descricao = info_alimento.get('descricao', 'Informação não disponível') %}
+
+                    {% set nutrientes = info_alimento.get('nutrientes', None) %}
+                    {% if nutrientes %}
+                        {% set calorias = nutrientes.get('calorias', 'Não disponível') %}
+                        {% set carboidratos = nutrientes.get('carboidratos', 'Não disponível') %}
+                        {% set proteinas = nutrientes.get('proteinas', 'Não disponível') %}
+                        {% set gorduras = nutrientes.get('gorduras', 'Não disponível') %}
+                        {% set fibra_alimentar = nutrientes.get('fibra_alimentar', 'Não disponível') %}
+
+                        {% set vitaminas = nutrientes.get('vitaminas', {}) %}
+                        {% set vitamina_c = vitaminas.get('vitamina_C', 'Não disponível') %}
+                        {% set vitamina_b9 = vitaminas.get('vitamina_B9', 'Não disponível') %}
+
+                        {% set minerais = nutrientes.get('minerais', {}) %}
+                        {% set ferro = minerais.get('ferro', 'Não disponível') %}
+                        {% set magnesio = minerais.get('magnésio', 'Não disponível') %}
+                        {% set potassio = minerais.get('potassio', 'Não disponível') %}
+                    {% endif %}
+                    <div class="detalhes-pedido-1">
+                        <output class="out-dados-pedido id-pedido">{{ nome }}</output>
+                    </div>
+                    <div class="detalhes-pedido-2">
+                        <h4>Nutrientes</h4>
+                        <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
+                        <output class="out-dados-pedido" id="descricao">Calorias: {{ calorias }}</output>
+                        <output class="out-dados-pedido" id="descricao">Carboidratos: {{ carboidratos }}</output>
+                        <output class="out-dados-pedido" id="descricao">Proteínas: {{ proteinas }}</output>
+                        <output class="out-dados-pedido" id="descricao">Gorduras: {{ gorduras }}</output>
+                        <output class="out-dados-pedido" id="descricao">Fibra Alimentar: {{ fibra_alimentar }}</output>
+
+                        <h4>Vitaminas</h4>
+                        <output class="out-dados-pedido" id="descricao">Vitamina C: {{ vitamina_c }}</output>
+                        <output class="out-dados-pedido" id="descricao">Vitamina B9: {{ vitamina_b9 }}</output>
+
+                        <h4>Minerais</h4>
+                        <output class="out-dados-pedido" id="descricao">Ferro: {{ ferro }}</output>
+                        <output class="out-dados-pedido" id="descricao">Magnésio: {{ magnesio }}</output>
+                        <output class="out-dados-pedido" id="descricao">Potássio: {{ potassio }}</output>
+                    </div>
+                    <div class="div-bt-pagar-pedido">
+                    </div>
+                </div>
+            {% else %}
+                <p>{{ msg_erro }}</p>
+                <div class="card-pedido">
+                    <div class="detalhes-pedido-1">
+                        <output class="out-dados-pedido id-pedido"></output>
+                    </div>
+                    <div class="detalhes-pedido-2">
+                        <h4>Nutrientes</h4>
+                        <output class="out-dados-pedido" id="descricao">Descrição: </output>
+                        <output class="out-dados-pedido" id="descricao">Calorias: </output>
+                        <output class="out-dados-pedido" id="descricao">Carboidratos: </output>
+                        <output class="out-dados-pedido" id="descricao">Proteínas: </output>
+                        <output class="out-dados-pedido" id="descricao">Gorduras: </output>
+                        <output class="out-dados-pedido" id="descricao">Fibra Alimentar: </output>
+
+                        <h4>Vitaminas</h4>
+                        <output class="out-dados-pedido" id="descricao">Vitamina C: </output>
+                        <output class="out-dados-pedido" id="descricao">Vitamina B9: </output>
+
+                        <h4>Minerais</h4>
+                        <output class="out-dados-pedido" id="descricao">Ferro: </output>
+                        <output class="out-dados-pedido" id="descricao">Magnésio: </output>
+                        <output class="out-dados-pedido" id="descricao">Potássio: </output>
+                    </div>
+                    <div class="div-bt-pagar-pedido">
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+{% endblock body %}

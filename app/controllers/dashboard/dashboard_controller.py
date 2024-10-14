@@ -1,13 +1,16 @@
 from datetime import datetime
 import os
 from pprint import pprint
+import re
 import traceback
 from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
 from werkzeug.utils import secure_filename
+import json
 
 from app.application.config.global_repositories import GlobalRepositories
+from app.application.config.global_services import GlobalServices
 from app.application.usecases.auth.alter_estoque_produto_usecase import AlterEstoqueProdutoUseCase
 from app.application.usecases.auth.create_cultivo_usecase import CreateCultivoUseCase
 from app.application.usecases.auth.create_produto_usecase import CreateProdutoUseCase
@@ -24,9 +27,11 @@ from app.domain.forms.add_cultivo import AddCultivoForm
 from app.domain.forms.add_produto import AddProdutoForm
 from flask_wtf import FlaskForm
 
+from app.domain.forms.buscar_alimento import BuscarAlimentoForm
 from app.domain.forms.editar_produto import EditarProdutoForm
 
 repositories = GlobalRepositories()
+services = GlobalServices(global_repositories=repositories)
 
 class DashboardController:
     def __init__(self):
@@ -40,7 +45,8 @@ class DashboardController:
         self.blueprint.add_url_rule('/alterar_estoque/<int:produto_id>', view_func=self.alterar_estoque, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/cultivo/', view_func=self.cultivo, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/add_cultivo/', view_func=self.add_cultivo, methods=['GET', 'POST'])
-
+        self.blueprint.add_url_rule('/buscar_alimentos/', view_func=self.buscar_alimentos, methods=['GET', 'POST'])
+        
     @login_required
     def estoque_produtos(self) -> None:
         
@@ -84,7 +90,6 @@ class DashboardController:
 
                 return redirect(url_for('dashboard.estoque_produtos'))
 
-                pass
             except Exception as e:
                 stacktrace = traceback.format_exc()
                 flash(message='Erro ao Alterar Quantidade', category='info')
@@ -135,7 +140,6 @@ class DashboardController:
         return render_template(
             'dashboard/cultivo.html',
             cultivos=cultivo_entity
-            # repositories=repositories
             )
 
     @login_required
@@ -162,4 +166,36 @@ class DashboardController:
                 pass
 
         return render_template('dashboard/add_cultivo.html', form=form)
+    
+    @login_required
+    def buscar_alimentos(self) -> None:
+
+        form: FlaskForm = BuscarAlimentoForm()
+
+        info_alimento = None
+
+        msg_erro = ''
+
+        if form.validate_on_submit():
+            try:
+                pprint(form.to_dict())
+                alimento = form.to_dict()
+
+                produto = alimento.get('alimento')
+                info_alimento = services.cohere_ia_service.obter_info_alimento(produto=produto)
+
+                if info_alimento != '"O parâmetro informado não é um alimento."':
+                    info_alimento = json.loads(info_alimento)  
+                else:
+                    info_alimento = {} 
+                    msg_erro = 'O parâmetro informado não é um alimento.'
+
+                return render_template('dashboard/buscar_alimentos.html', form=form, info_alimento=info_alimento, msg_erro=msg_erro)
+
+            except Exception as e:
+                stacktrace = traceback.format_exc()
+                flash(message='Erro ao Buscar Alimento', category='info')
+                pass
+        
+        return render_template('dashboard/buscar_alimentos.html', form=form, info_alimento=info_alimento, msg_erro=msg_erro)
     

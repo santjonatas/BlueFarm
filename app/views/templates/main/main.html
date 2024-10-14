@@ -47,8 +47,13 @@
                         <h3 class="nome-modulo">Estoque de Produtos</h3>
                     </button>
                 </form>
+                <form method="GET" action="{{ url_for('dashboard.buscar_alimentos') }}">
+                    <button type="submit" class="card-modulo">
+                        <img class="img-modulo" src="{{ url_for('static', filename='images/logo-BlueFarm.jpeg') }}" alt="">
+                        <h3 class="nome-modulo">Buscar Alimentos</h3>
+                    </button>
+                </form>
             </section>
-        
             <section class="section-producao section-content" id="producao" style="display: none;">
                 <form method="GET" action="{{ url_for('controle_producao.irrigacao') }}">
                     <button type="submit" class="card-modulo">
