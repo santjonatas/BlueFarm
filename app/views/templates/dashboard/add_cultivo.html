@@ -9,7 +9,7 @@
 
 {% block body %}
 <header>
-    <form method="GET" action="{{ url_for('dashboard.cultivo') }}" class="card-modulo">
+    <form method="GET" action="{{ url_for('gestao_estoque.estoque_insumos')}}" class="card-modulo">
         <button type="submit">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
@@ -27,7 +27,7 @@
             {{ form.csrf_token }}
             <div id="formularios">
                 <div class="form">
-                    {{ form.id_insumo(class="form-control", placeholder="Id Insumo") }}
+                    {{ form.id_insumo(id="id_insumo", class="form-control", placeholder="Id Insumo") }}
                 </div>
                 <div class="form">
                     {{ form.quantidade(class="form-control", placeholder="Quantidade de Insumos") }}
@@ -48,6 +48,7 @@
         </form>
     </section>
 </main>
-<!-- <script src="../../static/scripts/main.js"></script> -->
+<!-- <script src="../../static/scripts/add_cultivo.js"></script> -->
+<script src="{{ url_for('static', filename='scripts/add_cultivo.js') }}"></script>
 {% endblock body %}
 

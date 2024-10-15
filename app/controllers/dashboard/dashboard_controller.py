@@ -46,7 +46,8 @@ class DashboardController:
         self.blueprint.add_url_rule('/cultivo/', view_func=self.cultivo, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/add_cultivo/', view_func=self.add_cultivo, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/buscar_alimentos/', view_func=self.buscar_alimentos, methods=['GET', 'POST'])
-        
+
+
     @login_required
     def estoque_produtos(self) -> None:
         
@@ -158,14 +159,15 @@ class DashboardController:
 
                 flash(message='Cultivo Registrado', category='info')
 
-                return render_template('dashboard/add_cultivo.html', form=form)
+                return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
 
             except Exception as e:
                 stacktrace = traceback.format_exc()
                 flash(message='Erro ao Registrar Cultivo', category='info')
                 pass
 
-        return render_template('dashboard/add_cultivo.html', form=form)
+        return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
+    
     
     @login_required
     def buscar_alimentos(self) -> None:

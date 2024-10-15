@@ -39,7 +39,9 @@ class AddCultivoForm(BaseForm):
         super().__init__(*args, **kwargs)
 
         with current_app.app_context():
-            self.id_insumo.choices = [(insumo.id, insumo.nome) for insumo in InsumoEntity.query.all()]
+            a = self.id_insumo.choices = [(insumo.id, insumo.nome) for insumo in InsumoEntity.query.all()]
+            
+
 
     def to_dict(self) -> dict:
         return {
