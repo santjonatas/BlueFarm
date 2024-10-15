@@ -72,5 +72,4 @@ class GlobalUseCases:
         )
 
         self.create_cultivo_usecase = CreateCultivoUseCase(
-            cultivo_service = global_services.cargo_service
         )

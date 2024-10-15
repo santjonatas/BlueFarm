@@ -18,15 +18,19 @@ class AddCultivoForm(BaseForm):
     quantidade = IntegerField('Quantidade de Insumos',
         validators=[DataRequired()
     ])
-    status = StringField('Status',
+    status = SelectField('Status',
         validators=[DataRequired(),
             Length(min=2, message="O status do cultivo deve ter pelo menos 2 caracteres.")
+    ],
+    choices=[
+        ('Em andamento', 'Em andamento'),
+        ('Colhido', 'Colhido')
     ])
     data_inicio = DateField('Data de Início',
         validators=[DataRequired()]
     )
     data_fim = DateField('Data de Colheita',
-        validators=[DataRequired()]
+        validators=[Optional()] 
     )
     
     submit = SubmitField('Upload')

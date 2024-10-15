@@ -8,8 +8,8 @@ class CultivoEntity(BaseEntity, UserMixin):
 
     id_insumo = db.Column(db.Integer, db.ForeignKey(f'{schema}.insumos.id'))
     quantidade = db.Column(db.Integer, nullable=False)
-    data_inicio = db.Column(db.DateTime, nullable=False)
-    data_fim = db.Column(db.DateTime, nullable=False)
+    data_inicio = db.Column(db.Date, nullable=True)
+    data_fim = db.Column(db.Date, nullable=True)
     status = db.Column(db.String(50), nullable=False)
 
 
@@ -20,12 +20,14 @@ class CultivoEntity(BaseEntity, UserMixin):
         id_insumo: int,
         quantidade: int,
         data_inicio: str,
-        data_fim: str
+        data_fim: str,
+        status: str
         ) -> None:
         self.id_insumo = id_insumo
         self.quantidade = quantidade
         self.data_inicio = data_inicio
         self.data_fim = data_fim
+        self.status = status
         
     def __repr__(self):
         return "<Cultivo %r>" % self.id_insumo

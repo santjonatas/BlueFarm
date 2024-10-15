@@ -17,3 +17,4 @@ class CreateCultivoInputDto:
         self.data_inicio = data_inicio 
         self.data_fim = data_fim 
         
+    

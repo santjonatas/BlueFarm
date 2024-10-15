@@ -3,6 +3,7 @@ from app.infra.services.cohere_ia.cohere_ia_service import CohereIaService
 from app.infra.services.database.admin.admin_service import AdministradorService
 from app.infra.services.database.cargo.cargo_service import CargoService
 from app.infra.services.database.cliente.cliente_service import ClienteService
+from app.infra.services.database.cultivo.cultivo_service import CultivoService
 from app.infra.services.database.departamento.departamento_service import DepartamentoService
 from app.infra.services.database.estoque.estoque_service import EstoqueService
 from app.infra.services.database.funcionario.funcionario_service import FuncionarioService
@@ -59,5 +60,8 @@ class GlobalServices:
         )
         self.pagamento_service = PagamentoService(
             pagamento_repository=global_repositories.pagamento_repository
+        )
+        self.cultivo_service = CultivoService(
+            cultivo_repository=global_repositories.cultivo_repository
         )
         self.cohere_ia_service = CohereIaService()

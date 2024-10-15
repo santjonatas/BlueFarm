@@ -65,10 +65,12 @@
                     <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
                     <h3 class="nome-modulo">Colheita</h3>
                 </a>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Controle de Temperatura</h3>
-                </a>
+                <form method="GET" action="{{ url_for('controle_producao.controle_temperatura') }}">
+                    <button type="submit" class="card-modulo">
+                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <h3 class="nome-modulo">Controle de Temperatura</h3>
+                    </button>
+                </form>
             </section>
         
             <section class="section-estoque section-content" id="estoque" style="display: none;">

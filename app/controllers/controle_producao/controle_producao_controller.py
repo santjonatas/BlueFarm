@@ -42,6 +42,7 @@ class ControleProducaoController:
 
     def register_routes(self): 
         self.blueprint.add_url_rule('/irrigacao/', view_func=self.irrigacao, methods=['GET', 'POST'])
+        self.blueprint.add_url_rule('/controle_temperatura/', view_func=self.controle_temperatura, methods=['GET', 'POST'])
         
 
     @login_required
@@ -59,6 +60,23 @@ class ControleProducaoController:
         return render_template(
             'controle_producao/irrigacao.html',
             dados_irrigacao=dados_irrigacao
+            )
+    
+    @login_required
+    def controle_temperatura(self) -> None:
+
+        json_controle_temperatura = os.getenv('JSON_CONTROLE_TEMPERATURA')
+
+        with open(json_controle_temperatura, 'r', encoding='utf-8') as arquivo:
+            dados_controle_temperatura = json.load(arquivo)
+
+        metodo_controle_temperatura = dados_controle_temperatura.get('metodo_controle_temperatura')
+
+        metodo = metodo_controle_temperatura.get('metodo')
+        
+        return render_template(
+            'controle_producao/controle_temperatura.html',
+            dados_controle_temperatura=dados_controle_temperatura
             )
     
     

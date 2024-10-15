@@ -35,7 +35,9 @@
                     </div>
                     <div class="detalhes-pedido-2">
                         <output class="out-dados-pedido">Data de Início: {{ cultivo.data_inicio }}</output>
+                        {% if cultivo.data_fim != None %}
                         <output class="out-dados-pedido valor-pedido">Data de Colheita: {{ cultivo.data_fim }}</output>
+                        {% endif %}
                     </div>
                     <input type="hidden" name="cultivo_status" value="{{ cultivo.status }}">
                     <input type="hidden" name="cultivo_id_insumo" value="{{ cultivo.id_insumo }}">
