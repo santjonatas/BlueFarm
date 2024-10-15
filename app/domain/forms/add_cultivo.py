@@ -32,14 +32,10 @@ class AddCultivoForm(BaseForm):
     submit = SubmitField('Upload')
 
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
         with current_app.app_context():
-
-            self.id_insumo.choices = [(insumo.id) for insumo in InsumoEntity.query.all()]
-           
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+            self.id_insumo.choices = [(insumo.id, insumo.nome) for insumo in InsumoEntity.query.all()]
 
     def to_dict(self) -> dict:
         return {
