@@ -16,3 +16,9 @@ class ProdutoRepository(IProdutoRepository):
             return self.session.query(ProdutoEntity).filter_by(nome=nome).first() is not None
         finally:
             self.session.close()
+
+    def get_produto_by_name(self, nome: str):
+        try:
+            return self.session.query(ProdutoEntity).filter(ProdutoEntity.nome == nome).first()
+        finally:
+            self.session.close()

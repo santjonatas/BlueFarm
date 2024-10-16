@@ -14,3 +14,12 @@ class CultivoRepository(ICultivoRepository):
             self.session.commit()
         else:
             raise ValueError(f'Cultivo com id {cultivo_id} não encontrado.')
+
+    def atualizar_status_colhido(self, cultivo_id: int) -> None:
+        cultivo = self.session.query(CultivoEntity).filter_by(id=cultivo_id).first()
+
+        if cultivo:
+            cultivo.status = 'Colhido'  
+            self.session.commit() 
+        else:
+            print(f'Cultivo com ID {cultivo_id} não encontrado.')

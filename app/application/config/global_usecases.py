@@ -76,5 +76,4 @@ class GlobalUseCases:
         )
 
         self.create_colheita_usecase = CreateColheitaUseCase(
-            colheita_service = global_services.cliente_service
         )
