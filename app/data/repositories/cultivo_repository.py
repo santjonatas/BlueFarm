@@ -23,3 +23,12 @@ class CultivoRepository(ICultivoRepository):
             self.session.commit() 
         else:
             print(f'Cultivo com ID {cultivo_id} não encontrado.')
+
+
+    def get_cultivos_em_andamento(self):
+        try:
+            cultivos = self.session.query(CultivoEntity).filter_by(status='Em andamento').all()
+            return cultivos
+        except Exception as e:
+            print(f"Erro ao buscar cultivos em andamento: {e}")
+            return []

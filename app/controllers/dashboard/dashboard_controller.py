@@ -165,7 +165,7 @@ class DashboardController:
                 flash(message='Erro ao Registrar Colheita', category='info')
                 pass
         
-        cultivo_entity = repositories.cultivo_repository.list()
+        cultivo_entity = repositories.cultivo_repository.get_cultivos_em_andamento()
         
         return render_template(
             'dashboard/cultivo.html',
