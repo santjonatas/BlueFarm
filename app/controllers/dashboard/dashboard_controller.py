@@ -12,17 +12,20 @@ import json
 from app.application.config.global_repositories import GlobalRepositories
 from app.application.config.global_services import GlobalServices
 from app.application.usecases.auth.alter_estoque_produto_usecase import AlterEstoqueProdutoUseCase
+from app.application.usecases.auth.create_colheita_usecase import CreateColheitaUseCase
 from app.application.usecases.auth.create_cultivo_usecase import CreateCultivoUseCase
 from app.application.usecases.auth.create_produto_usecase import CreateProdutoUseCase
 from app.application.usecases.dto.input.entities.create_estoque_input_dto import CreateEstoqueInputDto
 from app.application.usecases.dto.input.entities.create_pedido_input_dto import CreatePedidoInputDto
 from app.application.usecases.dto.input.entities.create_produto_input_dto import CreateProdutoInputDto
 from app.application.usecases.dto.input.produto.alter_estoque_produto_input_dto import AlterEstoqueProdutoInputDto
+from app.application.usecases.dto.input.produto.create_colheita_input_dto import CreateColheitaInputDto
 from app.application.usecases.dto.input.produto.create_cultivo_input_dto import CreateCultivoInputDto
 from app.application.usecases.dto.input.produto.create_produto_item_input_dto import CreateProdutoItemInputDto
 from app.application.usecases.dto.input.users.create_admin_user_input_dto import CreateAdminUserInputDto
 from app.application.usecases.dto.input.users.create_operador_user_input_dto import CreateOperadorUserInputDto
 from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
+from app.domain.forms.add_colheita import AddColheitaForm
 from app.domain.forms.add_cultivo import AddCultivoForm
 from app.domain.forms.add_produto import AddProdutoForm
 from flask_wtf import FlaskForm
@@ -46,7 +49,7 @@ class DashboardController:
         self.blueprint.add_url_rule('/cultivo/', view_func=self.cultivo, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/add_cultivo/', view_func=self.add_cultivo, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/buscar_alimentos/', view_func=self.buscar_alimentos, methods=['GET', 'POST'])
-
+        
 
     @login_required
     def estoque_produtos(self) -> None:
@@ -75,6 +78,7 @@ class DashboardController:
     
     @login_required
     def alterar_estoque(self, produto_id):
+
         form: FlaskForm = EditarProdutoForm()
 
         if form.validate_on_submit():
@@ -136,11 +140,38 @@ class DashboardController:
     @login_required
     def cultivo(self) -> None:
         
+        cultivo_id = request.form.get('cultivo_id')
+
+        form: FlaskForm = AddColheitaForm()
+
+        if form.validate_on_submit():
+            try:
+                cultivo_id = int(cultivo_id)
+
+                pprint(form.to_dict())
+                
+                input_dto = CreateColheitaInputDto(**form.to_dict())
+
+                usecase: CreateColheitaUseCase = current_app.global_usecases.create_colheita_usecase
+
+                usecase.execute(input_dto=input_dto, cultivo_id=cultivo_id)
+
+                flash(message='Colheita Registrado', category='info')
+
+                return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
+
+            except Exception as e:
+                stacktrace = traceback.format_exc()
+                flash(message='Erro ao Registrar Colheita', category='info')
+                pass
+        
         cultivo_entity = repositories.cultivo_repository.list()
         
         return render_template(
             'dashboard/cultivo.html',
-            cultivos=cultivo_entity
+            cultivos=cultivo_entity,
+            form=form,
+            repositories=repositories
             )
 
     @login_required
@@ -167,8 +198,7 @@ class DashboardController:
                 pass
 
         return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
-    
-    
+        
     @login_required
     def buscar_alimentos(self) -> None:
 
@@ -200,4 +230,5 @@ class DashboardController:
                 pass
         
         return render_template('dashboard/buscar_alimentos.html', form=form, info_alimento=info_alimento, msg_erro=msg_erro)
+    
     

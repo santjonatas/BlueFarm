@@ -4,6 +4,7 @@ from app.application.usecases.auth.alter_estoque_insumo_usecase import AlterEsto
 from app.application.usecases.auth.alter_status_pedido_usecase import AlterStatusPedidoUseCase
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
 from app.application.usecases.auth.create_cliente_usecase import CreateClienteUserUseCase
+from app.application.usecases.auth.create_colheita_usecase import CreateColheitaUseCase
 from app.application.usecases.auth.create_cultivo_usecase import CreateCultivoUseCase
 from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
 from app.application.usecases.auth.alter_estoque_produto_usecase import AlterEstoqueProdutoUseCase
@@ -72,4 +73,8 @@ class GlobalUseCases:
         )
 
         self.create_cultivo_usecase = CreateCultivoUseCase(
+        )
+
+        self.create_colheita_usecase = CreateColheitaUseCase(
+            colheita_service = global_services.cliente_service
         )

@@ -46,6 +46,9 @@ class CreateProdutoUseCase:
     def execute(self, input_dto: CreateProdutoItemInputDto) -> CreateProdutoOutputDto:
         if repositories.produto_repository.exists_by_name(nome=input_dto.nome) == True:
             raise ProdutoEntityException('Produto já existe.')
+        
+        if repositories.insumo_repository.exists_by_name(nome=input_dto.nome) == True:
+            raise InsumoEntityException('Insumo já existe.')
 
         try:
             try:

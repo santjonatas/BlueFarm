@@ -29,6 +29,9 @@
                     <div class="detalhes-pedido-1">
                         <output class="out-dados-pedido id-pedido">Id do Cultivo: {{ cultivo.id }}</output>
                         <output class="out-dados-pedido status-pedido">Status: {{ cultivo.status }}</output>
+                        {% set insumo_entity = repositories.insumo_repository.get(obj_id=cultivo.id_insumo) %}
+                        <output class="out-dados-pedido status-pedido">Insumo: {{ insumo_entity.nome }}</output>
+                        <output class="out-dados-pedido status-pedido">Quantidade: {{ cultivo.quantidade }}</output>
                     </div>
                     <div class="detalhes-pedido-2">
                         <output class="out-dados-pedido">Data de Início: {{ cultivo.data_inicio }}</output>
@@ -36,13 +39,22 @@
                         <output class="out-dados-pedido valor-pedido">Data de Colheita: {{ cultivo.data_fim }}</output>
                         {% endif %}
                     </div>
+                    <input type="hidden" name="cultivo_id" value="{{ cultivo.id }}">
                     <input type="hidden" name="cultivo_status" value="{{ cultivo.status }}">
                     <input type="hidden" name="cultivo_id_insumo" value="{{ cultivo.id_insumo }}">
                     <input type="hidden" name="cultivo_quantidade" value="{{ cultivo.quantidade }}">
                     <input type="hidden" name="cultivo_data_inicio" value="{{ cultivo.data_inicio }}">
                     <input type="hidden" name="cultivo_data_fim" value="{{ cultivo.data_fim }}">
 
-                    <form method="POST" action="{{ url_for('gestao_vendas.editar_venda') }}" class="div-bt-pagar-pedido">
+                    <form method="POST" action="{{ url_for('dashboard.cultivo') }}" class="div-bt-pagar-pedido">
+                        {{ form.csrf_token }}
+                        <div class="form">
+                            <label>Data de Colheita</label>
+                            {{ form.data(class="form-control", placeholder="Data de Colheita") }}
+                        </div>
+                        <div class="form">
+                            {{ form.quantidade(class="form-control", placeholder="Quantidade de Produtos Colhidos") }}
+                        </div>
                         <form method="POST"  class="div-bt-pagar-pedido">
                         <input type="hidden" name="cultivo_id" value="{{ cultivo.id }}">
                         <button type="submit" class="bt-pagar-pedido">Gerar Colheita</button>

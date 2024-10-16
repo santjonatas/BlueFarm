@@ -13,7 +13,6 @@ class ProdutoRepository(IProdutoRepository):
 
     def exists_by_name(self, nome: str) -> bool:
         try:
-            # Verifica se existe pelo menos um registro com o nome fornecido
             return self.session.query(ProdutoEntity).filter_by(nome=nome).first() is not None
         finally:
             self.session.close()

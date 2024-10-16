@@ -16,3 +16,9 @@ class InsumoRepository(IInsumoRepository):
             self.session.commit()
             return True
         return False
+
+    def exists_by_name(self, nome: str) -> bool:
+        try:
+            return self.session.query(InsumoEntity).filter_by(nome=nome).first() is not None
+        finally:
+            self.session.close()
