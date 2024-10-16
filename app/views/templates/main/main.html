@@ -61,10 +61,12 @@
                         <h3 class="nome-modulo">Irrigação</h3>
                     </button>
                 </form>
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Colheita</h3>
-                </a>
+                <form method="GET" action="{{ url_for('controle_producao.colheita') }}">
+                    <button type="submit" class="card-modulo">
+                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <h3 class="nome-modulo">Colheita</h3>
+                    </button>
+                </form>
                 <form method="GET" action="{{ url_for('controle_producao.controle_temperatura') }}">
                     <button type="submit" class="card-modulo">
                         <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">

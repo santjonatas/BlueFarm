@@ -15,7 +15,7 @@ class AddColheitaForm(BaseForm):
         validators=[DataRequired()
     ])
     data = DateField('Data de Colheita',
-        validators=[Optional()] 
+        validators=[DataRequired()] 
     )
     submit = SubmitField('Upload')
 

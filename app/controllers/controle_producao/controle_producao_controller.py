@@ -43,6 +43,7 @@ class ControleProducaoController:
     def register_routes(self): 
         self.blueprint.add_url_rule('/irrigacao/', view_func=self.irrigacao, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/controle_temperatura/', view_func=self.controle_temperatura, methods=['GET', 'POST'])
+        self.blueprint.add_url_rule('/colheita/', view_func=self.colheita, methods=['GET', 'POST'])
         
 
     @login_required
@@ -80,3 +81,13 @@ class ControleProducaoController:
             )
     
     
+    @login_required
+    def colheita(self) -> None:
+        
+        colheita_entity = repositories.colheita_repository.list()
+        
+        return render_template(
+            'controle_producao/colheita.html',
+            colheitas=colheita_entity
+            # repositories=repositories
+            )
