@@ -1,8 +1,13 @@
 from app.application.config.global_services import GlobalServices
 from app.application.config.global_utils import GlobalUtils
+from app.application.usecases.auth.alter_estoque_insumo_usecase import AlterEstoqueInsumoUseCase
+from app.application.usecases.auth.alter_status_pedido_usecase import AlterStatusPedidoUseCase
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
 from app.application.usecases.auth.create_cliente_usecase import CreateClienteUserUseCase
+from app.application.usecases.auth.create_colheita_usecase import CreateColheitaUseCase
+from app.application.usecases.auth.create_cultivo_usecase import CreateCultivoUseCase
 from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
+from app.application.usecases.auth.alter_estoque_produto_usecase import AlterEstoqueProdutoUseCase
 from app.application.usecases.auth.create_produto_usecase import CreateProdutoUseCase
 from app.application.usecases.pedido.create_pagamento_usecase import CreatePagamentoUseCase
 from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
@@ -52,5 +57,23 @@ class GlobalUseCases:
         )
 
         self.create_pagamento_usecase = CreatePagamentoUseCase(
-            pagamento_service= global_services.pagamento_service
+            pagamento_service = global_services.pagamento_service
+        )
+
+        self.alter_estoque_produto_usecase = AlterEstoqueProdutoUseCase(
+            estoque_service = global_services.estoque_service
+        )
+
+        self.alter_estoque_insumo_usecase = AlterEstoqueInsumoUseCase(
+            insumo_service = global_services.insumo_service
+        )
+
+        self.alter_status_pedido_usecase = AlterStatusPedidoUseCase(
+            pedido_service = global_services.pedido_service
+        )
+
+        self.create_cultivo_usecase = CreateCultivoUseCase(
+        )
+
+        self.create_colheita_usecase = CreateColheitaUseCase(
         )

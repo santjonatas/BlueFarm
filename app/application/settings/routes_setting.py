@@ -8,3 +8,6 @@ class RoutesSetting:
         app.register_blueprint(app.global_controllers.home_controller.blueprint)
         app.register_blueprint(app.global_controllers.main_controller.blueprint)
         app.register_blueprint(app.global_controllers.dashboard_controller.blueprint)
+        app.register_blueprint(app.global_controllers.gestao_estoque.blueprint)
+        app.register_blueprint(app.global_controllers.gestao_vendas.blueprint)
+        app.register_blueprint(app.global_controllers.controle_producao_controller.blueprint)

@@ -1,0 +1,26 @@
+{
+    "metodo_controle_temperatura": 
+    {
+        "metodo": "Climatização Artificial",
+        "descricao": "Uso de sistemas de aquecimento ou resfriamento controlados, como ar-condicionado ou aquecedores, para manter a temperatura ideal no ambiente de cultivo.",
+        "vantagens": [
+        "Controle preciso da temperatura",
+        "Funciona em qualquer condição climática",
+        "Permite cultivo o ano todo"
+        ],
+        "adequado_para": "Estufas fechadas e ambientes de cultivo com necessidades climáticas específicas"
+    },
+    "tipo_de_clima": {
+        "tipo": "Clima Frio",
+        "descricao": "Requer o uso de aquecedores para manter as plantas em uma temperatura adequada, evitando o congelamento e o estresse por frio."
+    },
+    "pratica_sustentavel": {
+        "pratica": "Painéis Solares",
+        "descricao": "Utilização de painéis solares para alimentar os sistemas de climatização artificial, reduzindo a dependência de energia elétrica convencional.",
+        "beneficios": [
+        "Redução do consumo de energia",
+        "Sustentabilidade",
+        "Autossuficiência energética"
+        ]
+    }
+}

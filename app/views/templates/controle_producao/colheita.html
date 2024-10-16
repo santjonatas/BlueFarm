@@ -1,0 +1,63 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cultivo.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <section class="section-pedidos section-content" id="pedidos">
+            {% for colheita in colheitas %}
+                <div class="card-pedido">
+                    <div class="detalhes-pedido-1">
+                        <output class="out-dados-pedido id-pedido">Id da Colheita: {{ colheita.id }}</output>
+                        <output class="out-dados-pedido id-pedido">Id do Cultivo: {{ colheita.id_cultivo }}</output>
+                        <output class="out-dados-pedido id-pedido">Id do Produto: {{ colheita.id_produto }}</output>
+                        <output class="out-dados-pedido status-pedido">Quantidade Colhida: {{ colheita.quantidade }}</output>
+                    </div>
+                    <div class="detalhes-pedido-2">
+                        <output class="out-dados-pedido valor-pedido">Data de Colheita: {{ colheita.data }}</output>
+                    </div>
+                    <input type="hidden" name="colheita_id" value="{{ colheita.id }}">
+                    <input type="hidden" name="colheita_id_cultivo" value="{{ colheita.id_cultivo }}">
+                    <input type="hidden" name="colheita_id_produto" value="{{ colheita.id_produto }}">
+                    <input type="hidden" name="colheita_quantidade" value="{{ colheita.quantidade }}">
+                    <input type="hidden" name="colheita_data" value="{{ colheita.data }}">
+
+                    <form method="POST" action="{{ url_for('dashboard.cultivo') }}" class="div-bt-pagar-pedido">
+                        
+                        <div class="form">
+                            <label>Data de Colheita</label>
+                            
+                        </div>
+                        <div class="form">
+                            
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+            {% if vendas|length == 0 %}
+            <div style="height: 750px"></div>
+            {% endif %}
+        </section>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+{% endblock body %}

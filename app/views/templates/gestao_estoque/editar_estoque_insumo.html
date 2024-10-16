@@ -1,0 +1,41 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/editar_estoque_insumo.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('gestao_estoque.estoque_insumos') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <form method="POST" action="{{ url_for('gestao_estoque.alterar_estoque_insumo', insumo_id=insumo_id) }}" enctype="multipart/form-data" class="form-registro">
+            {{ form.csrf_token }}
+            <img class="img-produto" src="../../static/images/produtos/{{ insumo_nome }}.png" alt="{{ insumo_nome }}">
+            <h2>Insumo: {{ insumo_nome }}</h2>
+            <h2>Estoque: {{ insumo_quantidade }}</h2>
+                <div class="form">
+                    {{ form.quantidade_disponivel(class="form-control", placeholder="Quantidade disponível") }}
+                </div>
+            </div>
+            {{ form.submit(class="bt-registro", value="Alterar") }}
+        </form>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main.js"></script> -->
+{% endblock body %}
+

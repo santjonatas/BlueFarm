@@ -1,0 +1,54 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/add_cultivo.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('gestao_estoque.estoque_insumos')}}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <form method="POST" enctype="multipart/form-data" class="form-registro">
+            {{ form.csrf_token }}
+            <div id="formularios">
+                <div class="form">
+                    {{ form.id_insumo(id="id_insumo", class="form-control", placeholder="Id Insumo") }}
+                </div>
+                <div class="form">
+                    {{ form.quantidade(class="form-control", placeholder="Quantidade de Insumos") }}
+                </div>
+                <div class="form">
+                    {{ form.status(class="form-control", placeholder="Status") }}
+                </div>
+                <div class="form">
+                    <label>Data de início</label>
+                    {{ form.data_inicio(class="form-control", placeholder="Data de Início") }}
+                </div>
+                <div class="form">
+                    <label>Data de colheita</label>
+                    {{ form.data_fim(class="form-control", placeholder="Data de Coheita") }}
+                </div>
+            </div>
+            {{ form.submit(class="bt-registro", value="Registrar") }}
+        </form>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/add_cultivo.js"></script> -->
+<script src="{{ url_for('static', filename='scripts/add_cultivo.js') }}"></script>
+{% endblock body %}
+

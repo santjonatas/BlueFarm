@@ -1,0 +1,77 @@
+@media (min-width: 1201px) and (max-width: 1265px){
+    /* main{
+        background-color: red;
+    } */
+
+}    
+
+@media (min-width: 1025px) and (max-width: 1200px){
+    /* main{
+        background-color: green;
+    } */
+
+    .msg-qr-code{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        margin-top: 12%;
+        color: white;
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px){
+    /* main{
+        background-color:brown;
+    } */
+
+    .msg-qr-code{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        margin-top: 15%;
+        color: white;
+        text-align: center;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px){
+    /* main{
+        background-color: blueviolet;
+    } */
+
+    .msg-qr-code{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        margin-top: 22%;
+        color: white;
+        text-align: center;
+    }    
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+    /* main{
+        background-color: blue;
+    } */
+
+    .msg-qr-code{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        margin-top: 30%;
+        color: white;
+        text-align: center;
+    }  
+
+    .img-qr-code-pedido{
+        width: 250px;
+        height: 250px;
+    
+        margin: 100px;
+    }
+}

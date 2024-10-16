@@ -1,0 +1,49 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/estoque_insumos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <form method="GET" action="{{ url_for('dashboard.add_cultivo') }}" class="card-modulo">
+        <button type="submit">Cultivar Insumo</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <section class="section-produtos section-content" id="produtos">
+            {% for insumo in insumos %}
+            <form method="POST" action="{{ url_for('gestao_estoque.editar_insumo') }}" class="card-produto">
+                <img class="img-produto" src="../../static/images/produtos/{{ insumo.nome }}.png" alt="{{ insumo.nome }}">
+                <h3 class="nome-produto">{{ insumo.nome }}</h3>
+                <p>Preço: {{ insumo.preco }}</p>
+                <input type="hidden" name="insumo_id" value="{{ insumo.id }}">
+                <input type="hidden" name="insumo_nome" value="{{ insumo.nome }}">
+                <input type="hidden" name="insumo_preco" value="{{ insumo.preco }}">
+                <input type="hidden" name="insumo_quantidade" value="{{ insumo.quantidade }}">
+                <div class="info-estoque-produto">
+                    <button type="submit" class="editar-produto">editar</button>
+                    <output>Estoque: {{ insumo.quantidade }}</output>
+                </div>
+            </form>
+            {% endfor %}
+        </section>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+{% endblock body %}

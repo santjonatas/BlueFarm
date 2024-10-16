@@ -1,0 +1,55 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/lista_clientes.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-pedidos section-content" id="pedidos">
+        {% for cliente in clientes %}
+        {% set usuario_entity = repositories.usuario_repository.get(obj_id=cliente.id_usuario) %}
+        {% set pessoa_entity = repositories.pessoa_repository.get(obj_id=usuario_entity.id_pessoa) %}
+        <div class="card-pedido">
+            <div class="detalhes-pedido-1">
+                <output class="out-dados-pedido id-pedido">{{ pessoa_entity.nome }}</output>
+                <output class="out-dados-pedido status-pedido">{{ pessoa_entity.data_nascimento }}</output>
+            </div>
+            <div class="detalhes-item-pedido">
+                <div class="div-info-item-pedido">
+                    <output class="out-dados-pedido">CPF: {{ pessoa_entity.cpf }}</output>
+                    <output class="out-dados-pedido quantidade-pedido">Gênero: {{ pessoa_entity.genero }}</output>
+                    <output class="out-dados-pedido valor-pedido">Telefone: {{ pessoa_entity.telefone }}</output>
+                    <output class="out-dados-pedido">Email: {{ pessoa_entity.email }}</output>
+                </div>
+            </div>
+            <div class="detalhes-pedido-2">
+                <output class="out-dados-pedido">Endereço: {{ pessoa_entity.endereco }}</output>
+            </div>
+            <div class="div-bt-pagar-pedido">
+                <output class="out-dados-pedido">{{usuario_entity.username }}</output>
+            </div>
+        </div>
+        {% endfor %}
+        {% if clientes|length == 0 %}
+        <div style="height: 750px"></div>
+        {% endif %}
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+{% endblock body %}

@@ -1,0 +1,264 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+html, body{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+}
+
+/* main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%; 
+    width: 100%;
+    background-color: red;
+} */
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* height: 100%;  */
+    width: 100%;
+    background-color: red;
+}
+
+.section-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 75%;
+    height: 100%;
+    background-color: green;
+}
+
+/*################################*/
+
+header{
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+    height: 60px;
+
+    gap: 35%;
+
+    background-color: blueviolet;
+}
+
+.img-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 33px;
+    height: 33px;
+
+    /* background-image: url('../../../assets/images/menu.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center; */
+}
+
+.img-bluefarm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50px;
+    height: 50px;
+
+    background-image: url('../../../assets/images/logo-BlueFarm-sem-fundo-sem-nome.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.section-perfil{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    /* background-color: green; */
+    width: 200px;
+}
+
+.align-nome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    margin-right: 10px;
+
+    /* background-color: aqua; */
+}
+
+p{
+    text-align: center;
+}
+
+.img-perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    background-image: url('../../static/images/profile.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.img-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 33px;
+    height: 33px;
+
+    background-image: url('../../static/images/menu.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+
+/*################################*/
+
+.modulo-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    /* height: 100%; */
+
+    background-color: yellow;
+}
+
+.sessao-registro{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    background: linear-gradient(
+    to right bottom, 
+    rgb(255, 255, 255), 
+    rgb(238, 238, 238)
+    );
+}
+
+.form-registro{
+    width: 400px;
+    height: 350px;
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 4%;
+    margin: 17%;
+
+    background-color: blue;
+}
+
+#formularios{
+    width: 95%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 3%;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    margin-top: 10px;
+    height: 52px;
+}
+
+.form-control{
+    width: 300px;
+    height: 35px;
+    border-radius: 25px;
+    border: 0px solid;
+    margin-top: 1%;
+
+    background-color: #D5D1FF;
+    color: black;
+}
+
+label{
+    height: 17px;
+    font-size: 15px;
+}
+
+input{
+    padding-left: 3%;
+}
+
+input::placeholder {
+    color: #807e99; 
+    opacity: 1;
+}
+
+.bt-registro {
+    width: 95px;
+    height: 45px;
+    border-radius: 25px;
+    border: 0px solid;
+    margin-top: 3%;
+    font-size: 15px;
+    background-color: #0A73B0;
+    color: white;
+    background: linear-gradient(to right bottom, #151C1A, #27282C, #47533E);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 0;
+
+    margin-bottom: 30px;
+} 
+
+.img-produto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 130px;
+    height: 130px;
+
+    /* background-color: red; */
+}
