@@ -31,6 +31,9 @@ class CreateCargoUseCase:
 
     def execute(self, input_dto: CreateCargoInputDto) -> CreateCargoOutputDto:
 
+        if repositories.cargo_repository.exists_by_funcao(nome=input_dto.funcao) == True:
+            raise InvalidFieldException("Função já cadastrada.")
+
         try:
             if input_dto.id_nivel == False:
                 input_dto.id_nivel = 2

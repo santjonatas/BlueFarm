@@ -27,6 +27,9 @@ class CreateDepartamentoUseCase:
 
     def execute(self, input_dto: CreateDepartamentoInputDto) -> CreateDepartamentoOutputDto:
 
+        if repositories.departamento_repository.exists_by_area(area=input_dto.area) == True:
+            raise InvalidFieldException("Já existe este departamento")
+
         try:
             try:
                 departamento_input = CreateDepartamentoInputDto(

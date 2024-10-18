@@ -54,6 +54,8 @@ class ConfiguracoesController:
     @login_required
     def departamentos(self) -> None:
 
+        departamento_entity = repositories.departamento_repository.list()
+
         form: FlaskForm = AddDepartamentoForm()
 
         if form.validate_on_submit():
@@ -74,8 +76,6 @@ class ConfiguracoesController:
                 stacktrace = traceback.format_exc()
                 flash(message='Erro ao Registrar Departamento', category='info')
                 pass
-        
-        departamento_entity = repositories.departamento_repository.list()
         
         return render_template(
             'configuracoes/departamentos.html',

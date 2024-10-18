@@ -9,3 +9,8 @@ class DepartamentoRepository(IDepartamentoRepository):
 
     def get_by_departamento(self, area: str) -> DepartamentoEntity:
         return self.session.query(self.entity).filter(self.entity.area==area).first()
+
+    def exists_by_area(self, area: str) -> bool:
+        """Verifica se o departamento fornecido já existe na tabela."""
+        departamento = self.session.query(DepartamentoEntity).filter(DepartamentoEntity.area == area).first()
+        return departamento is not None
