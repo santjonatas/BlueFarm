@@ -115,10 +115,12 @@
                         <h3 class="nome-produto-carrinho">Adicionar Administrador</h3>
                     </button>
                 </form>
-                <div class="card-produto-carrinho">
-                    <img class="img-produto-carrinho" src="" alt="">
-                    <h3 class="nome-produto-carrinho">Adicionar Cargo</h3>
-                </div>
+                <form method="GET" action="{{ url_for('configuracoes.cargos') }}">
+                    <button class="card-produto-carrinho">
+                        <img class="img-produto-carrinho" src="" alt="">
+                        <h3 class="nome-produto-carrinho">Adicionar Cargo</h3>
+                    </button>
+                </form>
                 <form method="GET" action="{{ url_for('configuracoes.departamentos') }}">
                     <button class="card-produto-carrinho">
                         <img class="img-produto-carrinho" src="" alt="">

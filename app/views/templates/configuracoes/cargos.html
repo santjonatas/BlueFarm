@@ -1,0 +1,53 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cargos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <form method="POST" action="{{ url_for('configuracoes.cargos')}}" class="registrar-departamento">
+            {{ form.csrf_token }}
+            <div class="form-registrar-departamento">
+                <div class="form">
+                    {{ form.id_nivel(class="form-control", placeholder="Permissão") }}
+                </div>
+                <div class="form">
+                    {{ form.funcao(class="form-control", placeholder="Função") }}
+                </div>
+                <div class="form">
+                    {{ form.salario(class="form-control", placeholder="Salário") }}
+                </div>
+            </div>
+            {{ form.submit(class="bt-registro", value="Registrar") }}
+        </form>
+        <div class="lista-departamentos">
+            {% for cargo in cargos %}
+                <div class="card-departamento">
+                    {{ cargo.funcao }}
+                    {{ cargo.salario }}
+                    {{ cargo.id_nivel }}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+{% endblock body %}

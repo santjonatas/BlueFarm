@@ -12,10 +12,12 @@ import json
 from app.application.config.global_repositories import GlobalRepositories
 from app.application.config.global_services import GlobalServices
 from app.application.usecases.auth.alter_estoque_produto_usecase import AlterEstoqueProdutoUseCase
+from app.application.usecases.auth.create_cargo_usecase import CreateCargoUseCase
 from app.application.usecases.auth.create_colheita_usecase import CreateColheitaUseCase
 from app.application.usecases.auth.create_cultivo_usecase import CreateCultivoUseCase
 from app.application.usecases.auth.create_departamento_usecase import CreateDepartamentoUseCase
 from app.application.usecases.auth.create_produto_usecase import CreateProdutoUseCase
+from app.application.usecases.dto.input.entities.create_cargo_input_dto import CreateCargoInputDto
 from app.application.usecases.dto.input.entities.create_departamento_input_dto import CreateDepartamentoInputDto
 from app.application.usecases.dto.input.entities.create_estoque_input_dto import CreateEstoqueInputDto
 from app.application.usecases.dto.input.entities.create_pedido_input_dto import CreatePedidoInputDto
@@ -27,6 +29,7 @@ from app.application.usecases.dto.input.produto.create_produto_item_input_dto im
 from app.application.usecases.dto.input.users.create_admin_user_input_dto import CreateAdminUserInputDto
 from app.application.usecases.dto.input.users.create_operador_user_input_dto import CreateOperadorUserInputDto
 from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
+from app.domain.forms.add_cargo import AddCargoForm
 from app.domain.forms.add_colheita import AddColheitaForm
 from app.domain.forms.add_cultivo import AddCultivoForm
 from app.domain.forms.add_departamento import AddDepartamentoForm
@@ -46,6 +49,7 @@ class ConfiguracoesController:
 
     def register_routes(self): 
         self.blueprint.add_url_rule('/departamentos/', view_func=self.departamentos, methods=['GET', 'POST'])
+        self.blueprint.add_url_rule('/cargos/', view_func=self.cargos, methods=['GET', 'POST'])
     
     @login_required
     def departamentos(self) -> None:
@@ -77,5 +81,37 @@ class ConfiguracoesController:
             'configuracoes/departamentos.html',
             form=form,
             departamentos=departamento_entity
-            # repositories=repositories
+            )
+
+
+    @login_required
+    def cargos(self) -> None:
+
+        cargo_entity = repositories.cargo_repository.list()
+
+        form: FlaskForm = AddCargoForm()
+
+        if form.validate_on_submit():
+            try:
+                pprint(form.to_dict())
+                
+                input_dto = CreateCargoInputDto(**form.to_dict())
+
+                usecase: CreateCargoUseCase = current_app.global_usecases.create_cargo_usecase
+
+                usecase.execute(input_dto=input_dto)
+
+                flash(message='Cargo Registrado', category='info')
+
+                return render_template('configuracoes/cargos.html', form=form, cargos=cargo_entity)
+
+            except Exception as e:
+                stacktrace = traceback.format_exc()
+                flash(message='Erro ao Registrar Cargo', category='info')
+                pass
+        
+        return render_template(
+            'configuracoes/cargos.html',
+            form=form,
+            cargos=cargo_entity
             )

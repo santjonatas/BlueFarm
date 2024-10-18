@@ -3,6 +3,7 @@ from app.application.config.global_utils import GlobalUtils
 from app.application.usecases.auth.alter_estoque_insumo_usecase import AlterEstoqueInsumoUseCase
 from app.application.usecases.auth.alter_status_pedido_usecase import AlterStatusPedidoUseCase
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
+from app.application.usecases.auth.create_cargo_usecase import CreateCargoUseCase
 from app.application.usecases.auth.create_cliente_usecase import CreateClienteUserUseCase
 from app.application.usecases.auth.create_colheita_usecase import CreateColheitaUseCase
 from app.application.usecases.auth.create_cultivo_usecase import CreateCultivoUseCase
@@ -79,5 +80,8 @@ class GlobalUseCases:
         self.create_colheita_usecase = CreateColheitaUseCase(
         )
         self.create_departamento_usecase = CreateDepartamentoUseCase(
+            
+        )
+        self.create_cargo_usecase = CreateCargoUseCase(
             
         )
