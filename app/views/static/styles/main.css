@@ -215,13 +215,23 @@ p{
 .section-dashboard,
 .section-producao,
 .section-estoque,
-.section-vendas,
-.section-configuracoes {
+.section-vendas {
     display: grid;
     justify-content: center;
     align-items: center;
 
     grid-template-columns: repeat(2, 1fr);
+
+    width: 80%;
+    height: 80%;
+
+    background-color: palegoldenrod;
+}
+
+#configuracoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     width: 80%;
     height: 80%;
@@ -274,4 +284,54 @@ a{
     text-align: center;
     color: black; 
     font-size: 17px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card-produto-carrinho{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5%;
+
+    width: 600px;
+    height: 60px;
+    border-radius: 10px;
+    margin-top: 5%;
+    background-color: red;
+    backdrop-filter: blur(15px);
+}
+
+.img-produto-carrinho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+    margin: 20px;
+}
+
+.nome-produto-carrinho{
+    text-align: center;
+    color: rgb(255, 255, 255); 
+    font-size: 17px;
+}
+
+.out-preco{
+    color: rgb(0, 255, 0);
+}
+
+.out-quantidade{
+    color: white;
 }

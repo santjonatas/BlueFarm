@@ -6,6 +6,7 @@ from app.application.usecases.auth.create_administrador_usecase import CreateAdm
 from app.application.usecases.auth.create_cliente_usecase import CreateClienteUserUseCase
 from app.application.usecases.auth.create_colheita_usecase import CreateColheitaUseCase
 from app.application.usecases.auth.create_cultivo_usecase import CreateCultivoUseCase
+from app.application.usecases.auth.create_departamento_usecase import CreateDepartamentoUseCase
 from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
 from app.application.usecases.auth.alter_estoque_produto_usecase import AlterEstoqueProdutoUseCase
 from app.application.usecases.auth.create_produto_usecase import CreateProdutoUseCase
@@ -76,4 +77,7 @@ class GlobalUseCases:
         )
 
         self.create_colheita_usecase = CreateColheitaUseCase(
+        )
+        self.create_departamento_usecase = CreateDepartamentoUseCase(
+            
         )

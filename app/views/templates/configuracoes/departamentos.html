@@ -1,0 +1,45 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/departamentos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<main>
+    <section class="section-main">
+        <form method="POST" action="{{ url_for('configuracoes.departamentos')}}" class="registrar-departamento">
+            {{ form.csrf_token }}
+            <div class="form-registrar-departamento">
+                <div class="form">
+                    {{ form.area(class="form-control", placeholder="Área") }}
+                </div>
+            </div>
+            {{ form.submit(class="bt-registro", value="Registrar") }}
+        </form>
+        <div class="lista-departamentos">
+            {% for departamento in departamentos %}
+                <div class="card-departamento">
+                    {{ departamento.area }}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+{% endblock body %}
