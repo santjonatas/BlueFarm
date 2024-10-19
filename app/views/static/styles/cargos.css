@@ -100,7 +100,7 @@ main{
 .section-main{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     
     width: 100%;
     height: 100%;
@@ -623,6 +623,7 @@ a{
     width: 50%;
 
     background-color: red;
+    margin-top: 0px;
 }
 
 .lista-departamentos{
@@ -635,6 +636,8 @@ a{
     width: 50%;
 
     background-color: blue;
+
+    padding-top: 7%;
 }
 
 
@@ -666,4 +669,7 @@ a{
     height: 60px;
 
     background-color: yellow;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
 }

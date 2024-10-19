@@ -4,8 +4,8 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
-<link rel="stylesheet" href="../../static/styles/main.css">
 {% endblock style %}
 
 {% block body %}
@@ -22,6 +22,11 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+</div>
 <main>
     <section class="section-sidebar">
         <section class="sidebar">
@@ -132,4 +137,5 @@
     </section>
 </main>
 <script src="../../static/scripts/main.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}
