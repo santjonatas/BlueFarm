@@ -55,7 +55,7 @@ h3{
 }
 
 .sessao-login{
-    width: 60%;
+    width: 55%;
     height: 100%;
 
     display: flex;
@@ -164,4 +164,14 @@ input::placeholder {
     /* Garante que padding/border sejam incluídos nas dimensões */
     box-sizing: border-box;
     padding: 0;
+}
+
+.voltar{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    background-color: #0A73B0;
+    width: 5%;
+    height: 100%;
 }
