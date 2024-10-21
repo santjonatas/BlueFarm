@@ -72,10 +72,13 @@ p{
     background-position: center;
 }
 
-/* ******************************** */
-
 /* Estilização da div expandida */
 .perfil-expandido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
     position: fixed;
     top: 70px; 
     right: 0; 
@@ -88,6 +91,5 @@ p{
     align-items: center;
     z-index: 1000;
     transition: opacity 0.3s ease;
-
     margin-right: 5px;
 }

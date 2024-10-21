@@ -11,6 +11,7 @@ from app.application.usecases.auth.create_departamento_usecase import CreateDepa
 from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
 from app.application.usecases.auth.alter_estoque_produto_usecase import AlterEstoqueProdutoUseCase
 from app.application.usecases.auth.create_produto_usecase import CreateProdutoUseCase
+from app.application.usecases.auth.update_perfil_usecase import UpdatePerfilUserUseCase
 from app.application.usecases.pedido.create_pagamento_usecase import CreatePagamentoUseCase
 from app.application.usecases.pedido.create_pedido_usecase import CreatePedidoUseCase
 
@@ -84,4 +85,9 @@ class GlobalUseCases:
         )
         self.create_cargo_usecase = CreateCargoUseCase(
             
+        )
+        self.update_perfil_user_usecase = UpdatePerfilUserUseCase(
+            pessoa_service=global_services.pessoa_service,
+            usuario_service=global_services.usuario_service,
+            global_utils=global_utils
         )

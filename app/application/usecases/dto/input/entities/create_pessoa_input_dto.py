@@ -3,6 +3,7 @@ from datetime import datetime
 
 class CreatePessoaInputDto:
     def __init__(self,
+        id: int = None,
         nome: str=None, 
         data_nascimento: datetime=None, 
         cpf: str=None, 
@@ -11,6 +12,7 @@ class CreatePessoaInputDto:
         email: str=None,
         endereco: str=None) -> None:
         
+        self.id = id
         self.nome = nome
         self.data_nascimento = data_nascimento
         self.cpf = cpf
@@ -22,6 +24,7 @@ class CreatePessoaInputDto:
     @property
     def to_dict(self) -> dict:
         return {
+            'id': self.id if self.id is not None else 0,
             'nome': self.nome if self.nome is not None else '',
             'data_nascimento': self.data_nascimento if self.data_nascimento is not None else '',
             'cpf': self.cpf if self.cpf is not None else '',
