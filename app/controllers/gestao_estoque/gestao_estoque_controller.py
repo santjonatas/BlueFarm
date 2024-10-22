@@ -41,59 +41,70 @@ class GestaoEstoqueController:
 
     @login_required
     def estoque_insumos(self) -> None:
-        
-        insumo_entity = repositories.insumo_repository.list()
-        
-        return render_template(
-            'gestao_estoque/estoque_insumos.html',
-            insumos=insumo_entity, 
-            repositories=repositories
-            )
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            insumo_entity = repositories.insumo_repository.list()
+            
+            return render_template(
+                'gestao_estoque/estoque_insumos.html',
+                insumos=insumo_entity, 
+                repositories=repositories
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
     @login_required
     def editar_insumo(self) -> None:
-        insumo_id = request.form.get('insumo_id')
-        insumo_nome = request.form.get('insumo_nome')
-        insumo_preco = request.form.get('insumo_preco')
-        insumo_quantidade = request.form.get('insumo_quantidade')
-        
-        form: FlaskForm = EditarInsumoForm()
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            insumo_id = request.form.get('insumo_id')
+            insumo_nome = request.form.get('insumo_nome')
+            insumo_preco = request.form.get('insumo_preco')
+            insumo_quantidade = request.form.get('insumo_quantidade')
+            
+            form: FlaskForm = EditarInsumoForm()
 
-        return render_template('gestao_estoque/editar_estoque_insumo.html', form=form, insumo_nome=insumo_nome, insumo_quantidade=insumo_quantidade, insumo_id=insumo_id)
+            return render_template('gestao_estoque/editar_estoque_insumo.html', form=form, insumo_nome=insumo_nome, insumo_quantidade=insumo_quantidade, insumo_id=insumo_id)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
 
     @login_required
     def alterar_estoque_insumo(self, insumo_id):
-        form: FlaskForm = EditarInsumoForm()
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            form: FlaskForm = EditarInsumoForm()
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                
-                input_dto = AlterEstoqueInsumoInputDto(**form.to_dict())
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    
+                    input_dto = AlterEstoqueInsumoInputDto(**form.to_dict())
 
-                usecase: AlterEstoqueInsumoUseCase = current_app.global_usecases.alter_estoque_insumo_usecase
+                    usecase: AlterEstoqueInsumoUseCase = current_app.global_usecases.alter_estoque_insumo_usecase
 
-                insumo_entity = usecase.execute(input_dto=input_dto, insumo_id=insumo_id)
+                    insumo_entity = usecase.execute(input_dto=input_dto, insumo_id=insumo_id)
 
-                flash(message='Estoque Alterado', category='info')
+                    flash(message='Estoque Alterado', category='info')
 
-                return redirect(url_for('gestao_estoque.estoque_insumos'))
+                    return redirect(url_for('gestao_estoque.estoque_insumos'))
 
-                pass
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Alterar Quantidade', category='info')
-                pass
+                    pass
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Alterar Quantidade', category='info')
+                    pass
 
-        return redirect(url_for('gestao_estoque.estoque_insumos'))
+            return redirect(url_for('gestao_estoque.estoque_insumos'))
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def movimentacao_estoque(self) -> None:
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            pedido_entity = repositories.pedido_repository.obter_pedidos_pagos_hoje()
+            
+            return render_template(
+                'gestao_estoque/movimentacao_estoque.html',
+                pedidos_hoje=pedido_entity
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
         
-        pedido_entity = repositories.pedido_repository.obter_pedidos_pagos_hoje()
-        
-        return render_template(
-            'gestao_estoque/movimentacao_estoque.html',
-            pedidos_hoje=pedido_entity
-            )
