@@ -1,6 +1,6 @@
 from pprint import pprint
-from flask import current_app, flash, render_template, redirect, url_for, Blueprint
-from flask_login import login_required
+from flask import current_app, flash, jsonify, render_template, redirect, url_for, Blueprint
+from flask_login import login_required, login_user, logout_user, current_user
 from flask_wtf import FlaskForm
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
 from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
@@ -21,42 +21,48 @@ class RegisterController:
     
     @login_required
     def register_admin(self) -> None:
-        form: FlaskForm = RegisterAdmForm()
+        if '@adm' in current_user.username: 
+            form: FlaskForm = RegisterAdmForm()
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                input_dto = CreateAdminUserInputDto(**form.to_dict())
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    input_dto = CreateAdminUserInputDto(**form.to_dict())
 
-                usecase: CreateAdminUserUseCase = current_app.global_usecases.create_admin_user_usecase
+                    usecase: CreateAdminUserUseCase = current_app.global_usecases.create_admin_user_usecase
 
-                usecase.execute(input_dto=input_dto)
+                    usecase.execute(input_dto=input_dto)
 
-                flash(message='Administrador Registrado', category='info')
+                    flash(message='Administrador Registrado', category='info')
 
-                return redirect(url_for('register.register_admin'))
-            except Exception as e:
-                flash(message=str(e), category='danger')
-        
-        return render_template('auth/registro_admin.html', form=form)
+                    return redirect(url_for('register.register_admin'))
+                except Exception as e:
+                    flash(message=str(e), category='danger')
+            
+            return render_template('auth/registro_admin.html', form=form)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def register_operador(self) -> None:
-        form: FlaskForm = RegisterOpForm()
+        if '@adm' in current_user.username: 
+            form: FlaskForm = RegisterOpForm()
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                input_dto = CreateOperadorUserInputDto(**form.to_dict())
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    input_dto = CreateOperadorUserInputDto(**form.to_dict())
 
-                usecase: CreateOperadorUserUseCase = current_app.global_usecases.create_operador_user_usecase
+                    usecase: CreateOperadorUserUseCase = current_app.global_usecases.create_operador_user_usecase
 
-                usecase.execute(input_dto=input_dto)
+                    usecase.execute(input_dto=input_dto)
 
-                flash(message='Operador Registrado', category='info')
+                    flash(message='Operador Registrado', category='info')
 
-                return redirect(url_for('register.register_operador'))
-            except Exception as e:
-                flash(message=str(e), category='danger')
-        
-        return render_template('auth/registro_operador.html', form=form)
+                    return redirect(url_for('register.register_operador'))
+                except Exception as e:
+                    flash(message=str(e), category='danger')
+            
+            return render_template('auth/registro_operador.html', form=form)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401

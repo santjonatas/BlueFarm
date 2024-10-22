@@ -17,20 +17,12 @@ class HomeController:
     def register_routes(self):
         self.blueprint.add_url_rule('/home', view_func=self.home, methods=['GET', 'POST'])
         self.blueprint.add_url_rule('/', view_func=self.index)
-        ##################
-
-
-    # def home(self) -> None:
-    #     try:
-    #         return render_template('home/home.html')
-    #     except Exception as e:
-    #         stacktrace = traceback.format_exc()
-    #         return e
+        
         
     def index(self) -> None:
         return redirect(url_for('home.home'))
     
-    ##################################################
+
     def home(self) -> None:
         form: FlaskForm = RegisterClientForm()
 

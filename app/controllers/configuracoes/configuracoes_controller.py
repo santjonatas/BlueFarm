@@ -53,65 +53,69 @@ class ConfiguracoesController:
     
     @login_required
     def departamentos(self) -> None:
+        if '@adm' in current_user.username: 
+            departamento_entity = repositories.departamento_repository.list()
 
-        departamento_entity = repositories.departamento_repository.list()
+            form: FlaskForm = AddDepartamentoForm()
 
-        form: FlaskForm = AddDepartamentoForm()
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    
+                    input_dto = CreateDepartamentoInputDto(**form.to_dict())
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                
-                input_dto = CreateDepartamentoInputDto(**form.to_dict())
+                    usecase: CreateDepartamentoUseCase = current_app.global_usecases.create_departamento_usecase
 
-                usecase: CreateDepartamentoUseCase = current_app.global_usecases.create_departamento_usecase
+                    usecase.execute(input_dto=input_dto)
 
-                usecase.execute(input_dto=input_dto)
+                    flash(message='Departamento Registrado', category='info')
 
-                flash(message='Departamento Registrado', category='info')
+                    return render_template('configuracoes/departamentos.html', form=form, departamentos=departamento_entity)
 
-                return render_template('configuracoes/departamentos.html', form=form, departamentos=departamento_entity)
-
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Registrar Departamento', category='info')
-                pass
-        
-        return render_template(
-            'configuracoes/departamentos.html',
-            form=form,
-            departamentos=departamento_entity
-            )
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Registrar Departamento', category='info')
+                    pass
+            
+            return render_template(
+                'configuracoes/departamentos.html',
+                form=form,
+                departamentos=departamento_entity
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
 
     @login_required
     def cargos(self) -> None:
+        if '@adm' in current_user.username: 
+            cargo_entity = repositories.cargo_repository.list()
 
-        cargo_entity = repositories.cargo_repository.list()
+            form: FlaskForm = AddCargoForm()
 
-        form: FlaskForm = AddCargoForm()
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    
+                    input_dto = CreateCargoInputDto(**form.to_dict())
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                
-                input_dto = CreateCargoInputDto(**form.to_dict())
+                    usecase: CreateCargoUseCase = current_app.global_usecases.create_cargo_usecase
 
-                usecase: CreateCargoUseCase = current_app.global_usecases.create_cargo_usecase
+                    usecase.execute(input_dto=input_dto)
 
-                usecase.execute(input_dto=input_dto)
+                    flash(message='Cargo Registrado', category='info')
 
-                flash(message='Cargo Registrado', category='info')
+                    return render_template('configuracoes/cargos.html', form=form, cargos=cargo_entity)
 
-                return render_template('configuracoes/cargos.html', form=form, cargos=cargo_entity)
-
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Registrar Cargo', category='info')
-                pass
-        
-        return render_template(
-            'configuracoes/cargos.html',
-            form=form,
-            cargos=cargo_entity
-            )
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Registrar Cargo', category='info')
+                    pass
+            
+            return render_template(
+                'configuracoes/cargos.html',
+                form=form,
+                cargos=cargo_entity
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
