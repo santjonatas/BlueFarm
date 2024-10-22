@@ -37,7 +37,9 @@
             <button class="botao-sidebar" data-section="producao">Controle de Produção</button>
             <button class="botao-sidebar" data-section="estoque">Gestão de Estoque</button>
             <button class="botao-sidebar" data-section="vendas">Gestão de Vendas</button>
+            {% if '@adm' in current_user.username %}
             <button class="botao-sidebar" data-section="configuracoes">Configurações</button>
+            {% endif %}
         </section>
     </section>
     <section class="section-main">
