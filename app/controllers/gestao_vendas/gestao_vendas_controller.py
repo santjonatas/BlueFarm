@@ -44,66 +44,76 @@ class GestaoVendasController:
 
     @login_required
     def registro_vendas(self) -> None:
-        
-        pedido_entity = repositories.pedido_repository.obter_pedidos_nao_aguardando_pagamento()
-        
-        return render_template(
-            'gestao_vendas/registro_vendas.html',
-            vendas=pedido_entity
-            )
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            pedido_entity = repositories.pedido_repository.obter_pedidos_nao_aguardando_pagamento()
+            
+            return render_template(
+                'gestao_vendas/registro_vendas.html',
+                vendas=pedido_entity
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
     @login_required
     def editar_venda(self) -> None:
-        pedido_id = request.form.get('pedido_id')
-        pedido_status = request.form.get('pedido_status')
-        pedido_valor_total = request.form.get('pedido_valor_total')
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            pedido_id = request.form.get('pedido_id')
+            pedido_status = request.form.get('pedido_status')
+            pedido_valor_total = request.form.get('pedido_valor_total')
 
-        pedido_entity = repositories.pedido_repository.get(obj_id=pedido_id)
-        
-        form: FlaskForm = EditarPedidoForm()
+            pedido_entity = repositories.pedido_repository.get(obj_id=pedido_id)
+            
+            form: FlaskForm = EditarPedidoForm()
 
-        return render_template('gestao_vendas/editar_venda.html', 
-            form=form, 
-            pedido_id=pedido_id, 
-            pedido_status=pedido_status, 
-            pedido_valor_total=pedido_valor_total, 
-            pedido=pedido_entity, 
-            repositories=repositories)
+            return render_template('gestao_vendas/editar_venda.html', 
+                form=form, 
+                pedido_id=pedido_id, 
+                pedido_status=pedido_status, 
+                pedido_valor_total=pedido_valor_total, 
+                pedido=pedido_entity, 
+                repositories=repositories)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
     @login_required
     def alterar_status_venda(self, pedido_id):
-        form: FlaskForm = EditarPedidoForm()
-        print(form.status.data) 
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            form: FlaskForm = EditarPedidoForm()
+            print(form.status.data) 
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                
-                input_dto = AlterStatusPedidoInputDto(**form.to_dict())
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    
+                    input_dto = AlterStatusPedidoInputDto(**form.to_dict())
 
-                usecase: AlterStatusPedidoUseCase = current_app.global_usecases.alter_status_pedido_usecase
+                    usecase: AlterStatusPedidoUseCase = current_app.global_usecases.alter_status_pedido_usecase
 
-                pedido_entity = usecase.execute(input_dto=input_dto, pedido_id=pedido_id)
+                    pedido_entity = usecase.execute(input_dto=input_dto, pedido_id=pedido_id)
 
-                flash(message='Status Alterado', category='info')
+                    flash(message='Status Alterado', category='info')
 
-                return redirect(url_for('gestao_vendas.registro_vendas'))
+                    return redirect(url_for('gestao_vendas.registro_vendas'))
 
-                pass
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Alterar Quantidade', category='info')
-                pass
+                    pass
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Alterar Quantidade', category='info')
+                    pass
 
-        return redirect(url_for('gestao_vendas.registro_vendas'))
+            return redirect(url_for('gestao_vendas.registro_vendas'))
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def lista_clientes(self) -> None:
-        
-        cliente_entity = repositories.cliente_repository.list()
-        
-        return render_template(
-            'gestao_vendas/lista_clientes.html',
-            clientes=cliente_entity,
-            repositories=repositories
-            )
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            cliente_entity = repositories.cliente_repository.list()
+            
+            return render_template(
+                'gestao_vendas/lista_clientes.html',
+                clientes=cliente_entity,
+                repositories=repositories
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
