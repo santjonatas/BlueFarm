@@ -42,7 +42,10 @@ class MainController:
 
     @login_required
     def main(self) -> None:
-        return render_template('main/main.html')
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            return render_template('main/main.html')
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
     def logout(self) -> None:
         logout_user()
