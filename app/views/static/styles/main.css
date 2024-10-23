@@ -1,17 +1,11 @@
 *{
     margin: 0px;
     padding: 0px;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 100vh; 
-    width: 100%;
-    background-color: red;
-}
+/* SIDEBAR */
 
 .section-sidebar{
     display: flex;
@@ -20,7 +14,110 @@ main{
 
     width: 25%;
     height: 100%;
-    background-color: blue;
+    background-image: url('../images/background_fazenda_urbana_login.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.sidebar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1%;
+
+    margin-top: 3%;
+    width: 270px;
+    height: 450px;
+    border-radius: 24px 60px;
+    background-color: #ffffff33;
+    backdrop-filter: blur(15px);
+}
+
+.botao-sidebar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 70px;
+    width: 95%;
+    border: 0px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 22px;
+    background-color: #ffffff48;
+    backdrop-filter: blur(15px);
+}
+
+.total-carrinho{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    height: 50px;
+    width: 95%;
+    background-color: #00000073;
+    backdrop-filter: blur(15px);
+}
+
+.img-carrinho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 25px;
+    height: 25px;
+    margin-left: 3%;
+    background-image: url('../../static/images/carrinho.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.out-total-preco{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 3%;
+    color: rgb(0, 255, 0);
+}
+
+.bt-fazer-pedido{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 90px;
+    border-radius: 5px;
+    border: none;
+    background-color: #D5D1FF;
+}
+.form-bt-fazer-pedido{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    margin-left: 1%;
+}
+
+/* MENU */
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh; 
+    width: 100%;
+    background: linear-gradient(
+    to right bottom, 
+    rgb(255, 255, 255), 
+    rgb(238, 238, 238)
+    );
 }
 
 .section-main{
@@ -30,7 +127,6 @@ main{
     
     width: 75%;
     height: 100%;
-    background-color: green;
 }
 
 .ng-container{
@@ -51,143 +147,6 @@ main{
     height: 100%;
 }
 
-/*################################*/
-.sidebar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 1%;
-
-    margin-top: 5%;
-
-    width: 270px;
-    height: 475px;
-    border-radius: 24px 60px;
-    background-color: red;
-}
-
-
-/*################################*/
-
-.botao-sidebar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 70px;
-    width: 98%;
-
-    background-color: yellow;
-    border: 0px;
-
-    text-align: center;
-    font-size: 22px;
-}
-
-
-/*################################*/
-
-
-header{
-    position: fixed;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    width: 100%;
-    height: 60px;
-
-    gap: 35%;
-
-    background-color: blueviolet;
-}
-
-.img-menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 33px;
-    height: 33px;
-
-    /* background-image: url('../../../assets/images/menu.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center; */
-}
-
-.img-bluefarm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 50px;
-    height: 50px;
-
-    background-image: url('../../../assets/images/logo-BlueFarm-sem-fundo-sem-nome.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-.section-perfil{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-
-    /* background-color: green; */
-    width: 200px;
-}
-
-.align-nome{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    gap: 5px;
-
-    margin-right: 10px;
-
-    /* background-color: aqua; */
-}
-
-p{
-    text-align: center;
-}
-
-.img-perfil{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-
-    background-image: url('../../static/images/profile.jpg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-.img-menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 33px;
-    height: 33px;
-
-    background-image: url('../../static/images/menu.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-
-/*################################*/
-
 .modulo-main{
     display: flex;
     justify-content: center;
@@ -196,21 +155,8 @@ p{
     width: 100%;
     height: 100%;
 
-    background-color: yellow;
+    background-color: rgba(255, 255, 0, 0);
 }
-
-/* .section-dashboard{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    width: 80%;
-    height: 80%;
-
-    background-color: palegoldenrod;
-} */
 
 .section-dashboard,
 .section-producao,
@@ -225,7 +171,7 @@ p{
     width: 80%;
     height: 80%;
 
-    background-color: palegoldenrod;
+    background-color: rgba(238, 232, 170, 0);
 }
 
 #configuracoes {
@@ -235,13 +181,9 @@ p{
 
     width: 80%;
     height: 80%;
-
-    background-color: palegoldenrod;
 }
 
-
-
-/*################################*/
+/* CARDS MÓDULOS */
 
 a{
     display: flex;
@@ -256,15 +198,12 @@ a{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     gap: 5%;
 
     margin: auto;
-
     width: 215px;
     height: 215px;
-
-    background-color: cadetblue;
+    background-color: #D5D1FF;
     border-radius: 5%;
     border: none;
 }
@@ -276,62 +215,10 @@ a{
 
     width: 130px;
     height: 130px;
-
-    /* background-color: red; */
 }
 
 .nome-modulo{
     text-align: center;
     color: black; 
     font-size: 17px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-.card-produto-carrinho{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 5%;
-
-    width: 600px;
-    height: 60px;
-    border-radius: 10px;
-    margin-top: 5%;
-    background-color: red;
-    backdrop-filter: blur(15px);
-}
-
-.img-produto-carrinho{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px;
-    height: 40px;
-    margin: 20px;
-}
-
-.nome-produto-carrinho{
-    text-align: center;
-    color: rgb(255, 255, 255); 
-    font-size: 17px;
-}
-
-.out-preco{
-    color: rgb(0, 255, 0);
-}
-
-.out-quantidade{
-    color: white;
 }

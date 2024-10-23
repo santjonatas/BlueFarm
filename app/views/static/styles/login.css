@@ -155,13 +155,9 @@ input::placeholder {
     background-color: #0A73B0;
     color: white;
     background: linear-gradient(to right bottom, #151C1A, #27282C, #47533E);
-
-    /* Alinha o texto verticalmente e centraliza */
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* Garante que padding/border sejam incluídos nas dimensões */
     box-sizing: border-box;
     padding: 0;
 }
