@@ -39,7 +39,7 @@ class CreateColheitaUseCase:
                     id_cultivo=cultivo_entity.id,
                     id_produto=produto_entity.id,
                     quantidade=input_dto.quantidade,
-                    data=input_dto.data
+                    data=datetime.combine(input_dto.data, datetime.min.time())
                 )
 
                 colheita_entity =  colheita_service.create(input_dto=colheita_input) 
