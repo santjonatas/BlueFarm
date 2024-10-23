@@ -4,13 +4,14 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/irrigacao.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
     <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
+        <button type="submit" class="bt-cabecalho">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -21,43 +22,51 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
-        <section class="section-pedidos section-content" id="pedidos">
+        <section class="section-irrigacao section-content" id="irrigacao">
             {% set metodo_irrigacao = dados_irrigacao.get('metodo_irrigacao') %}
             {% set metodo = metodo_irrigacao.get('metodo') %}
             {% set descricao = metodo_irrigacao.get('descricao') %}
             {% set vantagens = metodo_irrigacao.get('vantagens') %}
             {% set adequado_para = metodo_irrigacao.get('adequado_para') %}
-            <div class="card-pedido">
-                <div class="detalhes-pedido-1">
-                    <output class="out-dados-pedido id-pedido">Irrigação</output>
-                    <output class="out-dados-pedido status-pedido">Método: {{ metodo }}</output>
+            <div class="card-irrigacao">
+                <div class="detalhes-irrigacao-1">
+                    <output class="out-dados-irrigacao id-irrigacao">Irrigação</output>
+                    <output class="out-dados-irrigacao status-irrigacao">Método: {{ metodo }}</output>
                 </div>
-                <div class="detalhes-pedido-2">
-                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
-                    <h4 class="out-dados-pedido">Vantagens:</h4>
+                <div class="detalhes-irrigacao-2">
+                    <output class="out-dados-irrigacao" id="descricao">Descrição: {{ descricao }}</output>
+                    <h4 class="out-dados-irrigacao">Vantagens:</h4>
                     {% for vantagem in vantagens %}
-                        <p class="out-dados-pedido valor-pedido">-{{ vantagem }}</p>
+                        <p class="out-dados-irrigacao valor-irrigacao">-{{ vantagem }}</p>
                     {% endfor %}
                 </div>
-                <div class="div-bt-pagar-pedido">
-                    <output class="out-dados-pedido valor-pedido">Adequado Para: {{ adequado_para }}</output>
+                <div class="div-bt-pagar-irrigacao">
+                    <output class="out-dados-irrigacao valor-irrigacao">Adequado Para: {{ adequado_para }}</output>
                 </div>
             </div>
 
             {% set tipo_de_solo = dados_irrigacao.get('tipo_de_solo') %}
             {% set tipo = tipo_de_solo.get('tipo') %}
             {% set descricao = tipo_de_solo.get('descricao') %}
-            <div class="card-pedido">
-                <div class="detalhes-pedido-1">
-                    <output class="out-dados-pedido id-pedido">Solo</output>
+            <div class="card-irrigacao">
+                <div class="detalhes-irrigacao-1">
+                    <output class="out-dados-irrigacao id-irrigacao">Solo</output>
                 </div>
-                <div class="detalhes-pedido-2">
-                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
+                <div class="detalhes-irrigacao-2">
+                    <output class="out-dados-irrigacao" id="descricao">Descrição: {{ descricao }}</output>
                 </div>
-                <div class="div-bt-pagar-pedido">
-                    <output class="out-dados-pedido valor-pedido">Tipo: {{ tipo }}</output>
+                <div class="div-bt-pagar-irrigacao">
+                    <output class="out-dados-irrigacao valor-irrigacao">Tipo: {{ tipo }}</output>
                 </div>
             </div>
 
@@ -65,23 +74,24 @@
             {% set pratica = pratica_sustentavel.get('pratica') %}
             {% set descricao = pratica_sustentavel.get('descricao') %}
             {% set beneficios = pratica_sustentavel.get('beneficios') %}
-            <div class="card-pedido">
-                <div class="detalhes-pedido-1">
-                    <output class="out-dados-pedido id-pedido">Prática Sustentável</output>
-                    <output class="out-dados-pedido status-pedido">Prática: {{ pratica }}</output>
+            <div class="card-irrigacao">
+                <div class="detalhes-irrigacao-1">
+                    <output class="out-dados-irrigacao id-irrigacao">Prática Sustentável</output>
+                    <output class="out-dados-irrigacao status-irrigacao">Prática: {{ pratica }}</output>
                 </div>
-                <div class="detalhes-pedido-2">
-                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
-                    <h4 class="out-dados-pedido">Beneficios:</h4>
+                <div class="detalhes-irrigacao-2">
+                    <output class="out-dados-irrigacao" id="descricao">Descrição: {{ descricao }}</output>
+                    <h4 class="out-dados-irrigacao">Beneficios:</h4>
                     {% for beneficio in beneficios %}
-                        <p class="out-dados-pedido valor-pedido">-{{ beneficio }}</p>
+                        <p class="out-dados-irrigacao valor-irrigacao">-{{ beneficio }}</p>
                     {% endfor %}
                 </div>
-                <div class="div-bt-pagar-pedido">
+                <div class="div-bt-pagar-irrigacao">
                 </div>
             </div>
         </section>
     </section>
 </main>
 <!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}
