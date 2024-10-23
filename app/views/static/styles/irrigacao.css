@@ -171,6 +171,10 @@ p{
     color: rgb(0, 247, 255);
 }
 
+h4{
+    color: yellow;
+}
+
 .div-bt-pagar-irrigacao{
     display: flex;
     justify-content: start;
