@@ -4,13 +4,14 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/buscar_alimentos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
     <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
+        <button type="submit" class="bt-cabecalho ">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -21,6 +22,14 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
         <form method="POST" class="section-pedidos section-content" id="pedidos">
@@ -28,8 +37,8 @@
                 {{ form.csrf_token }}
                 <div class="form">
                     {{ form.alimento(class="form-control", placeholder="Alimento") }}
+                    {{ form.submit(class="bt-buscar", value="Buscar Alimento") }}
                 </div>
-                {{ form.submit(class="bt-registro", value="Buscar Alimento") }}
             </div>
             {% set info_alimento=info_alimento %}
             {% if info_alimento and info_alimento != '"O parâmetro informado não é um alimento."' %}
@@ -110,4 +119,5 @@
     </section>
 </main>
 <!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}
