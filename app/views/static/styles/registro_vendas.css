@@ -5,6 +5,25 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* CABECALHO */
+
+.bt-cabecalho {
+    width: 45px;
+    height: 30px;
+    border-radius: 25px;
+    border: 0px solid;
+    margin-top: 1%;
+    font-size: 15px;
+    background-color: #0A73B0;
+    color: white;
+    background: linear-gradient(to right bottom, #151C1A, #27282C, #47533E);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0;
+}
+
 /* MENU */
 
 main {
