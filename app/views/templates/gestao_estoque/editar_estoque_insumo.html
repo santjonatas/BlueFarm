@@ -4,13 +4,14 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/editar_estoque_insumo.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
     <form method="GET" action="{{ url_for('gestao_estoque.estoque_insumos') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
+        <button type="submit" class="bt-cabecalho">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -21,6 +22,14 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
         <form method="POST" action="{{ url_for('gestao_estoque.alterar_estoque_insumo', insumo_id=insumo_id) }}" enctype="multipart/form-data" class="form-registro">
@@ -37,5 +46,6 @@
     </section>
 </main>
 <!-- <script src="../../static/scripts/main.js"></script> -->
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}
 
