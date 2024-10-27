@@ -31,17 +31,23 @@
     </form>
 </div>
 <main>
-    <section id="la">
-        {{ current_user.id }}
-        {{ current_user.username }}
-        {{ current_user.pessoa.nome }}
-        {{ current_user.pessoa.data_nascimento }}
-        {{ current_user.pessoa.cpf }}
-        {{ current_user.pessoa.genero }}
-        {{ current_user.pessoa.telefone }}
-        {{ current_user.pessoa.email }}
-        {{ current_user.pessoa.endereco }}
-    </section>
+    <div class="card-perfil">
+        <div class="detalhes-perfil-1">
+            <output class="out-dados">Id: {{ current_user.id }}</output>
+        </div>
+        <div class="detalhes-perfil-2">
+            <output class="out-dados">Username: {{ current_user.username }}</output>
+            <output class="out-dados">Nome: {{ current_user.pessoa.nome }}</output>
+            <output class="out-dados">Data de Nascimento: {{ current_user.pessoa.data_nascimento }}</output>
+            <output class="out-dados">CPF: {{ current_user.pessoa.cpf }}</output>
+            <output class="out-dados">Gênero: {{ current_user.pessoa.genero }}</output>
+            <output class="out-dados">Telefone: {{ current_user.pessoa.telefone }}</output>
+            <output class="out-dados">Email: {{ current_user.pessoa.email }}</output>
+            <output class="out-dados">Endereço: {{ current_user.pessoa.endereco }}</output>
+        </div>
+        <div class="div-bt-perfil">
+        </div>
+    </div>
     <section class="secao-registro">
         <form method="POST" class="form-registro">
             {{ form.csrf_token }}
