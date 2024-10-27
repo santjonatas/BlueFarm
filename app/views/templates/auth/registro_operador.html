@@ -27,7 +27,6 @@
             {% endif %}
         {% endwith %}
     </div>
-
     <form method="POST" class="form-registro">
         {{ form.csrf_token }}
         <div id="formularios">
@@ -75,7 +74,12 @@
 
             </article>
         </div>
-        {{ form.submit(class="bt-registro", value="Registrar-se") }}
+        <div class="botoes-registro">
+            <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+                <button type="submit" class="bt-voltar">Voltar</button>
+            </form>
+            {{ form.submit(class="bt-registro", value="Registrar-se") }}
+        </div>
     </form>
 
 {% endblock body %}
