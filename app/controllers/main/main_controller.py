@@ -100,6 +100,10 @@ class MainController:
                 preco_produto = Decimal(produto_entity.preco) if produto_entity.preco is not None else Decimal('0.00')
                 
                 for item in session['carrinho']:
+                    estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=item['id'])
+                    if estoque_entity_quantidade <= item['quantidade']:
+                        break
+
                     if item['id'] == produto_entity.id:
                         item['quantidade'] += 1
                         item['preco'] = Decimal(item['preco'])  
@@ -126,6 +130,10 @@ class MainController:
 
             if 'carrinho' in session:
                 for item in session['carrinho']:
+                    estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=item['id'])
+                    if estoque_entity_quantidade <= item['quantidade']:
+                        continue
+
                     if item['id'] == produto_id:
                         item['quantidade'] += 1
                         item['preco'] = Decimal(item['preco']) 
