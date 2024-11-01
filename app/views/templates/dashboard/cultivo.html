@@ -1,16 +1,17 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} BlueFarm | Main {% endblock title %}
+{% block title %} BlueFarm | Cultivo {% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/cultivo.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
     <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
+        <button type="submit" class="bt-cabecalho">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -21,51 +22,58 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
-    <section class="section-main">
-        <section class="section-pedidos section-content" id="pedidos">
-            {% for cultivo in cultivos %}
-                <div class="card-pedido">
-                    <div class="detalhes-pedido-1">
-                        <output class="out-dados-pedido id-pedido">Id do Cultivo: {{ cultivo.id }}</output>
-                        <output class="out-dados-pedido status-pedido">Status: {{ cultivo.status }}</output>
-                        {% set insumo_entity = repositories.insumo_repository.get(obj_id=cultivo.id_insumo) %}
-                        <output class="out-dados-pedido status-pedido">Insumo: {{ insumo_entity.nome }}</output>
-                        <output class="out-dados-pedido status-pedido">Quantidade: {{ cultivo.quantidade }}</output>
-                    </div>
-                    <div class="detalhes-pedido-2">
-                        <output class="out-dados-pedido">Data de Início: {{ cultivo.data_inicio }}</output>
-                        {% if cultivo.data_fim != None %}
-                        <output class="out-dados-pedido valor-pedido">Data de Colheita: {{ cultivo.data_fim }}</output>
-                        {% endif %}
-                    </div>
-                    <input type="hidden" name="cultivo_id" value="{{ cultivo.id }}">
-                    <input type="hidden" name="cultivo_status" value="{{ cultivo.status }}">
-                    <input type="hidden" name="cultivo_id_insumo" value="{{ cultivo.id_insumo }}">
-                    <input type="hidden" name="cultivo_quantidade" value="{{ cultivo.quantidade }}">
-                    <input type="hidden" name="cultivo_data_inicio" value="{{ cultivo.data_inicio }}">
-                    <input type="hidden" name="cultivo_data_fim" value="{{ cultivo.data_fim }}">
-
-                    <form method="POST" action="{{ url_for('dashboard.cultivo') }}" class="div-bt-pagar-pedido">
-                        {{ form.csrf_token }}
-                        <div class="form">
-                            <label>Data de Colheita</label>
-                            {{ form.data(class="form-control", placeholder="Data de Colheita") }}
-                        </div>
-                        <div class="form">
-                            {{ form.quantidade(class="form-control", placeholder="Quantidade de Produtos Colhidos") }}
-                        </div>
-                        <form method="POST"  class="div-bt-pagar-pedido">
-                        <input type="hidden" name="cultivo_id" value="{{ cultivo.id }}">
-                        <button type="submit" class="bt-pagar-pedido">Gerar Colheita</button>
-                    </form>
+    <section class="section-cultivos section-content" id="cultivos">
+        {% for cultivo in cultivos %}
+            <div class="card-cultivo">
+                <div class="detalhes-cultivo-1">
+                    <output class="out-dados-cultivo id-cultivo">Id do Cultivo: {{ cultivo.id }}</output>
+                    <output class="out-dados-cultivo status-cultivo">Status: {{ cultivo.status }}</output>
+                    {% set insumo_entity = repositories.insumo_repository.get(obj_id=cultivo.id_insumo) %}
+                    <output class="out-dados-cultivo status-cultivo">Insumo: {{ insumo_entity.nome }}</output>
+                    <output class="out-dados-cultivo status-cultivo">Quantidade: {{ cultivo.quantidade }}</output>
                 </div>
-            {% endfor %}
-            {% if vendas|length == 0 %}
-            <div style="height: 750px"></div>
-            {% endif %}
-        </section>
+                <div class="detalhes-cultivo-2">
+                    <output class="out-dados-cultivo">Data de Início: {{ cultivo.data_inicio }}</output>
+                    {% if cultivo.data_fim != None %}
+                    <output class="out-dados-cultivo valor-cultivo">Data de Colheita: {{ cultivo.data_fim }}</output>
+                    {% endif %}
+                </div>
+                <input type="hidden" name="cultivo_id" value="{{ cultivo.id }}">
+                <input type="hidden" name="cultivo_status" value="{{ cultivo.status }}">
+                <input type="hidden" name="cultivo_id_insumo" value="{{ cultivo.id_insumo }}">
+                <input type="hidden" name="cultivo_quantidade" value="{{ cultivo.quantidade }}">
+                <input type="hidden" name="cultivo_data_inicio" value="{{ cultivo.data_inicio }}">
+                <input type="hidden" name="cultivo_data_fim" value="{{ cultivo.data_fim }}">
+
+                <form method="POST" action="{{ url_for('dashboard.cultivo') }}" class="div-bt-gerar-colheita">
+                    {{ form.csrf_token }}
+                    <div class="form" id="dt-colheita">
+                        <label>Data de Colheita</label>
+                        {{ form.data(class="form-control", placeholder="Data de Colheita") }}
+                    </div>
+                    <div class="form">
+                        {{ form.quantidade(class="form-control", placeholder="Quantidade de Produtos Colhidos") }}
+                    </div>
+                    <form method="POST"  class="div-bt-gerar-colheita">
+                    <input type="hidden" name="cultivo_id" value="{{ cultivo.id }}">
+                    <button type="submit" class="bt-gerar-colheita">Gerar Colheita</button>
+                </form>
+            </div>
+        {% endfor %}
+        {% if cultivos|length == 0 %}
+        <div style="height: 750px"></div>
+        {% endif %}
     </section>
 </main>
-<!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/cultivo.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}

@@ -1,16 +1,17 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} BlueFarm | Main {% endblock title %}
+{% block title %} BlueFarm | Movimentaçao de Estoque {% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/movimentacao_estoque.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
     <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
+        <button type="submit" class="bt-cabecalho">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -21,6 +22,14 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
         <h2 class="text-movimentacao-estoque">Movimentação de Estoque Diária</h2>
@@ -51,5 +60,6 @@
         </section>
     </section>
 </main>
-<!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/movimentacao_estoque.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}

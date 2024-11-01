@@ -1,0 +1,77 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Main {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/perfil.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
+<main>
+    <div class="card-perfil">
+        <div class="detalhes-perfil-1">
+            <output class="out-dados">Id: {{ current_user.id }}</output>
+        </div>
+        <div class="detalhes-perfil-2">
+            <output class="out-dados">Username: {{ current_user.username }}</output>
+            <output class="out-dados">Nome: {{ current_user.pessoa.nome }}</output>
+            <output class="out-dados">Data de Nascimento: {{ current_user.pessoa.data_nascimento }}</output>
+            <output class="out-dados">CPF: {{ current_user.pessoa.cpf }}</output>
+            <output class="out-dados">Gênero: {{ current_user.pessoa.genero }}</output>
+            <output class="out-dados">Telefone: {{ current_user.pessoa.telefone }}</output>
+            <output class="out-dados">Email: {{ current_user.pessoa.email }}</output>
+            <output class="out-dados">Endereço: {{ current_user.pessoa.endereco }}</output>
+        </div>
+        <div class="div-bt-perfil">
+        </div>
+    </div>
+    <section class="secao-registro">
+        <form method="POST" class="form-registro">
+            {{ form.csrf_token }}
+            <div id="formularios">
+                <div class="form">
+                    {{ form.genero(class="form-control") }}
+                </div>
+                <div class="form">
+                    {{ form.telefone(class="form-control", placeholder="Telefone") }}
+                </div>
+                <div class="form">
+                    {{ form.email(class="form-control", placeholder="Email") }}
+                </div>
+                <div class="form">
+                    {{ form.endereco(class="form-control", placeholder="Endereço") }}
+                </div>
+                <div class="form">
+                    {{ form.senha(class="form-control", placeholder="Nova Senha") }}
+                </div>
+            </div>
+            {{ form.submit(class="bt-registro", value="Atualizar") }}
+        </form>
+    </section>
+</main>
+<!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/cabecalho.js"></script>
+{% endblock body %}

@@ -1,21 +1,23 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} BlueFarm | Main {% endblock title %}
+{% block title %} BlueFarm | Estoque de Produtos {% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/estoque_produtos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
-<link rel="stylesheet" href="../../static/styles/estoque_produtos.css">
 {% endblock style %}
 
 {% block body %}
 <header>
-    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
-    </form>
-    <form method="GET" action="{{ url_for('dashboard.add_produto') }}" class="card-modulo">
-        <button type="submit">Adicionar Produto</button>
-    </form>
+    <div class="div-botoes-header">
+        <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+            <button type="submit" class="bt-cabecalho">Voltar</button>
+        </form>
+        <form method="GET" action="{{ url_for('dashboard.add_produto') }}" class="card-modulo">
+            <button type="submit" id="bt-add-produto">Add Produto</button>
+        </form>
+    </div>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
         <div class="align-nome">
@@ -25,6 +27,14 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
         <section class="section-produtos section-content" id="produtos">
@@ -39,7 +49,7 @@
                 <input type="hidden" name="produto_preco" value="{{ produto.preco }}">
                 <input type="hidden" name="produto_quantidade" value="{{ quantidade_produto }}">
                 <div class="info-estoque-produto">
-                    <button type="submit" class="editar-produto">editar</button>
+                    <button type="submit" class="editar-produto bt-editar-produto">Editar</button>
                     <output>Estoque: {{ quantidade_produto }}</output>
                 </div>
             </form>
@@ -47,5 +57,6 @@
         </section>
     </section>
 </main>
-<!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/estoque_produtos.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}

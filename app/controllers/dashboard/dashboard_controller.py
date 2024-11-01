@@ -53,182 +53,198 @@ class DashboardController:
 
     @login_required
     def estoque_produtos(self) -> None:
-        
-        produto_entity = repositories.produto_repository.list()
-        
-        pedidos_entity = repositories.pedido_repository.list()
-        
-        return render_template(
-            'dashboard/estoque_produtos.html',
-            produtos=produto_entity, 
-            pedidos=pedidos_entity,
-            repositories=repositories
-            )
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            produto_entity = repositories.produto_repository.list()
+            
+            pedidos_entity = repositories.pedido_repository.list()
+            
+            return render_template(
+                'dashboard/estoque_produtos.html',
+                produtos=produto_entity, 
+                pedidos=pedidos_entity,
+                repositories=repositories
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def editar_produto(self) -> None:
-        produto_id = request.form.get('produto_id')
-        produto_nome = request.form.get('produto_nome')
-        produto_preco = request.form.get('produto_preco')
-        produto_quantidade = request.form.get('produto_quantidade')
-        
-        form: FlaskForm = EditarProdutoForm()
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            produto_id = request.form.get('produto_id')
+            produto_nome = request.form.get('produto_nome')
+            produto_preco = request.form.get('produto_preco')
+            produto_quantidade = request.form.get('produto_quantidade')
+            
+            form: FlaskForm = EditarProdutoForm()
 
-        return render_template('dashboard/editar_estoque.html', form=form, produto_nome=produto_nome, produto_quantidade=produto_quantidade, produto_id=produto_id)
+            return render_template('dashboard/editar_estoque.html', form=form, produto_nome=produto_nome, produto_quantidade=produto_quantidade, produto_id=produto_id)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def alterar_estoque(self, produto_id):
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            form: FlaskForm = EditarProdutoForm()
 
-        form: FlaskForm = EditarProdutoForm()
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    
+                    input_dto = AlterEstoqueProdutoInputDto(**form.to_dict())
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                
-                input_dto = AlterEstoqueProdutoInputDto(**form.to_dict())
+                    usecase: AlterEstoqueProdutoUseCase = current_app.global_usecases.alter_estoque_produto_usecase
 
-                usecase: AlterEstoqueProdutoUseCase = current_app.global_usecases.alter_estoque_produto_usecase
+                    estoque_entity = usecase.execute(input_dto=input_dto, produto_id=produto_id)
 
-                estoque_entity = usecase.execute(input_dto=input_dto, produto_id=produto_id)
+                    flash(message='Estoque Alterado', category='info')
 
-                flash(message='Estoque Alterado', category='info')
+                    return redirect(url_for('dashboard.estoque_produtos'))
 
-                return redirect(url_for('dashboard.estoque_produtos'))
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Alterar Quantidade', category='info')
+                    pass
 
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Alterar Quantidade', category='info')
-                pass
-
-        return redirect(url_for('dashboard.estoque_produtos'))
+            return redirect(url_for('dashboard.estoque_produtos'))
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def add_produto(self):
-        form: FlaskForm = AddProdutoForm()
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            form: FlaskForm = AddProdutoForm()
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                
-                input_dto = CreateProdutoItemInputDto(**form.to_dict())
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    
+                    input_dto = CreateProdutoItemInputDto(**form.to_dict())
 
-                usecase: CreateProdutoUseCase = current_app.global_usecases.create_produto_usecase
+                    usecase: CreateProdutoUseCase = current_app.global_usecases.create_produto_usecase
 
-                usecase.execute(input_dto=input_dto)
+                    usecase.execute(input_dto=input_dto)
 
-                file = form.file.data
-                if file:
-                    original_filename = secure_filename(file.filename)
-                    name, ext = os.path.splitext(original_filename)
-                    name = input_dto.nome
-                    new_filename = f"{name}{ext}"
-                    file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], new_filename)
-                    file.save(file_path)
+                    file = form.file.data
+                    if file:
+                        original_filename = secure_filename(file.filename)
+                        name, ext = os.path.splitext(original_filename)
+                        name = input_dto.nome
+                        new_filename = f"{name}{ext}"
+                        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], new_filename)
+                        file.save(file_path)
 
-                flash(message='Produto Registrado', category='info')
+                    flash(message='Produto Registrado', category='info')
 
-                return render_template('dashboard/add_produto.html', form=form)
+                    return render_template('dashboard/add_produto.html', form=form)
 
-                pass
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Registrar Produto', category='info')
-                pass
+                    pass
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Registrar Produto', category='info')
+                    pass
 
-        return render_template('dashboard/add_produto.html', form=form)
+            return render_template('dashboard/add_produto.html', form=form)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def cultivo(self) -> None:
-        
-        cultivo_id = request.form.get('cultivo_id')
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            cultivo_id = request.form.get('cultivo_id')
 
-        form: FlaskForm = AddColheitaForm()
+            form: FlaskForm = AddColheitaForm()
 
-        if form.validate_on_submit():
-            try:
-                cultivo_id = int(cultivo_id)
+            if form.validate_on_submit():
+                try:
+                    cultivo_id = int(cultivo_id)
 
-                pprint(form.to_dict())
-                
-                input_dto = CreateColheitaInputDto(**form.to_dict())
+                    pprint(form.to_dict())
+                    
+                    input_dto = CreateColheitaInputDto(**form.to_dict())
 
-                usecase: CreateColheitaUseCase = current_app.global_usecases.create_colheita_usecase
+                    usecase: CreateColheitaUseCase = current_app.global_usecases.create_colheita_usecase
 
-                usecase.execute(input_dto=input_dto, cultivo_id=cultivo_id)
+                    usecase.execute(input_dto=input_dto, cultivo_id=cultivo_id)
 
-                flash(message='Colheita Registrado', category='info')
+                    flash(message='Colheita Registrado', category='info')
 
-                return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
+                    return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
 
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Registrar Colheita', category='info')
-                pass
-        
-        cultivo_entity = repositories.cultivo_repository.get_cultivos_em_andamento()
-        
-        return render_template(
-            'dashboard/cultivo.html',
-            cultivos=cultivo_entity,
-            form=form,
-            repositories=repositories
-            )
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Registrar Colheita', category='info')
+                    pass
+            
+            cultivo_entity = repositories.cultivo_repository.get_cultivos_em_andamento()
+            
+            return render_template(
+                'dashboard/cultivo.html',
+                cultivos=cultivo_entity,
+                form=form,
+                repositories=repositories
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
     @login_required
     def add_cultivo(self):
-        form: FlaskForm = AddCultivoForm()
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            form: FlaskForm = AddCultivoForm()
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                
-                input_dto = CreateCultivoInputDto(**form.to_dict())
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    
+                    input_dto = CreateCultivoInputDto(**form.to_dict())
 
-                usecase: CreateCultivoUseCase = current_app.global_usecases.create_cultivo_usecase
+                    usecase: CreateCultivoUseCase = current_app.global_usecases.create_cultivo_usecase
 
-                usecase.execute(input_dto=input_dto)
+                    usecase.execute(input_dto=input_dto)
 
-                flash(message='Cultivo Registrado', category='info')
+                    flash(message='Cultivo Registrado', category='info')
 
-                return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
+                    return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
 
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Registrar Cultivo', category='info')
-                pass
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Registrar Cultivo', category='info')
+                    pass
 
-        return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
+            return render_template('dashboard/add_cultivo.html', form=form, repositories=repositories)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
         
     @login_required
     def buscar_alimentos(self) -> None:
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            form: FlaskForm = BuscarAlimentoForm()
 
-        form: FlaskForm = BuscarAlimentoForm()
+            info_alimento = None
 
-        info_alimento = None
+            msg_erro = ''
 
-        msg_erro = ''
+            if form.validate_on_submit():
+                try:
+                    pprint(form.to_dict())
+                    alimento = form.to_dict()
 
-        if form.validate_on_submit():
-            try:
-                pprint(form.to_dict())
-                alimento = form.to_dict()
+                    produto = alimento.get('alimento')
+                    info_alimento = services.cohere_ia_service.obter_info_alimento(produto=produto)
 
-                produto = alimento.get('alimento')
-                info_alimento = services.cohere_ia_service.obter_info_alimento(produto=produto)
+                    if info_alimento != '"O parâmetro informado não é um alimento."':
+                        info_alimento = json.loads(info_alimento)  
+                    else:
+                        info_alimento = {} 
+                        msg_erro = 'O parâmetro informado não é um alimento.'
 
-                if info_alimento != '"O parâmetro informado não é um alimento."':
-                    info_alimento = json.loads(info_alimento)  
-                else:
-                    info_alimento = {} 
-                    msg_erro = 'O parâmetro informado não é um alimento.'
+                    return render_template('dashboard/buscar_alimentos.html', form=form, info_alimento=info_alimento, msg_erro=msg_erro)
 
-                return render_template('dashboard/buscar_alimentos.html', form=form, info_alimento=info_alimento, msg_erro=msg_erro)
-
-            except Exception as e:
-                stacktrace = traceback.format_exc()
-                flash(message='Erro ao Buscar Alimento', category='info')
-                pass
+                except Exception as e:
+                    stacktrace = traceback.format_exc()
+                    flash(message='Erro ao Buscar Alimento', category='info')
+                    pass
+            
+            return render_template('dashboard/buscar_alimentos.html', form=form, info_alimento=info_alimento, msg_erro=msg_erro)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
         
-        return render_template('dashboard/buscar_alimentos.html', form=form, info_alimento=info_alimento, msg_erro=msg_erro)
-    
-    

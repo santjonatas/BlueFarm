@@ -10,7 +10,7 @@ from app.application.usecases.dto.out.produto.create_cultivo_output_dto import C
 from app.exceptions.auth.InvalidFieldException import InvalidFieldException
 from app.exceptions.database.ColheitaEntityException import ColheitaEntityException
 from app.exceptions.database.CultivoEntityException import CultivoEntityException
-from app.infra.services.colheita.colheita_service import ColheitaService
+from app.infra.services.database.colheita.colheita_service import ColheitaService
 from app.infra.services.database.cultivo.cultivo_service import CultivoService
 from app.infra.services.database.estoque.estoque_service import EstoqueService
 
@@ -39,7 +39,7 @@ class CreateColheitaUseCase:
                     id_cultivo=cultivo_entity.id,
                     id_produto=produto_entity.id,
                     quantidade=input_dto.quantidade,
-                    data=input_dto.data
+                    data=datetime.combine(input_dto.data, datetime.min.time())
                 )
 
                 colheita_entity =  colheita_service.create(input_dto=colheita_input) 

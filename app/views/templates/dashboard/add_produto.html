@@ -1,17 +1,17 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} BlueFarm | Main {% endblock title %}
+{% block title %} BlueFarm | Adicionar Produto {% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/add_produto.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
-<link rel="stylesheet" href="../../static/styles/add_produto.css">
 {% endblock style %}
 
 {% block body %}
 <header>
     <form method="GET" action="{{ url_for('dashboard.estoque_produtos') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
+        <button type="submit" class="bt-cabecalho">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -22,9 +22,16 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
-        
             <form method="POST" enctype="multipart/form-data" class="form-registro">
                 {{ form.csrf_token }}
                 <div id="formularios">
@@ -56,16 +63,15 @@
                         <label>Data de compra insumo</label>
                         {{ form.comprado_em(class="form-control", placeholder="Data de compra insumo") }}
                     </div>
-                    <div class="form">
+                    <div class="form" id="form-add-img-produto">
                         <label>Adicione uma imagem PNG deste produto</label>
-                        {{ form.file(class="form-control", placeholder="Data de compra insumo") }}
+                        {{ form.file(class="form-control", id="file", placeholder="Data de compra insumo") }}
                     </div>
                 </div>
                 {{ form.submit(class="bt-registro", value="Registrar") }}
             </form>
-        
     </section>
 </main>
-<!-- <script src="../../static/scripts/main.js"></script> -->
+<script src="../../static/scripts/add_produto.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}
-

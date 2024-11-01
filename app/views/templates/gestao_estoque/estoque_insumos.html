@@ -1,20 +1,23 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} BlueFarm | Main {% endblock title %}
+{% block title %} BlueFarm | Estoque de Insumos {% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/estoque_insumos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
-    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
-    </form>
-    <form method="GET" action="{{ url_for('dashboard.add_cultivo') }}" class="card-modulo">
-        <button type="submit">Cultivar Insumo</button>
-    </form>
+    <div class="div-botoes-header">
+        <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+            <button type="submit" class="bt-cabecalho">Voltar</button>
+        </form>
+        <form method="GET" action="{{ url_for('dashboard.add_cultivo') }}" class="card-modulo">
+            <button type="submit" id="bt-cultivar-insumo">Cultivar Insumo</button>
+        </form>
+    </div>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
         <div class="align-nome">
@@ -24,20 +27,28 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
-        <section class="section-produtos section-content" id="produtos">
+        <section class="section-insumos section-content" id="insumos">
             {% for insumo in insumos %}
-            <form method="POST" action="{{ url_for('gestao_estoque.editar_insumo') }}" class="card-produto">
-                <img class="img-produto" src="../../static/images/produtos/{{ insumo.nome }}.png" alt="{{ insumo.nome }}">
-                <h3 class="nome-produto">{{ insumo.nome }}</h3>
+            <form method="POST" action="{{ url_for('gestao_estoque.editar_insumo') }}" class="card-insumo">
+                <img class="img-insumo" src="../../static/images/produtos/{{ insumo.nome }}.png" alt="{{ insumo.nome }}">
+                <h3 class="nome-insumo">{{ insumo.nome }}</h3>
                 <p>Preço: {{ insumo.preco }}</p>
                 <input type="hidden" name="insumo_id" value="{{ insumo.id }}">
                 <input type="hidden" name="insumo_nome" value="{{ insumo.nome }}">
                 <input type="hidden" name="insumo_preco" value="{{ insumo.preco }}">
                 <input type="hidden" name="insumo_quantidade" value="{{ insumo.quantidade }}">
-                <div class="info-estoque-produto">
-                    <button type="submit" class="editar-produto">editar</button>
+                <div class="info-estoque-insumo">
+                    <button type="submit" class="editar-insumo bt-editar-insumo">editar</button>
                     <output>Estoque: {{ insumo.quantidade }}</output>
                 </div>
             </form>
@@ -45,5 +56,6 @@
         </section>
     </section>
 </main>
-<!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/estoque_insumos.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}

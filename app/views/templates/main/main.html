@@ -4,15 +4,13 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
-<link rel="stylesheet" href="../../static/styles/main.css">
 {% endblock style %}
 
 {% block body %}
 <header>
-    <article class="img-menu">
-        <article class="img-menu"></article>
-    </article>
+    <article class="img-menu"></article>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
         <div class="align-nome">
@@ -22,6 +20,14 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-sidebar">
         <section class="sidebar">
@@ -29,7 +35,9 @@
             <button class="botao-sidebar" data-section="producao">Controle de Produção</button>
             <button class="botao-sidebar" data-section="estoque">Gestão de Estoque</button>
             <button class="botao-sidebar" data-section="vendas">Gestão de Vendas</button>
+            {% if '@adm' in current_user.username %}
             <button class="botao-sidebar" data-section="configuracoes">Configurações</button>
+            {% endif %}
         </section>
     </section>
     <section class="section-main">
@@ -37,19 +45,19 @@
             <section class="section-dashboard section-content" id="dashboard">
                 <form method="GET" action="{{ url_for('dashboard.cultivo') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <img class="img-modulo" src="../../static/images/cultivo.png" alt="">
                         <h3 class="nome-modulo">Cultivo</h3>
                     </button>
                 </form>
                 <form method="GET" action="{{ url_for('dashboard.estoque_produtos') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="{{ url_for('static', filename='images/logo-BlueFarm.jpeg') }}" alt="">
+                        <img class="img-modulo" src="../../static/images/estoque_produtos.png" alt="">
                         <h3 class="nome-modulo">Estoque de Produtos</h3>
                     </button>
                 </form>
                 <form method="GET" action="{{ url_for('dashboard.buscar_alimentos') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="{{ url_for('static', filename='images/logo-BlueFarm.jpeg') }}" alt="">
+                        <img class="img-modulo" src="../../static/images/buscar_alimentos.png" alt="">
                         <h3 class="nome-modulo">Buscar Alimentos</h3>
                     </button>
                 </form>
@@ -57,62 +65,80 @@
             <section class="section-producao section-content" id="producao" style="display: none;">
                 <form method="GET" action="{{ url_for('controle_producao.irrigacao') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <img class="img-modulo" src="../../static/images/irrigacao.png" alt="">
                         <h3 class="nome-modulo">Irrigação</h3>
                     </button>
                 </form>
                 <form method="GET" action="{{ url_for('controle_producao.colheita') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <img class="img-modulo" src="../../static/images/colheita.png" alt="">
                         <h3 class="nome-modulo">Colheita</h3>
                     </button>
                 </form>
                 <form method="GET" action="{{ url_for('controle_producao.controle_temperatura') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <img class="img-modulo" src="../../static/images/controle_temperatura.png" alt="">
                         <h3 class="nome-modulo">Controle de Temperatura</h3>
                     </button>
                 </form>
             </section>
-        
             <section class="section-estoque section-content" id="estoque" style="display: none;">
                 <form method="GET" action="{{ url_for('gestao_estoque.estoque_insumos') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <img class="img-modulo" src="../../static/images/estoque_insumos.png" alt="">
                         <h3 class="nome-modulo">Estoque de Insumos</h3>
                     </button>
                 </form>
                 <form method="GET" action="{{ url_for('gestao_estoque.movimentacao_estoque') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <img class="img-modulo" src="../../static/images/movimentacao_estoque.png" alt="">
                         <h3 class="nome-modulo">Movimentação de Estoques</h3>
                     </button>
                 </form>
             </section>
-        
             <section class="section-vendas section-content" id="vendas" style="display: none;">
                 <form method="GET" action="{{ url_for('gestao_vendas.registro_vendas') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <img class="img-modulo" src="../../static/images/registro_vendas.png" alt="">
                         <h3 class="nome-modulo">Registro de Vendas</h3>
                     </button>
                 </form>
                 <form method="GET" action="{{ url_for('gestao_vendas.lista_clientes') }}">
                     <button type="submit" class="card-modulo">
-                        <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
+                        <img class="img-modulo" src="../../static/images/gestao_clientes.png" alt="">
                         <h3 class="nome-modulo">Gestão de Clientes</h3>
                     </button>
                 </form>
             </section>
-        
             <section class="section-configuracoes section-content" id="configuracoes" style="display: none;">
-                <a class="card-modulo" href="">
-                    <img class="img-modulo" src="../../static/images/logo-BlueFarm.jpeg" alt="">
-                    <h3 class="nome-modulo">Configurações</h3>
-                </a>
+                <form method="GET" action="{{ url_for('register.register_operador') }}">
+                    <button class="card-acessar">
+                        <img class="img-acessar" src="../../static/images/operador.png" alt="">
+                        <h3 class="nome-acessar">Adicionar Operador</h3>
+                    </button>
+                </form>
+                <form method="GET" action="{{ url_for('register.register_admin') }}">
+                    <button class="card-acessar">
+                        <img class="img-acessar" src="../../static/images/administrador.png" alt="">
+                        <h3 class="nome-acessar">Adicionar Administrador</h3>
+                    </button>
+                </form>
+                <form method="GET" action="{{ url_for('configuracoes.cargos') }}">
+                    <button class="card-acessar">
+                        <img class="img-acessar" src="../../static/images/cargo.png" alt="">
+                        <h3 class="nome-acessar">Adicionar Cargo</h3>
+                    </button>
+                </form>
+                <form method="GET" action="{{ url_for('configuracoes.departamentos') }}">
+                    <button class="card-acessar">
+                        <img class="img-acessar" src="../../static/images/departamento.png" alt="">
+                        <h3 class="nome-acessar">Adicionar Departamento</h3>
+                    </button>
+                </form>
             </section>
         </div>
     </section>
 </main>
 <script src="../../static/scripts/main.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}

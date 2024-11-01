@@ -48,46 +48,52 @@ class ControleProducaoController:
 
     @login_required
     def irrigacao(self) -> None:
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            json_irrigacao = os.getenv('JSON_IRRIGACAO')
 
-        json_irrigacao = os.getenv('JSON_IRRIGACAO')
+            with open(json_irrigacao, 'r', encoding='utf-8') as arquivo:
+                dados_irrigacao = json.load(arquivo)
 
-        with open(json_irrigacao, 'r', encoding='utf-8') as arquivo:
-            dados_irrigacao = json.load(arquivo)
+            metodo_irrigacao = dados_irrigacao.get('metodo_irrigacao')
 
-        metodo_irrigacao = dados_irrigacao.get('metodo_irrigacao')
-
-        metodo = metodo_irrigacao.get('metodo')
-        
-        return render_template(
-            'controle_producao/irrigacao.html',
-            dados_irrigacao=dados_irrigacao
-            )
+            metodo = metodo_irrigacao.get('metodo')
+            
+            return render_template(
+                'controle_producao/irrigacao.html',
+                dados_irrigacao=dados_irrigacao
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def controle_temperatura(self) -> None:
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            json_controle_temperatura = os.getenv('JSON_CONTROLE_TEMPERATURA')
 
-        json_controle_temperatura = os.getenv('JSON_CONTROLE_TEMPERATURA')
+            with open(json_controle_temperatura, 'r', encoding='utf-8') as arquivo:
+                dados_controle_temperatura = json.load(arquivo)
 
-        with open(json_controle_temperatura, 'r', encoding='utf-8') as arquivo:
-            dados_controle_temperatura = json.load(arquivo)
+            metodo_controle_temperatura = dados_controle_temperatura.get('metodo_controle_temperatura')
 
-        metodo_controle_temperatura = dados_controle_temperatura.get('metodo_controle_temperatura')
-
-        metodo = metodo_controle_temperatura.get('metodo')
-        
-        return render_template(
-            'controle_producao/controle_temperatura.html',
-            dados_controle_temperatura=dados_controle_temperatura
-            )
+            metodo = metodo_controle_temperatura.get('metodo')
+            
+            return render_template(
+                'controle_producao/controle_temperatura.html',
+                dados_controle_temperatura=dados_controle_temperatura
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     
     @login_required
     def colheita(self) -> None:
-        
-        colheita_entity = repositories.colheita_repository.list()
-        
-        return render_template(
-            'controle_producao/colheita.html',
-            colheitas=colheita_entity
-            # repositories=repositories
-            )
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            colheita_entity = repositories.colheita_repository.list()
+            
+            return render_template(
+                'controle_producao/colheita.html',
+                colheitas=colheita_entity
+                # repositories=repositories
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401

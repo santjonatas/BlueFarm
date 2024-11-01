@@ -1,0 +1,55 @@
+{% extends 'layout/base/structure.html' %}
+
+{% block title %} BlueFarm | Adicionar Departamento {% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/departamentos.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
+{% endblock style %}
+
+{% block body %}
+<header>
+    <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
+        <button type="submit" class="bt-cabecalho">Voltar</button>
+    </form>
+    <article class="img-bluefarm"></article>
+    <section class="section-perfil">
+        <div class="align-nome">
+            <p>Olá, </p>
+            <p id="nome-usuario">{{current_user.username}}</p>
+        </div>
+        <article class="img-perfil"></article>
+    </section>
+</header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
+<main>
+    <section class="section-main">
+        <form method="POST" action="{{ url_for('configuracoes.departamentos')}}" class="registrar-departamento">
+            {{ form.csrf_token }}
+            <div class="form-registrar-departamento">
+                <div class="form">
+                    {{ form.area(class="form-control", placeholder="Área") }}
+                </div>
+                {{ form.submit(class="bt-registro", value="Registrar") }}
+            </div>
+        </form>
+        <div class="lista-departamentos">
+            {% for departamento in departamentos %}
+                <div class="card-departamento">
+                    {{ departamento.area }}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+<script src="../../static/scripts/register.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
+{% endblock body %}

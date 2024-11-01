@@ -1,20 +1,23 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} BlueFarm | Main {% endblock title %}
+{% block title %} BlueFarm | Editar Venda {% endblock title %}
 
 {% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/editar_venda.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
-    <form method="GET" action="{{ url_for('gestao_vendas.registro_vendas') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
-    </form>
-    <form method="GET" action="{{ url_for('gestao_estoque.movimentacao_estoque') }}" class="card-modulo">
-        <button type="submit">Movimentação de Estoque</button>
-    </form>
+    <div class="div-botoes-header">
+        <form method="GET" action="{{ url_for('gestao_vendas.registro_vendas') }}" class="card-modulo">
+            <button type="submit" class="bt-cabecalho">Voltar</button>
+        </form>
+        <form method="GET" action="{{ url_for('gestao_estoque.movimentacao_estoque') }}" class="card-modulo">
+            <button type="submit" id="bt-add-produto">Movimentação de Estoque</button>
+        </form>
+    </div>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
         <div class="align-nome">
@@ -24,6 +27,14 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
             <div class="card-pedido">
@@ -56,6 +67,7 @@
             </div>
     </section>
 </main>
-<!-- <script src="../../static/scripts/main.js"></script> -->
+<script src="../../static/scripts/editar_venda.js"></script>
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}
 

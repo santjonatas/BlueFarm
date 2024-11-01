@@ -42,7 +42,10 @@ class MainController:
 
     @login_required
     def main(self) -> None:
-        return render_template('main/main.html')
+        if '@adm' in current_user.username or '@op' in current_user.username: 
+            return render_template('main/main.html')
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
     def logout(self) -> None:
         logout_user()
@@ -50,156 +53,245 @@ class MainController:
     
     @login_required
     def main_client(self) -> None:
-        if 'carrinho' not in session:
-            session['carrinho'] = []
-        
-        produto_entity = repositories.produto_repository.list()
-        
-        pedidos_entity = repositories.pedido_repository.get_pedidos_by_cliente(id_cliente=current_user.cliente.id)
+        if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            if 'carrinho' not in session:
+                session['carrinho'] = []
+            
+            produto_entity = repositories.produto_repository.list()
+            
+            pedidos_entity = repositories.pedido_repository.get_pedidos_by_cliente(id_cliente=current_user.cliente.id)
 
-        total_precos = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
-        
-        return render_template(
-            'main/main_client.html',
-            produtos=produto_entity, 
-            total_precos=total_precos, 
-            pedidos=pedidos_entity,
-            repositories=repositories
-            )
+            total_precos = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
+            
+            return render_template(
+                'main/main_client.html',
+                produtos=produto_entity, 
+                total_precos=total_precos, 
+                pedidos=pedidos_entity,
+                repositories=repositories
+                )
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
     @login_required
     def remove_from_cart(self):
-        produto_id = int(request.form.get('produto_id'))
+        if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            produto_id = int(request.form.get('produto_id'))
 
-        if 'carrinho' in session:
-            session['carrinho'] = [item for item in session['carrinho'] if item['id'] != produto_id]
+            if 'carrinho' in session:
+                session['carrinho'] = [item for item in session['carrinho'] if item['id'] != produto_id]
 
-        print(f'removeu: {session['carrinho']}') 
-        flash('Produto removido do carrinho!')
-        return redirect(url_for('main.main_client'))
+            print(f'removeu: {session['carrinho']}') 
+            flash('Produto removido do carrinho!')
+            return redirect(url_for('main.main_client'))
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
+    # @login_required
+    # def add_to_cart(self):
+    #     if not '@adm' in current_user.username and not '@op' in current_user.username: 
+    #         produto_id = request.form.get('produto_id')
+    #         produto_entity = repositories.produto_repository.get(obj_id=produto_id)
+
+    #         if 'carrinho' not in session:
+    #             session['carrinho'] = []
+
+    #         if produto_entity:
+    #             preco_produto = Decimal(produto_entity.preco) if produto_entity.preco is not None else Decimal('0.00')
+                
+    #             for item in session['carrinho']:
+    #                 estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=item['id'])
+    #                 if estoque_entity_quantidade <= item['quantidade']:
+    #                     continue
+
+    #                 if item['id'] == produto_entity.id:
+    #                     item['quantidade'] += 1
+    #                     item['preco'] = Decimal(item['preco'])  
+    #                     item['preco'] += Decimal(produto_entity.preco)  
+    #                     break
+    #             else:
+    #                 session['carrinho'].append({
+    #                     'id': produto_entity.id,
+    #                     'nome': produto_entity.nome,
+    #                     'preco': preco_produto,
+    #                     'quantidade': 1
+    #                 })
+    #         print(session['carrinho'])  
+    #         flash('Produto adicionado ao carrinho!')
+    #         return redirect(url_for('main.main_client'))
+    #     else:
+    #         return jsonify({"message": "Acesso não autorizado"}), 401
     @login_required
     def add_to_cart(self):
-        produto_id = request.form.get('produto_id')
-        produto_entity = repositories.produto_repository.get(obj_id=produto_id)
+        if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            produto_id = request.form.get('produto_id')
+            produto_entity = repositories.produto_repository.get(obj_id=produto_id)
 
-        if 'carrinho' not in session:
-            session['carrinho'] = []
+            if 'carrinho' not in session:
+                session['carrinho'] = []
 
-        if produto_entity:
-            preco_produto = Decimal(produto_entity.preco) if produto_entity.preco is not None else Decimal('0.00')
+            if produto_entity:
+                preco_produto = Decimal(produto_entity.preco) if produto_entity.preco is not None else Decimal('0.00')
+
+                for item in session['carrinho']:
+                    if item['id'] == produto_entity.id:
+                        estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=item['id'])
+                        
+                        if estoque_entity_quantidade > item['quantidade']:
+                            item['quantidade'] += 1
+                            item['preco'] = Decimal(item['preco'])  
+                            item['preco'] += preco_produto
+                        else:
+                            pass
+                        break
+                else:
+                    session['carrinho'].append({
+                        'id': produto_entity.id,
+                        'nome': produto_entity.nome,
+                        'preco': preco_produto,
+                        'quantidade': 1
+                    })
             
-            for item in session['carrinho']:
-                if item['id'] == produto_entity.id:
-                    item['quantidade'] += 1
-                    item['preco'] = Decimal(item['preco'])  
-                    item['preco'] += Decimal(produto_entity.preco)  
-                    break
-            else:
-                session['carrinho'].append({
-                    'id': produto_entity.id,
-                    'nome': produto_entity.nome,
-                    'preco': preco_produto,
-                    'quantidade': 1
-                })
-        print(session['carrinho'])  
-        flash('Produto adicionado ao carrinho!')
-        return redirect(url_for('main.main_client'))
+            print(session['carrinho'])  
+            flash('Produto adicionado ao carrinho!')
+            return redirect(url_for('main.main_client'))
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
+    # @login_required
+    # def increment_item(self):
+    #     if not '@adm' in current_user.username and not '@op' in current_user.username: 
+    #         produto_id = int(request.form.get('produto_id'))
+    #         produto_entity = repositories.produto_repository.get(obj_id=produto_id)
+
+    #         if 'carrinho' in session:
+    #             for item in session['carrinho']:
+    #                 estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=item['id'])
+    #                 if estoque_entity_quantidade <= item['quantidade']:
+    #                     break
+
+    #                 if item['id'] == produto_id:
+    #                     item['quantidade'] += 1
+    #                     item['preco'] = Decimal(item['preco']) 
+    #                     item['preco'] += Decimal(produto_entity.preco)   
+    #                     break
+
+    #         flash('Quantidade incrementada!')
+    #         return redirect(url_for('main.main_client'))
+    #     else:
+    #         return jsonify({"message": "Acesso não autorizado"}), 401
     @login_required
     def increment_item(self):
-        produto_id = int(request.form.get('produto_id'))
-        produto_entity = repositories.produto_repository.get(obj_id=produto_id)
+        if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            produto_id = int(request.form.get('produto_id'))
+            produto_entity = repositories.produto_repository.get(obj_id=produto_id)
 
-        if 'carrinho' in session:
-            for item in session['carrinho']:
-                if item['id'] == produto_id:
-                    item['quantidade'] += 1
-                    item['preco'] = Decimal(item['preco']) 
-                    item['preco'] += Decimal(produto_entity.preco)   
-                    break
+            if 'carrinho' in session:
+                for item in session['carrinho']:
+                    if item['id'] == produto_id:
+                        estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=produto_id)
+                        
+                        if estoque_entity_quantidade > item['quantidade']:
+                            item['quantidade'] += 1
+                            item['preco'] = Decimal(item['preco'])
+                            item['preco'] += Decimal(produto_entity.preco)
+                            flash('Quantidade incrementada!')
+                        else:
+                            pass
+                        break  
+            
+            return redirect(url_for('main.main_client'))
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
-        flash('Quantidade incrementada!')
-        return redirect(url_for('main.main_client'))
     
     @login_required
     def decrement_item(self):
-        produto_id = int(request.form.get('produto_id'))
-        produto_entity = repositories.produto_repository.get(obj_id=produto_id)
+        if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            produto_id = int(request.form.get('produto_id'))
+            produto_entity = repositories.produto_repository.get(obj_id=produto_id)
 
-        if 'carrinho' in session:
-            for item in session['carrinho']:
-                if item['id'] == produto_id:
-                    item['quantidade'] -= 1
-                    item['preco'] = Decimal(item['preco']) 
-                    item['preco'] -= Decimal(produto_entity.preco) 
+            if 'carrinho' in session:
+                for item in session['carrinho']:
+                    if item['id'] == produto_id:
+                        item['quantidade'] -= 1
+                        item['preco'] = Decimal(item['preco']) 
+                        item['preco'] -= Decimal(produto_entity.preco) 
 
-                    if item['quantidade'] == 0:
-                        session['carrinho'].remove(item) 
-                    break
+                        if item['quantidade'] == 0:
+                            session['carrinho'].remove(item) 
+                        break
 
-        flash('Quantidade decrementada!')
-        return redirect(url_for('main.main_client'))
+            flash('Quantidade decrementada!')
+            return redirect(url_for('main.main_client'))
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
 
     @login_required
     def fazer_pedido(self):
-        try:
-            input_dto = CreatePedidoInputDto(
-                id_cliente = current_user.cliente.id,
-                data_pedido = datetime.now(),
-                status ='Aguardando Pagamento',
-                valor_total = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
-            )
+        if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            try:
+                input_dto = CreatePedidoInputDto(
+                    id_cliente = current_user.cliente.id,
+                    data_pedido = datetime.now(),
+                    status ='Aguardando Pagamento',
+                    valor_total = sum(Decimal(item['preco']) for item in session['carrinho'] if 'preco' in item)
+                )
 
-            usecase: CreatePedidoUseCase = current_app.global_usecases.create_pedido_usecase
+                usecase: CreatePedidoUseCase = current_app.global_usecases.create_pedido_usecase
 
-            pedido_entity = usecase.execute(input_dto=input_dto, list_carrinho=session['carrinho'])
+                pedido_entity = usecase.execute(input_dto=input_dto, list_carrinho=session['carrinho'])
 
-            flash(message='Operador Registrado', category='info')
+                flash(message='Operador Registrado', category='info')
 
-            session['carrinho'] = []
+                session['carrinho'] = []
+
+                return redirect(url_for('main.main_client'))
+            except Exception as e:
+                stacktrace = traceback.format_exc()
+                flash(message=str(e), category='danger')
 
             return redirect(url_for('main.main_client'))
-        except Exception as e:
-            stacktrace = traceback.format_exc()
-            flash(message=str(e), category='danger')
-
-        return redirect(url_for('main.main_client'))
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
     
     @login_required
     def fazer_pagamento(self):
-        pedido_id = request.form.get('pedido_id') 
-        print(pedido_id)
-        id_qr_code = pedido_id
+        if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            pedido_id = request.form.get('pedido_id') 
+            print(pedido_id)
+            id_qr_code = pedido_id
 
-        def obter_url_ngrok():
-            try:
-                ngrok = os.getenv('HTTP_NGROK')
-                response = requests.get(ngrok)
-                tunnels = response.json().get('tunnels', [])
-                if tunnels:
-                    return tunnels[0]['public_url'] 
-            except Exception as e:
-                print(f"Erro ao obter URL do ngrok: {e}")
-            return None
+            def obter_url_ngrok():
+                try:
+                    ngrok = os.getenv('HTTP_NGROK')
+                    response = requests.get(ngrok)
+                    tunnels = response.json().get('tunnels', [])
+                    if tunnels:
+                        return tunnels[0]['public_url'] 
+                except Exception as e:
+                    print(f"Erro ao obter URL do ngrok: {e}")
+                return None
 
-        def gerar_qr_code():
-            ngrok_url = obter_url_ngrok()
+            def gerar_qr_code():
+                ngrok_url = obter_url_ngrok()
 
-            if ngrok_url is not None:   
-                qr_id = str(pedido_id)
-                qr_data = f"{ngrok_url}/confirm/{qr_id}"
+                if ngrok_url is not None:   
+                    qr_id = str(pedido_id)
+                    qr_data = f"{ngrok_url}/confirm/{qr_id}"
+                    
+                    qr_img = qrcode.make(qr_data)
+                    qr_img.save(f"app/views/static/qr_codes/{qr_id}.png")
                 
-                qr_img = qrcode.make(qr_data)
-                qr_img.save(f"app/views/static/qr_codes/{qr_id}.png")
-            
-                return qr_id
+                    return qr_id
 
-        if not os.path.exists(f"app/views/static/qr_codes/{pedido_id}.png"):
-            id_qr_code = gerar_qr_code()
+            if not os.path.exists(f"app/views/static/qr_codes/{pedido_id}.png"):
+                id_qr_code = gerar_qr_code()
 
-        return render_template('main/pagamento.html', qr_id=id_qr_code)
+            return render_template('main/pagamento.html', qr_id=id_qr_code)
+        else:
+            return jsonify({"message": "Acesso não autorizado"}), 401
 
     def acessar_qr_code(self, qr_id):
         if request.method == 'POST':

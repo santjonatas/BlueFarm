@@ -1,16 +1,17 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} BlueFarm | Main {% endblock title %}
+{% block title %} BlueFarm | Controle de Temperatura {% endblock title %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/irrigacao.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/controle_temperatura.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
     <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
+        <button type="submit" class="bt-cabecalho">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -21,43 +22,51 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button>Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button>Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
-        <section class="section-pedidos section-content" id="pedidos">
+        <section class="section-temperatura section-content" id="temperatura">
             {% set metodo_controle_temperatura = dados_controle_temperatura.get('metodo_controle_temperatura') %}
             {% set metodo = metodo_controle_temperatura.get('metodo') %}
             {% set descricao = metodo_controle_temperatura.get('descricao') %}
             {% set vantagens = metodo_controle_temperatura.get('vantagens') %}
             {% set adequado_para = metodo_controle_temperatura.get('adequado_para') %}
-            <div class="card-pedido">
-                <div class="detalhes-pedido-1">
-                    <output class="out-dados-pedido id-pedido">Controle de Temperatura</output>
-                    <output class="out-dados-pedido status-pedido">Método: {{ metodo }}</output>
+            <div class="card-temperatura">
+                <div class="detalhes-temperatura-1">
+                    <output class="out-dados-temperatura id-temperatura">Controle de Temperatura</output>
+                    <output class="out-dados-temperatura status-temperatura">Método: {{ metodo }}</output>
                 </div>
-                <div class="detalhes-pedido-2">
-                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
-                    <h4 class="out-dados-pedido">Vantagens:</h4>
+                <div class="detalhes-temperatura-2">
+                    <output class="out-dados-temperatura" id="descricao">Descrição: {{ descricao }}</output>
+                    <h4 class="out-dados-temperatura">Vantagens:</h4>
                     {% for vantagem in vantagens %}
-                        <p class="out-dados-pedido valor-pedido">-{{ vantagem }}</p>
+                        <p class="out-dados-temperatura valor-temperatura">-{{ vantagem }}</p>
                     {% endfor %}
                 </div>
-                <div class="div-bt-pagar-pedido">
-                    <output class="out-dados-pedido valor-pedido">Adequado Para: {{ adequado_para }}</output>
+                <div class="div-bt-temperatura">
+                    <output class="out-dados-temperatura valor-temperatura">Adequado Para: {{ adequado_para }}</output>
                 </div>
             </div>
 
             {% set tipo_de_clima = dados_controle_temperatura.get('tipo_de_clima') %}
             {% set tipo = tipo_de_clima.get('tipo') %}
             {% set descricao = tipo_de_clima.get('descricao') %}
-            <div class="card-pedido">
-                <div class="detalhes-pedido-1">
-                    <output class="out-dados-pedido id-pedido">Clima</output>
+            <div class="card-temperatura">
+                <div class="detalhes-temperatura-1">
+                    <output class="out-dados-temperatura id-temperatura">Clima</output>
                 </div>
-                <div class="detalhes-pedido-2">
-                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
+                <div class="detalhes-temperatura-2">
+                    <output class="out-dados-temperatura" id="descricao">Descrição: {{ descricao }}</output>
                 </div>
-                <div class="div-bt-pagar-pedido">
-                    <output class="out-dados-pedido valor-pedido">Tipo: {{ tipo }}</output>
+                <div class="div-bt-temperatura">
+                    <output class="out-dados-temperatura valor-temperatura">Tipo: {{ tipo }}</output>
                 </div>
             </div>
 
@@ -65,23 +74,24 @@
             {% set pratica = pratica_sustentavel.get('pratica') %}
             {% set descricao = pratica_sustentavel.get('descricao') %}
             {% set beneficios = pratica_sustentavel.get('beneficios') %}
-            <div class="card-pedido">
-                <div class="detalhes-pedido-1">
-                    <output class="out-dados-pedido id-pedido">Prática Sustentável</output>
-                    <output class="out-dados-pedido status-pedido">Prática: {{ pratica }}</output>
+            <div class="card-temperatura">
+                <div class="detalhes-temperatura-1">
+                    <output class="out-dados-temperatura id-temperatura">Prática Sustentável</output>
+                    <output class="out-dados-temperatura status-temperatura">Prática: {{ pratica }}</output>
                 </div>
-                <div class="detalhes-pedido-2">
-                    <output class="out-dados-pedido" id="descricao">Descrição: {{ descricao }}</output>
-                    <h4 class="out-dados-pedido">Beneficios:</h4>
+                <div class="detalhes-temperatura-2">
+                    <output class="out-dados-temperatura" id="descricao">Descrição: {{ descricao }}</output>
+                    <h4 class="out-dados-temperatura">Beneficios:</h4>
                     {% for beneficio in beneficios %}
-                        <p class="out-dados-pedido valor-pedido">-{{ beneficio }}</p>
+                        <p class="out-dados-temperatura valor-temperatura">-{{ beneficio }}</p>
                     {% endfor %}
                 </div>
-                <div class="div-bt-pagar-pedido">
+                <div class="div-bt-temperatura">
                 </div>
             </div>
         </section>
     </section>
 </main>
 <!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}
