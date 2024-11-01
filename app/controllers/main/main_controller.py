@@ -102,7 +102,7 @@ class MainController:
                 for item in session['carrinho']:
                     estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=item['id'])
                     if estoque_entity_quantidade <= item['quantidade']:
-                        break
+                        continue
 
                     if item['id'] == produto_entity.id:
                         item['quantidade'] += 1
