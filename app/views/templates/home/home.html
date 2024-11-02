@@ -4,7 +4,7 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css' ) }}">
-<link rel="stylesheet" href="../../static/styles/home.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
@@ -29,6 +29,17 @@
     </div>
 </section>
 <section class="secao-registro">
+    <div id="sessao-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
     <form method="POST" class="form-registro">
         {{ form.csrf_token }}
         <div id="formularios">
