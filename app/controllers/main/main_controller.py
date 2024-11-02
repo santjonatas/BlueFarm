@@ -302,7 +302,6 @@ class MainController:
             return jsonify({"message": "Acesso não autorizado"}), 401
 
     def acessar_qr_code(self, qr_id):
-        messages = get_flashed_messages()
         if request.method == 'POST':
             if session.get(f'{qr_id}_confirmed'):
                 return "QR Code já foi confirmado!"
@@ -313,7 +312,6 @@ class MainController:
         return render_template('main/acessar_qr_code.html', qr_id=qr_id)
 
     def confirmar_pagamento(self, qr_id):
-        messages = get_flashed_messages()
         print(qr_id)
         try:
             input_dto = CreatePagamentoInputDto(
