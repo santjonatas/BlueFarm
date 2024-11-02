@@ -6,13 +6,15 @@ html, body {
   
 body{
     width: 100%;
-    height: 2600px;
+    height: 3280px;
     
     display: flex;
     flex-direction: column;
 
     font-family: Arial, Helvetica, sans-serif;
 }
+
+/* CABECALHO */
 
 header{
     width: 100%;
@@ -64,9 +66,11 @@ button{
     color: white;
 }
 
+/* MENU PRINCIPAL */
+
 .secao-principal{
     width: 100%;
-    height: 50%;
+    height: 700px;
 
     display: flex;
     justify-content: center;
@@ -127,73 +131,11 @@ h2{
     background-color: rgba(0, 0, 0, 0);
 }
 
-.secao-sobre-nos{
-    width: 100%;
-    height: 50%;
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    /* background: linear-gradient(to right bottom, 
-    #151C1A, 
-    #27282C, 
-    #47533E); */
-    background: linear-gradient(to right bottom, #1A1A1A, #3A3A3A, #5A5A5A);
-}
-
-.img-fazenda-sobre-nos{
-    width: 35%;
-    height: 45%;
-
-    background-image: url('../../static/images/background-home-sobre-nos.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; 
-}
-
-.txt-sobre-nos{
-    width: 50%;
-    height: 50%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-h3{
-    font-size: 27px;
-    color: white;
-    text-align: center;
-}
-
-#txt-sobre-nos{
-    font-size: 17px;
-    color: white;
-    text-align: center;
-    margin: auto;
-}
-
-.secao-servicos{
-    width: 100%;
-    height: 50%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-image: url('../../static/images/background-home-servicos.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; 
-}
-
-/*****************************************************/
+/* REGISTRO */
 
 .secao-registro{
     width: 100%;
-    height: 50%;
+    height: 600px;
 
     display: flex;
     justify-content: space-around;
@@ -370,4 +312,158 @@ input::placeholder {
     /* Garante que padding/border sejam incluídos nas dimensões */
     box-sizing: border-box;
     padding: 0;
+}
+
+/* SOBRE NOS */
+
+.secao-sobre-nos{
+    width: 100%;
+    height: 600px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: rgb(10, 10, 10);
+}
+
+.img-fazenda-sobre-nos{
+    width: 25%;
+    height: 65%;
+
+    background-image: url('../../static/images/background_sobre_nos_home.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.txt-sobre-nos{
+    width: 50%;
+    height: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    font-size: 27px;
+    color: white;
+    text-align: center;
+}
+
+#txt-sobre-nos{
+    font-size: 17px;
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+
+/* SERVICOS */
+
+#secao-servicos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 15%;
+}
+
+.img-fazenda-servicos{
+    width: 25%;
+    height: 65%;
+
+    background-image: url('../../static/images/background_servicos_home2.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.secao-servicos{
+    width: 100%;
+    height: 600px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('../../static/images/background_servicos_home.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.txt-servicos{
+    width: 40%;
+    height: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000033;
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    padding: 35px;
+}
+
+#txt-servicos{
+    font-size: 17px;
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+
+/* PRODUTOS */
+
+.secao-produtos{
+    width: 100%;
+    height: 700px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10%;
+    padding-top: 70px;
+    background-color: rgb(10, 10, 10);
+}
+
+.imagens-produtos{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 2%;
+
+    width: 80%;
+    height: 80%;
+}
+
+.img-produtos{
+    width: 150px;
+    height: 150px;
+
+    background-color: #3A3A3A;
+    border-radius: 10px;
+}
+
+#txt-produtos{
+    font-size: 17px;
+    color: white;
+    text-align: center;
+    margin: auto;
+    width: 80%;
+}
+
+/* FOOTER */
+
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
