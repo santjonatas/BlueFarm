@@ -3,7 +3,7 @@ import os
 from pprint import pprint
 import re
 import traceback
-from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, jsonify, request, session, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
 from werkzeug.utils import secure_filename
@@ -54,6 +54,7 @@ class DashboardController:
     @login_required
     def estoque_produtos(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             produto_entity = repositories.produto_repository.list()
             
             pedidos_entity = repositories.pedido_repository.list()
@@ -70,6 +71,7 @@ class DashboardController:
     @login_required
     def editar_produto(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             produto_id = request.form.get('produto_id')
             produto_nome = request.form.get('produto_nome')
             produto_preco = request.form.get('produto_preco')
@@ -83,7 +85,8 @@ class DashboardController:
     
     @login_required
     def alterar_estoque(self, produto_id):
-        if '@adm' in current_user.username or '@op' in current_user.username: 
+        if '@adm' in current_user.username or '@op' in current_user.username:
+            messages = get_flashed_messages() 
             form: FlaskForm = EditarProdutoForm()
 
             if form.validate_on_submit():
@@ -112,6 +115,7 @@ class DashboardController:
     @login_required
     def add_produto(self):
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             form: FlaskForm = AddProdutoForm()
 
             if form.validate_on_submit():
@@ -150,6 +154,7 @@ class DashboardController:
     @login_required
     def cultivo(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             cultivo_id = request.form.get('cultivo_id')
 
             form: FlaskForm = AddColheitaForm()
@@ -189,6 +194,7 @@ class DashboardController:
     @login_required
     def add_cultivo(self):
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             form: FlaskForm = AddCultivoForm()
 
             if form.validate_on_submit():
@@ -217,6 +223,7 @@ class DashboardController:
     @login_required
     def buscar_alimentos(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             form: FlaskForm = BuscarAlimentoForm()
 
             info_alimento = None

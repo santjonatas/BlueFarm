@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 from pprint import pprint
 import traceback
-from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, jsonify, request, session, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
 from werkzeug.utils import secure_filename
@@ -49,6 +49,7 @@ class ControleProducaoController:
     @login_required
     def irrigacao(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             json_irrigacao = os.getenv('JSON_IRRIGACAO')
 
             with open(json_irrigacao, 'r', encoding='utf-8') as arquivo:
@@ -68,6 +69,7 @@ class ControleProducaoController:
     @login_required
     def controle_temperatura(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             json_controle_temperatura = os.getenv('JSON_CONTROLE_TEMPERATURA')
 
             with open(json_controle_temperatura, 'r', encoding='utf-8') as arquivo:
@@ -88,6 +90,7 @@ class ControleProducaoController:
     @login_required
     def colheita(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             colheita_entity = repositories.colheita_repository.list()
             
             return render_template(

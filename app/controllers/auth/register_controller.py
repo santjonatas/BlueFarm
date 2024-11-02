@@ -1,5 +1,5 @@
 from pprint import pprint
-from flask import current_app, flash, jsonify, render_template, redirect, url_for, Blueprint
+from flask import current_app, flash, get_flashed_messages, jsonify, render_template, redirect, url_for, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from flask_wtf import FlaskForm
 from app.application.usecases.auth.create_administrador_usecase import CreateAdminUserUseCase
@@ -22,6 +22,7 @@ class RegisterController:
     @login_required
     def register_admin(self) -> None:
         if '@adm' in current_user.username: 
+            messages = get_flashed_messages()
             form: FlaskForm = RegisterAdmForm()
 
             if form.validate_on_submit():
@@ -46,6 +47,7 @@ class RegisterController:
     @login_required
     def register_operador(self) -> None:
         if '@adm' in current_user.username: 
+            messages = get_flashed_messages()
             form: FlaskForm = RegisterOpForm()
 
             if form.validate_on_submit():

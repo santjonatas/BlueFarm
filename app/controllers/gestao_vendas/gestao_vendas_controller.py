@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 from pprint import pprint
 import traceback
-from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, jsonify, request, session, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
 from werkzeug.utils import secure_filename
@@ -45,6 +45,7 @@ class GestaoVendasController:
     @login_required
     def registro_vendas(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             pedido_entity = repositories.pedido_repository.obter_pedidos_nao_aguardando_pagamento()
             
             return render_template(
@@ -57,6 +58,7 @@ class GestaoVendasController:
     @login_required
     def editar_venda(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             pedido_id = request.form.get('pedido_id')
             pedido_status = request.form.get('pedido_status')
             pedido_valor_total = request.form.get('pedido_valor_total')
@@ -78,6 +80,7 @@ class GestaoVendasController:
     @login_required
     def alterar_status_venda(self, pedido_id):
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             form: FlaskForm = EditarPedidoForm()
             print(form.status.data) 
 
@@ -108,6 +111,7 @@ class GestaoVendasController:
     @login_required
     def lista_clientes(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             cliente_entity = repositories.cliente_repository.list()
             
             return render_template(

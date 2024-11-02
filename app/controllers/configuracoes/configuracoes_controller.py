@@ -3,7 +3,7 @@ import os
 from pprint import pprint
 import re
 import traceback
-from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, jsonify, request, session, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
 from werkzeug.utils import secure_filename
@@ -58,6 +58,7 @@ class ConfiguracoesController:
     @login_required
     def departamentos(self) -> None:
         if '@adm' in current_user.username: 
+            messages = get_flashed_messages()
             departamento_entity = repositories.departamento_repository.list()
 
             form: FlaskForm = AddDepartamentoForm()
@@ -91,7 +92,8 @@ class ConfiguracoesController:
 
     @login_required
     def cargos(self) -> None:
-        if '@adm' in current_user.username: 
+        if '@adm' in current_user.username:
+            messages = get_flashed_messages() 
             cargo_entity = repositories.cargo_repository.list()
 
             form: FlaskForm = AddCargoForm()
@@ -126,6 +128,7 @@ class ConfiguracoesController:
     @login_required
     def funcionarios(self) -> None:
         if '@adm' in current_user.username: 
+            messages = get_flashed_messages()
             form = RemoverFuncionarioForm()
 
             funcionario_entity = repositories.funcionario_repository.list()
@@ -137,6 +140,7 @@ class ConfiguracoesController:
     @login_required
     def remover_funcionario(self, id_funcionario) -> None:
         if '@adm' in current_user.username: 
+            messages = get_flashed_messages()
             funcionario_entity = repositories.funcionario_repository.list()
 
             form: FlaskForm = RemoverFuncionarioForm()

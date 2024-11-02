@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 import traceback
-from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, jsonify, request, session, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
 import qrcode
@@ -43,6 +43,7 @@ class MainController:
     @login_required
     def main(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             return render_template('main/main.html')
         else:
             return jsonify({"message": "Acesso não autorizado"}), 401
@@ -54,6 +55,7 @@ class MainController:
     @login_required
     def main_client(self) -> None:
         if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            messages = get_flashed_messages()
             if 'carrinho' not in session:
                 session['carrinho'] = []
             
@@ -76,6 +78,7 @@ class MainController:
     @login_required
     def remove_from_cart(self):
         if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            messages = get_flashed_messages()
             produto_id = int(request.form.get('produto_id'))
 
             if 'carrinho' in session:
@@ -124,6 +127,7 @@ class MainController:
     @login_required
     def add_to_cart(self):
         if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            messages = get_flashed_messages()
             produto_id = request.form.get('produto_id')
             produto_entity = repositories.produto_repository.get(obj_id=produto_id)
 
@@ -183,6 +187,7 @@ class MainController:
     @login_required
     def increment_item(self):
         if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            messages = get_flashed_messages()
             produto_id = int(request.form.get('produto_id'))
             produto_entity = repositories.produto_repository.get(obj_id=produto_id)
 
@@ -208,6 +213,7 @@ class MainController:
     @login_required
     def decrement_item(self):
         if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            messages = get_flashed_messages()
             produto_id = int(request.form.get('produto_id'))
             produto_entity = repositories.produto_repository.get(obj_id=produto_id)
 
@@ -231,6 +237,7 @@ class MainController:
     @login_required
     def fazer_pedido(self):
         if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            messages = get_flashed_messages()
             try:
                 input_dto = CreatePedidoInputDto(
                     id_cliente = current_user.cliente.id,
@@ -243,7 +250,7 @@ class MainController:
 
                 pedido_entity = usecase.execute(input_dto=input_dto, list_carrinho=session['carrinho'])
 
-                flash(message='Operador Registrado', category='info')
+                flash(message='Pedido Registrado', category='info')
 
                 session['carrinho'] = []
 
@@ -259,6 +266,7 @@ class MainController:
     @login_required
     def fazer_pagamento(self):
         if not '@adm' in current_user.username and not '@op' in current_user.username: 
+            messages = get_flashed_messages()
             pedido_id = request.form.get('pedido_id') 
             print(pedido_id)
             id_qr_code = pedido_id
@@ -294,6 +302,7 @@ class MainController:
             return jsonify({"message": "Acesso não autorizado"}), 401
 
     def acessar_qr_code(self, qr_id):
+        messages = get_flashed_messages()
         if request.method == 'POST':
             if session.get(f'{qr_id}_confirmed'):
                 return "QR Code já foi confirmado!"
@@ -304,6 +313,7 @@ class MainController:
         return render_template('main/acessar_qr_code.html', qr_id=qr_id)
 
     def confirmar_pagamento(self, qr_id):
+        messages = get_flashed_messages()
         print(qr_id)
         try:
             input_dto = CreatePagamentoInputDto(
