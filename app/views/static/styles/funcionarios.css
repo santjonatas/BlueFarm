@@ -1,0 +1,197 @@
+*{
+    margin: 0px;
+    padding: 0px;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CABECALHO */
+
+.bt-cabecalho {
+    width: 45px;
+    height: 30px;
+    border-radius: 25px;
+    border: 0px solid;
+    margin-top: 1%;
+    font-size: 15px;
+    background-color: #0A73B0;
+    color: white;
+    background: linear-gradient(to right bottom, #151C1A, #27282C, #47533E);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+/* MENU */
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    width: 100%;
+    background: linear-gradient(
+    to right bottom, 
+    rgb(255, 255, 255), 
+    rgb(238, 238, 238)
+    );
+}
+
+.section-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    width: 100%;
+    height: 100%;
+}
+
+.form-registrar-departamento{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 350px;
+    height: 400px;
+    background-color: #7D52FF;
+    margin-top: 20%;
+    margin-bottom: 20%;
+    border-radius: 15px;
+}
+
+.card-departamento{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    
+    width: 310px;
+    height: 300px;
+    background-color: #7D52FF;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 15px;
+    color: white;
+    padding-left: 5px;
+}
+
+/* FORMULARIOS */
+
+.sessao-registro{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    background: linear-gradient(
+    to right bottom, 
+    rgb(255, 255, 255), 
+    rgb(238, 238, 238)
+    );
+}
+
+.form-registro{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10%;
+}
+
+#formularios{
+    width: 95%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 3%;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    margin-top: 10px;
+    height: 52px;
+}
+
+.form-control{
+    width: 300px;
+    height: 35px;
+    border-radius: 25px;
+    border: 0px solid;
+    margin-top: 1%;
+
+    background-color: #D5D1FF;
+    color: black;
+}
+
+label{
+    height: 17px;
+    font-size: 15px;
+}
+
+input{
+    padding-left: 3%;
+}
+
+input::placeholder {
+    color: #807e99; 
+    opacity: 1;
+}
+
+.bt-registro {
+    width: 95px;
+    height: 45px;
+    border-radius: 25px;
+    border: 0px solid;
+    margin-top: 3%;
+    font-size: 15px;
+    background-color: #0A73B0;
+    color: white;
+    background: linear-gradient(to right bottom, #151C1A, #27282C, #47533E);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 0;
+
+    margin-bottom: 30px;
+} 
+
+#file{
+    height: 100%;
+}
+
+#boolean{
+    width: 15px;
+    height: 15px;
+}
+
+#form-bool{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    width: 200px;
+    color: white;
+}
