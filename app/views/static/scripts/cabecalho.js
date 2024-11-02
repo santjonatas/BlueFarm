@@ -27,3 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const imgPerfil = document.querySelector(".img-perfil");
+
+    imgPerfil.addEventListener("mouseenter", function () {
+        imgPerfil.style.backgroundImage = "url('../../static/images/profile-escuro.jpg')";
+    });
+
+    imgPerfil.addEventListener("mouseleave", function () {
+        imgPerfil.style.backgroundImage = "url('../../static/images/profile.jpg')";
+    });
+});
