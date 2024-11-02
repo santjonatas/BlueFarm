@@ -29,122 +29,92 @@
 main{
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
+    flex-direction: column;
 
     width: 100%;
+    height: 100%;
     background: linear-gradient(
     to right bottom, 
     rgb(255, 255, 255), 
     rgb(238, 238, 238)
     );
+    padding-top: 5%;
+    padding-bottom: 15%;
 }
 
-.section-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    
-    width: 100%;
-    height: 100%;
-}
+/* FUNCIONÁRO */
 
-.form-registrar-departamento{
+.card-funcionario{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 
-    width: 350px;
-    height: 400px;
-    background-color: #7D52FF;
-    margin-top: 20%;
-    margin-bottom: 20%;
-    border-radius: 15px;
+    width: 600px;
+    border-radius: 10px;
+    margin-top: 5%;
 }
 
-.card-departamento{
+.detalhes-funcionario-1{
     display: flex;
-    justify-content: center;
-    align-items: start;
-    flex-direction: column;
-    
-    width: 310px;
-    height: 300px;
-    background-color: #7D52FF;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    border-radius: 15px;
-    color: white;
-    padding-left: 5px;
-}
-
-/* FORMULARIOS */
-
-.sessao-registro{
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-
-    background-color: white;
-    background: linear-gradient(
-    to right bottom, 
-    rgb(255, 255, 255), 
-    rgb(238, 238, 238)
-    );
-}
-
-.form-registro{
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center;
-
-    margin-top: 10%;
-}
-
-#formularios{
-    width: 95%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
     gap: 3%;
+
+    width: 100%;
+    height: 50px;
+    background-color: #7D52FF;
+    border-radius: 10px 10px 0px 0px;
+    color: white;
 }
 
-.form{
+.img-produto-funcionario{
+    width: 50px;
+    height: 50px;
+}
+
+.detalhes-funcionario-2{
     display: flex;
+    justify-content: center;
+    align-items: start;
     flex-direction: column;
-    justify-content: end;
+    gap: 2%;
 
-    margin-top: 10px;
-    height: 52px;
-}
-
-.form-control{
-    width: 300px;
-    height: 35px;
-    border-radius: 25px;
-    border: 0px solid;
-    margin-top: 1%;
-
+    width: 100%;
+    height: 250px;
     background-color: #D5D1FF;
-    color: black;
 }
 
-label{
-    height: 17px;
-    font-size: 15px;
+p{
+    margin-left: 5px;
+}
+
+.div-bt-delete{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    gap: 5%;
+    width: 100%;
+    height: 55px;
+    background-color: #7D52FF;
+    border-radius: 0px 0px 10px 10px;
+    color: white;
+}
+
+.bt-delete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50px;
+    height: 35px;
+    margin-right: 5px;
+}
+
+#dt-colheita{
+    width: 260px;
 }
 
 input{
@@ -156,42 +126,19 @@ input::placeholder {
     opacity: 1;
 }
 
-.bt-registro {
-    width: 95px;
+.bt-delete {
+    width: 80px;
     height: 45px;
     border-radius: 25px;
     border: 0px solid;
-    margin-top: 3%;
+    margin-top: 1%;
     font-size: 15px;
     background-color: #0A73B0;
     color: white;
     background: linear-gradient(to right bottom, #151C1A, #27282C, #47533E);
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     box-sizing: border-box;
     padding: 0;
-
-    margin-bottom: 30px;
-} 
-
-#file{
-    height: 100%;
-}
-
-#boolean{
-    width: 15px;
-    height: 15px;
-}
-
-#form-bool{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 10px;
-    width: 200px;
-    color: white;
 }

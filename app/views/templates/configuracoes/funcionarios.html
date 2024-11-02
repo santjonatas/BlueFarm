@@ -31,34 +31,35 @@
     </form>
 </div>
 <main>
-    <section class="section-main">
-        {% for funcionario in funcionarios %}
-            {% if funcionario.usuario and funcionario.usuario.pessoa %}
-            <form method="POST" action="{{ url_for('configuracoes.remover_funcionario', id_funcionario=funcionario.id)}}" class="lista-departamentos">
-                {{ form.csrf_token }}
-                <div class="card-departamento">
-                    <p>Id Pessoa: {{ funcionario.usuario.pessoa.id }}</p>
-                    <p>Nome: {{ funcionario.usuario.pessoa.nome }}</p>
-                    <p>Data de Nascimento: {{ funcionario.usuario.pessoa.data_nascimento }}</p>
-                    <p>CPF: {{ funcionario.usuario.pessoa.cpf }}</p>
-                    <p>Gênero: {{ funcionario.usuario.pessoa.genero }}</p>
-                    <p>Telefone: {{ funcionario.usuario.pessoa.telefone }}</p>
-                    <p>Email: {{ funcionario.usuario.pessoa.email }}</p>
-                    <p>Endereço: {{ funcionario.usuario.pessoa.endereco }}</p>
+    {% for funcionario in funcionarios %}
+        {% if funcionario.usuario and funcionario.usuario.pessoa %}
+        <form method="POST" action="{{ url_for('configuracoes.remover_funcionario', id_funcionario=funcionario.id)}}" class="card-funcionario">
+            {{ form.csrf_token }}
+            <div class="detalhes-funcionario-1">
+                <p>Username: {{ funcionario.usuario.username }}</p>
+            </div>
+            <div class="detalhes-funcionario-2">
+                <p>Id Pessoa: {{ funcionario.usuario.pessoa.id }}</p>
+                <p>Nome: {{ funcionario.usuario.pessoa.nome }}</p>
+                <p>Data de Nascimento: {{ funcionario.usuario.pessoa.data_nascimento }}</p>
+                <p>CPF: {{ funcionario.usuario.pessoa.cpf }}</p>
+                <p>Gênero: {{ funcionario.usuario.pessoa.genero }}</p>
+                <p>Telefone: {{ funcionario.usuario.pessoa.telefone }}</p>
+                <p>Email: {{ funcionario.usuario.pessoa.email }}</p>
+                <p>Endereço: {{ funcionario.usuario.pessoa.endereco }}</p>
 
-                    <p>Id Usuário: {{ funcionario.id_usuario }}</p>
-                    <p>Username: {{ funcionario.usuario.username }}</p>
+                <p>Id Usuário: {{ funcionario.id_usuario }}</p>
 
-                    <p>Id Funcionário: {{ funcionario.id }}</p>
-                    <p>Cargo: {{ funcionario.cargo.funcao }}</p>
-                    <p>Salário: {{ funcionario.cargo.salario }}</p>
-                    
-                    {{ form.submit(class="bt-registro", value="Deletar") }}
-                </div>
-            </form>
-            {% endif %}
-        {% endfor %}
-    </section>
+                <p>Id Funcionário: {{ funcionario.id }}</p>
+                <p>Cargo: {{ funcionario.cargo.funcao }}</p>
+                <p>Salário: {{ funcionario.cargo.salario }}</p>
+            </div>
+            <div class="div-bt-delete">
+                {{ form.submit(class="bt-delete", value="Deletar") }}
+            </div>
+        </form>
+        {% endif %}
+    {% endfor %}
 </main>
 <script src="../../static/scripts/register.js"></script>
 <script src="../../static/scripts/cabecalho.js"></script>
