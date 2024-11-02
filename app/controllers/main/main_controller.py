@@ -42,6 +42,9 @@ class MainController:
 
     @login_required
     def main(self) -> None:
+        if not '@adm' in current_user.username and not '@op' in current_user.username:
+            return redirect(url_for('main.main_client'))
+
         if '@adm' in current_user.username or '@op' in current_user.username: 
             messages = get_flashed_messages()
             return render_template('main/main.html')
