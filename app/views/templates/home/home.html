@@ -11,9 +11,9 @@
 <header>
     <div class="borrao-header">
         <div class="conteudo-header">
-            <button type="submit">Sobre Nós</button>
-            <button type="submit">Serviços</button>
-            <button type="submit">Produtos</button>
+            <button class="bt-cabecalho" type="submit">Sobre Nós</button>
+            <button class="bt-cabecalho" type="submit">Serviços</button>
+            <button class="bt-cabecalho" type="submit">Produtos</button>
         </div>
     </div>
 </header>
@@ -23,7 +23,7 @@
             <h1>Seja Bem-Vindo a BlueFarm!</h1>
             <h2>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h2>
             <form action="{{ url_for('login.login') }}" method="get">
-                <button type="submit" class="bt-contato">Realizar Login</button>
+                <button type="submit" class="bt-login">Realizar Login</button>
             </form>
         </div>
     </div>
@@ -87,7 +87,7 @@
     <div class="borrao-secao">
         <div class="conteudo-secao" id="secao-servicos">
             <div class="txt-servicos">
-                <h3>Sobre Nós</h3>
+                <h3>Serviços</h3>
                 <p id="txt-servicos">
                     Nossa fazenda urbana oferece uma experiência prática e rápida de compra para quem valoriza produtos frescos e de qualidade. No nosso site, você encontra uma seleção cuidadosa de hortaliças, frutas e ervas, colhidos diretamente da nossa horta e prontos para consumo. Basta acessar a plataforma, escolher os itens que deseja, realizar a compra e finalizar o pedido – tudo em poucos cliques.
 
@@ -128,5 +128,6 @@
     </p>
 </footer>
 </body>
+<script src="../../static/scripts/home.js"></script>
 </html>
 {% endblock body %}
