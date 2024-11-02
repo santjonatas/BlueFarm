@@ -10,3 +10,20 @@ function togglePerfilExpandido() {
 }
 
 imgPerfil.addEventListener('click', togglePerfilExpandido);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.bt-div-header');
+    
+    cards.forEach(function(card) {
+        card.addEventListener('mouseover', function() {
+            card.style.backgroundColor = 'rgb(219, 217, 217)'; 
+            card.style.boxshadow = '';
+        });
+        
+        card.addEventListener('mouseout', function() {
+            card.style.backgroundColor = '';  
+            card.style.boxshadow = ''
+        });
+    });
+});
