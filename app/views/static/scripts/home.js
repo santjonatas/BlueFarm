@@ -12,6 +12,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const sobreNosButton = document.querySelector('.bt-cabecalho:nth-of-type(1)'); // Botão "Sobre Nós"
+    const servicosButton = document.querySelector('.bt-cabecalho:nth-of-type(2)'); // Botão "Serviços"
+    const produtosButton = document.querySelector('.bt-cabecalho:nth-of-type(3)'); // Botão "Produtos"
+
+    sobreNosButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        const targetSection = document.getElementById('sobre-nos');
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    });
+
+    servicosButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        const targetSection = document.getElementById('servicos');
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    });
+
+    produtosButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        const targetSection = document.getElementById('produtos');
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    });
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     const cards = document.querySelectorAll('.bt-login');
     
