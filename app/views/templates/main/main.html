@@ -22,10 +22,10 @@
 </header>
 <div id="perfil-expandido" class="perfil-expandido" style="display: none;">
     <form method="GET" action="{{ url_for('login.logout') }}">
-        <button>Logout</button>
+        <button class="bt-div-header">Logout</button>
     </form>
     <form method="GET" action="{{ url_for('login.perfil') }}">
-        <button>Perfil</button>
+        <button class="bt-div-header">Perfil</button>
     </form>
 </div>
 <main>
@@ -133,6 +133,12 @@
                     <button class="card-acessar">
                         <img class="img-acessar" src="../../static/images/departamento.png" alt="">
                         <h3 class="nome-acessar">Adicionar Departamento</h3>
+                    </button>
+                </form>
+                <form method="GET" action="{{ url_for('configuracoes.funcionarios') }}">
+                    <button class="card-acessar">
+                        <img class="img-acessar" src="../../static/images/funcionario.png" alt="">
+                        <h3 class="nome-acessar">Gerenciar Funcionários</h3>
                     </button>
                 </form>
             </section>

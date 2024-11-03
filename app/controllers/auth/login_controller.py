@@ -1,6 +1,6 @@
 from pprint import pprint
 import traceback
-from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, session, url_for, Blueprint
 from flask_login import login_user, logout_user
 from flask_wtf import FlaskForm
 from app.application.usecases.auth.create_operador_usecase import CreateOperadorUserUseCase
@@ -27,7 +27,7 @@ class LoginController:
         self.blueprint.add_url_rule('/perfil/', view_func=self.perfil, methods=['GET', 'POST'])
     
     def login(self) -> None:
-        get_flashed_messages()
+        messages = get_flashed_messages()
         
         form: FlaskForm = LoginForm()
 
@@ -63,7 +63,7 @@ class LoginController:
 
 
     def perfil(self) -> None:
-
+        messages = get_flashed_messages()
         form: FlaskForm = AtualizarPerfilForm()
 
         if form.validate_on_submit():

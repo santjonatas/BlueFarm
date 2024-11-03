@@ -52,7 +52,14 @@ class RegisterOpForm(BaseForm):
 
         with current_app.app_context():
             self.cargo.choices = [(cargo.id, cargo.funcao) for cargo in CargoEntity.query.all()]
-            self.supervisor.choices = [(supervisor.id, supervisor.funcionario.usuario.pessoa.nome) for supervisor in AdministradorEntity.query.all()]
+
+            self.supervisor.choices = [
+                (supervisor.id, supervisor.funcionario.usuario.pessoa.nome)
+                for supervisor in AdministradorEntity.query.all()
+                if supervisor.funcionario and 
+                supervisor.funcionario.usuario and 
+                supervisor.funcionario.usuario.pessoa
+            ]
 
     def to_dict(self) -> dict:
         return {

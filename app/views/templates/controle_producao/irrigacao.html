@@ -24,10 +24,10 @@
 </header>
 <div id="perfil-expandido" class="perfil-expandido" style="display: none;">
     <form method="GET" action="{{ url_for('login.logout') }}">
-        <button>Logout</button>
+        <button class="bt-div-header">Logout</button>
     </form>
     <form method="GET" action="{{ url_for('login.perfil') }}">
-        <button>Perfil</button>
+        <button class="bt-div-header">Perfil</button>
     </form>
 </div>
 <main>
@@ -92,6 +92,5 @@
         </section>
     </section>
 </main>
-<!-- <script src="../../static/scripts/main_client.js"></script> -->
 <script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}

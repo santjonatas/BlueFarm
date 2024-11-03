@@ -17,17 +17,17 @@
     <section class="section-perfil">
         <div class="align-nome">
             <p>Olá, </p>
-            <p id="nome-usuario">{{current_user.username}}</p>
+            <p id="nome-usuario">{{ current_user.username }}</p>
         </div>
         <article class="img-perfil"></article>
     </section>
 </header>
 <div id="perfil-expandido" class="perfil-expandido" style="display: none;">
     <form method="GET" action="{{ url_for('login.logout') }}">
-        <button>Logout</button>
+        <button class="bt-div-header">Logout</button>
     </form>
     <form method="GET" action="{{ url_for('login.perfil') }}">
-        <button>Perfil</button>
+        <button class="bt-div-header">Perfil</button>
     </form>
 </div>
 <main>
@@ -40,13 +40,13 @@
                     {{ form.submit(class="bt-buscar", value="Buscar Alimento") }}
                 </div>
             </div>
-            {% set info_alimento=info_alimento %}
-            {% if info_alimento and info_alimento != '"O parâmetro informado não é um alimento."' %}
+            {% set info_alimento = info_alimento %}
+            {% if info_alimento is mapping %}
                 <div class="card-pedido">
                     {% set nome = info_alimento.get('nome', 'Informação não disponível') %}
                     {% set descricao = info_alimento.get('descricao', 'Informação não disponível') %}
 
-                    {% set nutrientes = info_alimento.get('nutrientes', None) %}
+                    {% set nutrientes = info_alimento.get('nutrientes', {}) %}
                     {% if nutrientes %}
                         {% set calorias = nutrientes.get('calorias', 'Não disponível') %}
                         {% set carboidratos = nutrientes.get('carboidratos', 'Não disponível') %}
@@ -84,8 +84,7 @@
                         <output class="out-dados-pedido" id="descricao">Magnésio: {{ magnesio }}</output>
                         <output class="out-dados-pedido" id="descricao">Potássio: {{ potassio }}</output>
                     </div>
-                    <div class="div-bt-pagar-pedido">
-                    </div>
+                    <div class="div-bt-pagar-pedido"></div>
                 </div>
             {% else %}
                 <p>{{ msg_erro }}</p>
@@ -111,8 +110,7 @@
                         <output class="out-dados-pedido" id="descricao">Magnésio: </output>
                         <output class="out-dados-pedido" id="descricao">Potássio: </output>
                     </div>
-                    <div class="div-bt-pagar-pedido">
-                    </div>
+                    <div class="div-bt-pagar-pedido"></div>
                 </div>
             {% endif %}
         </form>

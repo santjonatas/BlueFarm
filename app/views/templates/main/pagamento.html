@@ -1,10 +1,11 @@
 {% extends 'layout/base/structure.html' %}
 
-{% block title %} BlueFarm | Main {% endblock title %}
+{% block title %} BlueFarm | Pagamento {% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/pagamento.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/responsivo/pagamento_responsivo.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/cabecalho.css' ) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
@@ -22,11 +23,19 @@
         <article class="img-perfil"></article>
     </section>
 </header>
+<div id="perfil-expandido" class="perfil-expandido" style="display: none;">
+    <form method="GET" action="{{ url_for('login.logout') }}">
+        <button class="bt-div-header">Logout</button>
+    </form>
+    <form method="GET" action="{{ url_for('login.perfil') }}">
+        <button class="bt-div-header">Perfil</button>
+    </form>
+</div>
 <main>
     <section class="section-main">
         <h2 class="msg-qr-code">Leia o QR Code a baixo para realizar o pagamento do pedido: {{ qr_id }}</h2>
         <img src="../../static/qr_codes/{{ qr_id }}.png" alt="" class="img-qr-code-pedido">
     </section>
 </main>
-<!-- <script src="../../static/scripts/main.js"></script> -->
+<script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}g

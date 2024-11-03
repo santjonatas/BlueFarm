@@ -4,16 +4,16 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css' ) }}">
-<link rel="stylesheet" href="../../static/styles/home.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/common/messages.css' ) }}">
 {% endblock style %}
 
 {% block body %}
 <header>
     <div class="borrao-header">
         <div class="conteudo-header">
-            <button type="submit">Sobre Nós</button>
-            <button type="submit">Serviços</button>
-            <button type="submit">Produtos</button>
+            <button class="bt-cabecalho" type="submit">Sobre Nós</button>
+            <button class="bt-cabecalho" type="submit">Serviços</button>
+            <button class="bt-cabecalho" type="submit">Produtos</button>
         </div>
     </div>
 </header>
@@ -23,12 +23,23 @@
             <h1>Seja Bem-Vindo a BlueFarm!</h1>
             <h2>Semeando o futuro, colhendo sustentabilidade no coração da cidade.</h2>
             <form action="{{ url_for('login.login') }}" method="get">
-                <button type="submit" class="bt-contato">Realizar Login</button>
+                <button type="submit" class="bt-login">Realizar Login</button>
             </form>
         </div>
     </div>
 </section>
 <section class="secao-registro">
+    <div id="sessao-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
     <form method="POST" class="form-registro">
         {{ form.csrf_token }}
         <div id="formularios">
@@ -64,7 +75,7 @@
         {{ form.submit(class="bt-registro", value="Registrar-se") }}
     </form>
 </section>
-<section class="secao-sobre-nos">
+<section class="secao-sobre-nos" id="sobre-nos">
     <article class="img-fazenda-sobre-nos">
 
     </article>
@@ -83,13 +94,51 @@
         </p>
     </div>
 </section>
-<section class="secao-servicos">
+<section class="secao-servicos" id="servicos">
     <div class="borrao-secao">
-        <div class="conteudo-secao">
-            
+        <div class="conteudo-secao" id="secao-servicos">
+            <div class="txt-servicos">
+                <h3>Serviços</h3>
+                <p id="txt-servicos">
+                    Nossa fazenda urbana oferece uma experiência prática e rápida de compra para quem valoriza produtos frescos e de qualidade. No nosso site, você encontra uma seleção cuidadosa de hortaliças, frutas e ervas, colhidos diretamente da nossa horta e prontos para consumo. Basta acessar a plataforma, escolher os itens que deseja, realizar a compra e finalizar o pedido – tudo em poucos cliques.
+
+                    Com um processo simples e sem complicações, você recebe produtos direto da fonte, sem intermediários e sem necessidade de assinaturas. Queremos que sua experiência seja rápida, transparente e acessível, permitindo que você sempre tenha ingredientes frescos à disposição.
+
+                    Nosso compromisso é levar o melhor da agricultura urbana para sua mesa, proporcionando sabor, frescor e a confiança de que você está consumindo alimentos de origem local e sustentável.
+                </p>
+            </div>
+            <article class="img-fazenda-servicos">
+
+            </article>
         </div>
     </div>
 </section>
+<section class="secao-produtos" id="produtos">
+    <h3>Produtos</h3>
+    <p id="txt-produtos">
+        Na nossa fazenda urbana, oferecemos uma variedade de produtos frescos, cultivados com cuidado e colhidos no ponto certo para garantir sabor e qualidade. Trabalhamos com um sistema de produção sustentável, priorizando métodos naturais que respeitam o meio ambiente e entregam alimentos frescos e saudáveis direto para você.
+    </p>
+    <div class="imagens-produtos">
+        <img class="img-produtos" src="../../static/images/produtos/Agrião.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Alface Americana.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Almeirão.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Brócolis.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Cebolinha.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Cenoura.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Espinafre.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Manjericão.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Pepino Japonês.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Pimentão Verde.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Rúcula.png" alt="">
+        <img class="img-produtos" src="../../static/images/produtos/Salsa.png" alt="">
+    </div>
+</section>
+<footer>
+    <p id="txt-footer">
+        &copy; BlueFarm 2024. Todos os direitos reservados.
+    </p>
+</footer>
 </body>
+<script src="../../static/scripts/home.js"></script>
 </html>
 {% endblock body %}

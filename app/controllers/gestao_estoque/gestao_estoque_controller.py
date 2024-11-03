@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 from pprint import pprint
 import traceback
-from flask import current_app, flash, render_template, redirect, url_for, jsonify, request, session, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, jsonify, request, session, Blueprint
 from flask_login import login_required, login_user, logout_user, current_user
 from decimal import Decimal
 from werkzeug.utils import secure_filename
@@ -42,6 +42,7 @@ class GestaoEstoqueController:
     @login_required
     def estoque_insumos(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             insumo_entity = repositories.insumo_repository.list()
             
             return render_template(
@@ -55,6 +56,7 @@ class GestaoEstoqueController:
     @login_required
     def editar_insumo(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             insumo_id = request.form.get('insumo_id')
             insumo_nome = request.form.get('insumo_nome')
             insumo_preco = request.form.get('insumo_preco')
@@ -70,6 +72,7 @@ class GestaoEstoqueController:
     @login_required
     def alterar_estoque_insumo(self, insumo_id):
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             form: FlaskForm = EditarInsumoForm()
 
             if form.validate_on_submit():
@@ -99,6 +102,7 @@ class GestaoEstoqueController:
     @login_required
     def movimentacao_estoque(self) -> None:
         if '@adm' in current_user.username or '@op' in current_user.username: 
+            messages = get_flashed_messages()
             pedido_entity = repositories.pedido_repository.obter_pedidos_pagos_hoje()
             
             return render_template(

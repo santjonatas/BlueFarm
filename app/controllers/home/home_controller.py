@@ -1,6 +1,6 @@
 import traceback
 from pprint import pprint
-from flask import current_app, flash, render_template, redirect, url_for, Blueprint
+from flask import current_app, flash, get_flashed_messages, render_template, redirect, url_for, Blueprint
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 
@@ -24,6 +24,7 @@ class HomeController:
     
 
     def home(self) -> None:
+        messages = get_flashed_messages()
         form: FlaskForm = RegisterClientForm()
 
         if form.validate_on_submit():

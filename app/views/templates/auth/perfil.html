@@ -11,7 +11,7 @@
 {% block body %}
 <header>
     <form method="GET" action="{{ url_for('main.main') }}" class="card-modulo">
-        <button type="submit">Voltar</button>
+        <button type="submit" class="bt-cabecalho">Voltar</button>
     </form>
     <article class="img-bluefarm"></article>
     <section class="section-perfil">
@@ -24,10 +24,10 @@
 </header>
 <div id="perfil-expandido" class="perfil-expandido" style="display: none;">
     <form method="GET" action="{{ url_for('login.logout') }}">
-        <button>Logout</button>
+        <button class="bt-div-header">Logout</button>
     </form>
     <form method="GET" action="{{ url_for('login.perfil') }}">
-        <button>Perfil</button>
+        <button class="bt-div-header">Perfil</button>
     </form>
 </div>
 <main>
@@ -72,6 +72,6 @@
         </form>
     </section>
 </main>
-<!-- <script src="../../static/scripts/main_client.js"></script> -->
+<script src="../../static/scripts/perfil.js"></script>
 <script src="../../static/scripts/cabecalho.js"></script>
 {% endblock body %}
