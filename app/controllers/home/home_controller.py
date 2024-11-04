@@ -38,7 +38,7 @@ class HomeController:
 
                 flash(message='Cliente Registrado', category='info')
 
-                return render_template('home/home.html')
+                return render_template('home/home.html', form=form)
             except Exception as e:
                 flash(message=str(e), category='danger')
         
