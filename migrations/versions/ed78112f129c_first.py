@@ -1,8 +1,8 @@
-"""empty message
+"""first
 
-Revision ID: 38c86f8a4a16
+Revision ID: ed78112f129c
 Revises: 
-Create Date: 2024-09-16 22:06:09.650070
+Create Date: 2024-11-09 12:25:02.642686
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '38c86f8a4a16'
+revision = 'ed78112f129c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,7 +33,8 @@ def upgrade():
     sa.Column('nome', sa.String(length=100), nullable=False),
     sa.Column('descricao', sa.String(length=255), nullable=False),
     sa.Column('preco', sa.DECIMAL(precision=10, scale=2), nullable=False),
-    sa.Column('comprado_em', sa.DateTime(), nullable=False),
+    sa.Column('comprado_em', sa.Date(), nullable=False),
+    sa.Column('quantidade', sa.Integer(), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -104,8 +105,9 @@ def upgrade():
     op.create_table('cultivo',
     sa.Column('id_insumo', sa.Integer(), nullable=True),
     sa.Column('quantidade', sa.Integer(), nullable=False),
-    sa.Column('data_inicio', sa.DateTime(), nullable=False),
-    sa.Column('data_fim', sa.DateTime(), nullable=False),
+    sa.Column('data_inicio', sa.Date(), nullable=True),
+    sa.Column('data_fim', sa.Date(), nullable=True),
+    sa.Column('status', sa.String(length=50), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
