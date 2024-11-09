@@ -40,7 +40,7 @@ class UpdatePerfilUserUseCase:
             if not self.global_utils.regex_validator_util.verificar_email(email=input_dto.email):
                 raise InvalidFieldException('Email inválido.')
         
-        if input_dto.senha != None:
+        if input_dto.senha != None and input_dto.senha != '':
             if not self.global_utils.regex_validator_util.verificar_senha(senha=input_dto.senha):
                 raise InvalidFieldException('Senha inválida.')
         
