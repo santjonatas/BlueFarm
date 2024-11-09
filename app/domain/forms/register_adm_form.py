@@ -35,12 +35,17 @@ class RegisterAdmForm(BaseForm):
             Length(min=4, max=20, message="O username deve ter entre 4 e 20 caracteres."),
             Regexp(r'^\w+$', message="O username deve conter apenas letras, números e underscores.")
     ])
-    senha = PasswordField('Senha',
-        validators=[DataRequired(),
-            Length(min=8, message="A senha deve ter no mínimo 8 caracteres."),
-            Regexp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$',
-                   message="A senha deve ter pelo menos uma letra, um número e um caractere especial.")
-    ])
+    senha = PasswordField(
+    'Senha',
+    validators=[
+        DataRequired(),
+        Length(min=8, message="A senha deve ter no mínimo 8 caracteres."),
+        Regexp(
+            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+            message="A senha deve ter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
+            )
+        ]
+    )
     endereco = StringField('Endereço', validators=[DataRequired()])
     data_admissao = DateField('Data de admissão', validators=[DataRequired()])
     cargo = SelectField('Cargo', coerce=str, validators=[DataRequired()])

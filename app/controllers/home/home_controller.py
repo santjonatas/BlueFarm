@@ -37,9 +37,16 @@ class HomeController:
                 usecase.execute(input_dto=input_dto)
 
                 flash(message='Cliente Registrado', category='info')
-
-                return render_template('home/home.html', form=form)
+                
+                return redirect(url_for('home.home'))
             except Exception as e:
                 flash(message=str(e), category='danger')
+                return redirect(url_for('home.home'))
         
+        if form.errors:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    flash(f"{field}: {error}", category='danger')
+            return redirect(url_for('home.home'))
+            
         return render_template('home/home.html', form=form)

@@ -93,40 +93,7 @@ class MainController:
         else:
             return jsonify({"message": "Acesso não autorizado"}), 401
 
-    # @login_required
-    # def add_to_cart(self):
-    #     if not '@adm' in current_user.username and not '@op' in current_user.username: 
-    #         produto_id = request.form.get('produto_id')
-    #         produto_entity = repositories.produto_repository.get(obj_id=produto_id)
 
-    #         if 'carrinho' not in session:
-    #             session['carrinho'] = []
-
-    #         if produto_entity:
-    #             preco_produto = Decimal(produto_entity.preco) if produto_entity.preco is not None else Decimal('0.00')
-                
-    #             for item in session['carrinho']:
-    #                 estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=item['id'])
-    #                 if estoque_entity_quantidade <= item['quantidade']:
-    #                     continue
-
-    #                 if item['id'] == produto_entity.id:
-    #                     item['quantidade'] += 1
-    #                     item['preco'] = Decimal(item['preco'])  
-    #                     item['preco'] += Decimal(produto_entity.preco)  
-    #                     break
-    #             else:
-    #                 session['carrinho'].append({
-    #                     'id': produto_entity.id,
-    #                     'nome': produto_entity.nome,
-    #                     'preco': preco_produto,
-    #                     'quantidade': 1
-    #                 })
-    #         print(session['carrinho'])  
-    #         flash('Produto adicionado ao carrinho!')
-    #         return redirect(url_for('main.main_client'))
-    #     else:
-    #         return jsonify({"message": "Acesso não autorizado"}), 401
     @login_required
     def add_to_cart(self):
         if not '@adm' in current_user.username and not '@op' in current_user.username: 
@@ -165,28 +132,7 @@ class MainController:
         else:
             return jsonify({"message": "Acesso não autorizado"}), 401
 
-    # @login_required
-    # def increment_item(self):
-    #     if not '@adm' in current_user.username and not '@op' in current_user.username: 
-    #         produto_id = int(request.form.get('produto_id'))
-    #         produto_entity = repositories.produto_repository.get(obj_id=produto_id)
 
-    #         if 'carrinho' in session:
-    #             for item in session['carrinho']:
-    #                 estoque_entity_quantidade = repositories.estoque_repository.get_quantidade_por_produto(id_produto=item['id'])
-    #                 if estoque_entity_quantidade <= item['quantidade']:
-    #                     break
-
-    #                 if item['id'] == produto_id:
-    #                     item['quantidade'] += 1
-    #                     item['preco'] = Decimal(item['preco']) 
-    #                     item['preco'] += Decimal(produto_entity.preco)   
-    #                     break
-
-    #         flash('Quantidade incrementada!')
-    #         return redirect(url_for('main.main_client'))
-    #     else:
-    #         return jsonify({"message": "Acesso não autorizado"}), 401
     @login_required
     def increment_item(self):
         if not '@adm' in current_user.username and not '@op' in current_user.username: 

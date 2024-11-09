@@ -39,6 +39,13 @@ class RegisterController:
                     return redirect(url_for('register.register_admin'))
                 except Exception as e:
                     flash(message=str(e), category='danger')
+                    return redirect(url_for('register.register_admin'))
+                
+            if form.errors:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        flash(f"{field}: {error}", category='danger')
+                return redirect(url_for('register.register_admin'))
             
             return render_template('auth/registro_admin.html', form=form)
         else:
@@ -64,6 +71,13 @@ class RegisterController:
                     return redirect(url_for('register.register_operador'))
                 except Exception as e:
                     flash(message=str(e), category='danger')
+                    return redirect(url_for('register.register_operador'))
+                
+            if form.errors:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        flash(f"{field}: {error}", category='danger')
+                return redirect(url_for('register.register_operador'))
             
             return render_template('auth/registro_operador.html', form=form)
         else:
